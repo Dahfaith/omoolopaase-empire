@@ -83,7 +83,7 @@
             margin-top: 10px;
         }
 
-        /* --- STICKY TRANSPARENT NAVBAR --- */
+        /* --- 1. STICKY TRANSPARENT NAVBAR --- */
         nav {
             position: fixed;
             top: 0;
@@ -300,7 +300,7 @@
 
         .cart-overlay.open { display: block; }
 
-        /* --- HERO SECTION --- */
+        /* --- 1. HERO SECTION --- */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -365,13 +365,58 @@
             font-weight: 600;
         }
 
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px var(--gold-glow); }
+
         .btn-secondary {
             background: transparent;
             color: var(--white);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* --- PRODUCT CARDS & PREMIUM PRICING LAYOUT --- */
+        .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+        /* --- 2. ABOUT BRAND SECTION --- */
+        .about {
+            position: relative;
+            background-color: #161616;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .about-text p { color: #bbb; margin-bottom: 20px; font-size: 1rem; }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .about-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 30px 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .about-card i { font-size: 2rem; color: var(--gold); margin-bottom: 15px; }
+
+        .about-card h4 { font-family: var(--font-heading); color: var(--white); margin-bottom: 8px; }
+
+        /* --- 3. FEATURED PRODUCTS SECTION --- */
         .product-tabs {
             display: flex;
             justify-content: center;
@@ -414,7 +459,6 @@
             transition: transform 0.5s ease-in-out; 
         }
 
-        /* Container system for image frames to preserve sizing */
         .image-frame {
             width: 50%;
             height: 100%;
@@ -433,11 +477,8 @@
             transition: opacity 0.3s ease;
         }
 
-        .image-frame img.loaded {
-            opacity: 1;
-        }
+        .image-frame img.loaded { opacity: 1; }
 
-        /* Luxury fallbacks for items that haven't been pushed to GitHub yet */
         .placeholder-card-fallback {
             position: absolute;
             top: 0;
@@ -477,30 +518,31 @@
 
         .product-card p { font-size: 0.85rem; color: #aaa; margin-bottom: 15px; flex-grow: 1; }
 
-        /* HIGH CONTRAST SEPARATION PRICING */
+        /* DETACHED HIGH CONTRAST PRICING STRUCTURE */
         .price-container { 
             margin-bottom: 20px; 
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            background: rgba(0,0,0,0.2);
-            padding: 8px;
+            gap: 14px;
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
             border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.02);
         }
 
         .old-price { 
             text-decoration: line-through; 
-            color: #888888; 
+            color: #a0a0a0; 
             font-size: 0.95rem;
             font-weight: 400;
         }
 
         .new-price { 
             color: var(--gold); 
-            font-weight: 600; 
-            font-size: 1.35rem;
-            text-shadow: 0 0 10px rgba(214, 175, 55, 0.2);
+            font-weight: 700; 
+            font-size: 1.4rem;
+            text-shadow: 0 0 12px rgba(214, 175, 55, 0.3);
         }
 
         .buy-btn {
@@ -518,13 +560,15 @@
 
         .buy-btn:hover { background: var(--gold); color: var(--black); }
 
-        /* --- CONSULTATION SECTION --- */
+        /* --- 4. CONSULTATION SECTION --- */
         .consultation {
-            background: #161616;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1515942400758-4588f9a67a3a?auto=format&fit=crop&q=80&w=1200') center/cover;
             text-align: center;
         }
 
         .consultation-container { max-width: 900px; margin: 0 auto; }
+
+        .consultation-p { max-width: 600px; margin: 0 auto 30px auto; color: #ccc; }
 
         .tier-grid {
             display: grid;
@@ -572,21 +616,105 @@
 
         .tier-card.featured .tier-btn { background: var(--gold); border-color: var(--gold); color: var(--black); font-weight: 600; }
 
-        /* --- FAQ SECTION --- */
+        /* --- 5. WHY CHOOSE US SECTION --- */
+        .why-us { background-color: #161616; }
+
+        .why-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+
+        .why-card {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 30px 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .why-card i { font-size: 2rem; color: var(--gold); margin-bottom: 15px; }
+
+        .why-card h4 { font-family: var(--font-heading); color: var(--white); margin-bottom: 8px; }
+
+        .why-card p { font-size: 0.8rem; color: #999; }
+
+        /* --- 6. TESTIMONIALS SECTION --- */
+        .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+
+        .testimonial-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 8px; padding: 30px; position: relative; }
+
+        .stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 15px; }
+
+        .testimonial-card p { font-size: 0.9rem; color: #ccc; font-style: italic; margin-bottom: 20px; }
+
+        .client-info { display: flex; align-items: center; gap: 12px; }
+
+        .client-avatar { width: 40px; height: 40px; background: var(--purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); border: 1px solid var(--gold); font-weight: bold; }
+
+        /* --- 7. FAQ SECTION --- */
+        .faq { background-color: #161616; }
+
         .faq-container { max-width: 800px; margin: 0 auto; }
 
         .faq-item { background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 6px; margin-bottom: 15px; overflow: hidden; }
 
         .faq-header { padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
 
-        .faq-body p { padding: 0 25px 20px 25px; font-size: 0.9rem; color: #bbb; }
+        .faq-header h4 { font-family: var(--font-heading); color: var(--white); font-size: 0.95rem; }
 
-        /* --- FOOTER & CREDITS --- */
-        footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 5%; text-align: center; }
+        .faq-icon { color: var(--gold); transition: var(--transition); }
 
-        .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; font-size: 0.85rem; }
+        .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: rgba(0, 0, 0, 0.2); }
 
-        .credit-link { color: var(--gold); text-decoration: none; }
+        .faq-body p { padding: 20px 25px; font-size: 0.9rem; color: #bbb; }
+
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+        /* --- 8. NEWSLETTER SECTION --- */
+        .newsletter { text-align: center; }
+
+        .newsletter-box { max-width: 650px; margin: 0 auto; background: #1a1a1a; padding: 40px; border-radius: 8px; border: 1px solid var(--glass-border); box-shadow: 0 0 20px var(--gold-glow); }
+
+        .newsletter h3 { font-family: var(--font-heading); color: var(--white); margin-bottom: 10px; }
+
+        .newsletter p { font-size: 0.9rem; color: #aaa; margin-bottom: 25px; }
+
+        .subscribe-form { display: flex; gap: 10px; }
+
+        .subscribe-form input { flex-grow: 1; background: #222; border: 1px solid rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 4px; color: var(--white); font-family: var(--font-body); font-size: 0.9rem; }
+
+        .subscribe-btn { background: var(--gold); color: var(--black); border: none; padding: 0 30px; border-radius: 4px; font-family: var(--font-heading); font-weight: 600; cursor: pointer; }
+
+        /* --- 9. CONTACT SECTION --- */
+        .contact { background-color: #161616; }
+
+        .contact-container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; }
+
+        .contact-info h3 { font-family: var(--font-heading); color: var(--white); margin-bottom: 15px; }
+
+        .contact-info p { color: #aaa; margin-bottom: 30px; }
+
+        .contact-details-list { list-style: none; margin-bottom: 30px; }
+
+        .contact-details-list li { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+
+        .contact-details-list li i { color: var(--gold); font-size: 1.2rem; }
+
+        .contact-form { background: var(--black); padding: 40px; border-radius: 8px; border: 1px solid var(--glass-border); }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-group input, .form-group textarea { width: 100%; background: #1a1a1a; border: 1px solid rgba(255, 255, 255, 0.05); padding: 12px 15px; color: var(--white); border-radius: 4px; font-family: var(--font-body); font-size: 0.9rem; }
+
+        .form-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 12px 30px; border-radius: 4px; font-family: var(--font-heading); cursor: pointer; transition: var(--transition); width: 100%; text-align: center; }
+
+        .form-btn:hover { background: var(--gold); color: var(--black); }
+
+        /* --- 10. FOOTER SECTION & CORE VISIOREACH LINKS --- */
+        footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 60px 5% 40px 5%; background: var(--black); }
+
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; }
+
+        .credit-link { color: var(--gold); text-decoration: none; font-weight: 500; }
+        .credit-link:hover { text-decoration: underline; }
 
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 9999; text-decoration: none; }
 
@@ -613,12 +741,15 @@
             .nav-links.mobile-open { right: 0 !important; }
             .nav-links a { font-size: 1.1rem; width: 100%; text-align: center; color: var(--white); }
             .hero h1 { font-size: 2.5rem; }
-            .tier-grid { grid-template-columns: 1fr; gap: 20px; }
+            .tier-grid, .about-container, .contact-container, .testimonial-grid { grid-template-columns: 1fr; gap: 25px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
             .section-padding { padding: 80px 6% 60px 6%; }
             .cart-drawer { width: 100%; right: -100%; }
+            .why-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -673,6 +804,23 @@
         <div class="hero-btns">
             <a href="#products" class="btn btn-primary">Shop Products</a>
             <a href="#consultation" class="btn btn-secondary">Book Consultation</a>
+        </div>
+    </section>
+
+    <section class="about section-padding" id="about">
+        <div class="about-container">
+            <div class="about-text">
+                <h3>Welcome to Omoolopaase Empire</h3>
+                <p>We combine ancestral wisdom, spiritual laws, and potent organic herbal alternatives to bring clarity, protection, and transformation to your lifestyle.</p>
+                <p>Our framework approaches spiritual growth carefully. From breaking deep generational limitations to realigning individual auras, we pinpoint the root cause of systemic blockages.</p>
+                <p style="color: var(--gold); font-weight: 500;">Serious clients only. Results built on faith &amp; consistency.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card"><i class="fa-solid fa-eye"></i><h4>Clear Guidance</h4><p>Transparent root diagnostics.</p></div>
+                <div class="about-card"><i class="fa-solid fa-shield-halved"></i><h4>Total Shield</h4><p>Ancestral protection grids.</p></div>
+                <div class="about-card"><i class="fa-solid fa-leaf"></i><h4>100% Organic</h4><p>Finely sorted botanicals.</p></div>
+                <div class="about-card"><i class="fa-solid fa-hands-praying"></i><h4>Aura Realignment</h4><p>Prosperity &amp; favor tracking.</p></div>
+            </div>
         </div>
     </section>
 
@@ -945,6 +1093,42 @@
         </div>
     </section>
 
+    <section class="why-us section-padding">
+        <div class="heading-container">
+            <h2>Why Seek Our <span>Guidance?</span></h2>
+        </div>
+        <div class="why-grid">
+            <div class="why-card"><i class="fa-solid fa-leaf"></i><h4>100% Organic</h4><p>Pure herbal formulas.</p></div>
+            <div class="why-card"><i class="fa-solid fa-user-shield"></i><h4>Trusted Counsel</h4><p>Years of verified metrics.</p></div>
+            <div class="why-card"><i class="fa-solid fa-truck-fast"></i><h4>Fast Delivery</h4><p>Discreet global transit.</p></div>
+            <div class="why-card"><i class="fa-solid fa-mortar-pestle"></i><h4>Handmade</h4><p>Individually mixed steps.</p></div>
+            <div class="why-card"><i class="fa-solid fa-lock"></i><h4>Confidential</h4><p>100% private security.</p></div>
+        </div>
+    </section>
+
+    <section class="testimonials section-padding">
+        <div class="heading-container">
+            <h2>True <span>Transformation Stories</span></h2>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"The Curse Breaker soap completely cleared the heavy stagnant weight around my career. Two weeks after, I landed a corporate contract."</p>
+                <div class="client-info"><div class="client-avatar">AO</div><h5>Adeshina O.</h5></div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"I paid for the VIP consultation because things were collapsing rapidly. The root reading was dangerously accurate."</p>
+                <div class="client-info"><div class="client-avatar">CE</div><h5>Chidi E.</h5></div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"The Attraction Oil and Kayamata packages work wonderfully. My long-term partner has completely transformed."</p>
+                <div class="client-info"><div class="client-avatar">TI</div><h5>Titi I.</h5></div>
+            </div>
+        </div>
+    </section>
+
     <section class="faq section-padding" id="faq">
         <div class="heading-container">
             <h2>Frequently Asked <span>Questions</span></h2>
@@ -953,6 +1137,10 @@
             <div class="faq-item">
                 <div class="faq-header" onclick="toggleFaq(this)"><h4>How long does it take to see visible results?</h4><i class="fa-solid fa-chevron-down faq-icon"></i></div>
                 <div class="faq-body"><p>Spiritual paths depend on configuration alignment, faith, and consistency. While many see shifts within 7 to 14 days, situations vary based on individual aura parameters.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)"><h4>Are these items safe or associated with any kickbacks?</h4><i class="fa-solid fa-chevron-down faq-icon"></i></div>
+                <div class="faq-body"><p>Everything we offer is formulated using 100% natural herbs, therapeutic plants, and safe ancestral laws—completely free from malicious side effects or kickbacks.</p></div>
             </div>
         </div>
     </section>
@@ -1024,9 +1212,9 @@
             document.getElementById('menuToggleIcon').classList.replace('fa-xmark', 'fa-bars');
         }
 
+        // Monitors whether the image folder assets are loaded from GitHub directory yet
         function imageLoaded(imgElement) {
             imgElement.classList.add('loaded');
-            // Hide the generic background card once your real photo loads from GitHub
             const placeholder = imgElement.parentElement.querySelector('.placeholder-card-fallback');
             if(placeholder) placeholder.style.display = 'none';
         }
@@ -1097,6 +1285,7 @@
             updateCartUI();
         }
 
+        // Item deletion routine
         function removeItemFromCart(name) {
             basketCart = basketCart.filter(item => item.name !== name);
             updateCartUI();
@@ -1158,7 +1347,6 @@
         }
 
         function handleFormSubmission(event) {
-            // Intercepts the form to notify users before external form processors handle the redirect routing
             alert('Your request details are being processed securely. Thank you!');
         }
     </script>

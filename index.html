@@ -26,7 +26,7 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- GLOBAL BASE OVERHAUL --- */
+        /* --- GLOBAL BASE BASE RESET --- */
         * {
             margin: 0;
             padding: 0;
@@ -69,7 +69,7 @@
             margin-top: 8px;
         }
 
-        /* --- ULTRA-RESPONSIVE STATIC & MOBILE NAVIGATION --- */
+        /* --- STICKY TRANSPARENT NAVBAR --- */
         nav {
             position: fixed;
             top: 0;
@@ -130,7 +130,7 @@
         .cart-badge {
             position: absolute;
             top: -3px;
-            right: -4px;
+            right: -44px;
             background: var(--gold);
             color: var(--black);
             font-size: 0.65rem;
@@ -141,6 +141,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            right: -3px;
         }
 
         .menu-toggle {
@@ -150,7 +151,6 @@
             cursor: pointer;
         }
 
-        /* --- PERSISTENT MOBILE ACCORDION LINKS LAYER --- */
         @media (max-width: 1024px) {
             .menu-toggle { display: block; }
             .nav-links {
@@ -177,7 +177,7 @@
             }
         }
 
-        /* --- HERO HOME BANNER --- */
+        /* --- HERO SECTION --- */
         .hero {
             min-height: 85vh;
             display: flex;
@@ -237,13 +237,13 @@
         .btn-primary { background: var(--gold); color: var(--black); font-weight: 600; }
         .btn-secondary { border: 1px solid rgba(255,255,255,0.2); color: var(--white); }
 
-        /* --- HORIZONTAL SCROLLABLE SWIPER TABS --- */
+        /* --- PRODUCT SCROLLABLE NAVIGATION --- */
         .product-tabs-wrapper {
             width: 100%;
             overflow-x: auto;
             padding: 5px 5% 15px 5%;
             margin-bottom: 25px;
-            scrollbar-width: none; /* Auto-hides standard desktop track bars */
+            scrollbar-width: none;
         }
         .product-tabs-wrapper::-webkit-scrollbar { display: none; }
 
@@ -260,7 +260,6 @@
             padding: 8px 18px;
             border-radius: 20px;
             font-size: 0.8rem;
-            font-family: var(--font-body);
             white-space: nowrap;
             cursor: pointer;
             transition: var(--transition);
@@ -272,7 +271,7 @@
             border-color: var(--gold);
         }
 
-        /* --- FLUID PORTFOLIO PRODUCT CARDS GRID --- */
+        /* --- PRODUCT GRIDS & PHOTO PAIRS --- */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
@@ -290,11 +289,10 @@
             justify-content: space-between;
         }
 
-        /* Absolute Relative Frame Bounds mapping */
         .product-gallery {
             position: relative;
             width: 100%;
-            height: 230px; /* Optimized layout bounding height */
+            height: 230px;
             background: linear-gradient(135deg, #1f0b25 0%, #0d0d0d 100%);
             overflow: hidden;
         }
@@ -323,7 +321,6 @@
 
         .image-frame img.loaded { opacity: 1; }
 
-        /* Dynamic fallback styling if GitHub files aren't updated yet */
         .mystical-fallback {
             position: absolute;
             top: 0;
@@ -374,7 +371,6 @@
             font-size: 1.1rem;
             color: var(--white);
             margin-bottom: 6px;
-            letter-spacing: 0.5px;
         }
 
         .product-card p {
@@ -384,7 +380,6 @@
             flex-grow: 1;
         }
 
-        /* BALANCED HIGH CONTRAST PRICE TAGS STYLE */
         .price-container {
             display: flex;
             align-items: center;
@@ -400,14 +395,12 @@
             text-decoration: line-through;
             color: #7a7a7a;
             font-size: 0.85rem;
-            font-weight: 400;
         }
 
         .new-price {
             color: var(--gold);
             font-size: 1.25rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
         }
 
         .buy-btn {
@@ -426,7 +419,7 @@
 
         .buy-btn:hover { background: var(--gold); color: var(--black); }
 
-        /* --- CONSULTATION SECTION --- */
+        /* --- CONSULTATION PLANS --- */
         .consultation { background: #141414; text-align: center; }
         .consultation-container { max-width: 900px; margin: 0 auto; }
         .consultation-p { font-size: 0.9rem; color: #b5b5b5; margin-bottom: 30px; }
@@ -455,7 +448,7 @@
         }
         .tier-card.featured .tier-btn { background: var(--gold); border-color: var(--gold); color: var(--black); font-weight: 600; }
 
-        /* --- ACCORDION FAQ SECTION --- */
+        /* --- EXPANDED 4-ITEM FAQ GRID --- */
         .faq { background: #161616; }
         .faq-container { max-width: 750px; margin: 0 auto; }
         .faq-item { background: var(--black); border: 1px solid rgba(255,255,255,0.03); border-radius: 6px; margin-bottom: 12px; overflow: hidden; }
@@ -466,7 +459,7 @@
         .faq-body p { padding: 0 20px 16px 20px; font-size: 0.8rem; color: #a5a5a5; text-align: left; }
         .faq-item.active .faq-icon { transform: rotate(180deg); }
 
-        /* --- PREMIUM WEB FORMS SUBSCRIPTION LAYOUTS --- */
+        /* --- CONNECTED LUXURY FIELDS WEB FORMS --- */
         .forms-section { background: var(--black); text-align: center; }
         .premium-form-box {
             max-width: 580px; margin: 0 auto 40px auto;
@@ -491,10 +484,19 @@
             font-weight: 600; font-size: 0.8rem; cursor: pointer; letter-spacing: 1px;
         }
 
-        /* --- FOOTER PLATFORM --- */
-        footer { border-top: 1px solid rgba(255,255,255,0.04); padding: 30px 5%; background: #0f0f0f; text-align: center; }
-        .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 0.75rem; color: #757575; }
+        /* --- PRESTIGE MULTI-ROW LINK FOOTER --- */
+        footer { border-top: 1px solid rgba(255,255,255,0.04); padding: 50px 8% 20px 8%; background: #0c0c0c; }
+        .footer-main-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; margin-bottom: 40px; text-align: left; }
+        .footer-brand h4 { font-family: var(--font-heading); color: var(--white); font-size: 1.15rem; margin-bottom: 12px; }
+        .footer-brand p { color: #8a8a8a; font-size: 0.8rem; max-width: 300px; }
+        .footer-col h5 { font-family: var(--font-heading); color: var(--gold); font-size: 0.9rem; margin-bottom: 15px; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col a { color: #8a8a8a; text-decoration: none; font-size: 0.8rem; transition: var(--transition); }
+        .footer-col a:hover { color: var(--white); padding-left: 4px; }
+        
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 0.75rem; color: #606060; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 20px; }
         .credit-link { color: var(--gold); text-decoration: none; font-weight: 500; }
+        .credit-link:hover { text-decoration: underline; }
 
         /* --- BASKET CHECKOUT PANEL --- */
         .cart-drawer {
@@ -510,6 +512,10 @@
         .checkout-btn { width: 100%; background: var(--gold); color: var(--black); border: none; padding: 14px; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: 4px; }
 
         .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 999; text-decoration: none; }
+
+        @media (max-width: 1024px) {
+            .footer-main-grid { grid-template-columns: 1fr; gap: 30px; }
+        }
     </style>
 </head>
 <body>
@@ -717,7 +723,7 @@
             </div>
 
             <div class="product-card" data-category="money">
-                <div class="product-card-gallery product-gallery">
+                <div class="product-gallery">
                     <div class="gallery-slides" id="slides-p6">
                         <div class="image-frame">
                             <div class="mystical-fallback"><i class="fa-solid fa-vault"></i><span>Option 1 Loading</span></div>
@@ -735,7 +741,7 @@
                 </div>
                 <div class="product-content">
                     <h3>Cash Out Premium Soap</h3>
-                    <p>Our highest performance preparation for corporate negotiations, unexpected business breakthroughs, and contracts.</p>
+                    <p>Our highest performance preparation for corporate negotiations, unexpected breakthroughs, and contracts.</p>
                     <div class="price-container">
                         <span class="old-price">₦250,000</span>
                         <span class="new-price">₦200,000</span>
@@ -755,7 +761,7 @@
             <div class="tier-grid">
                 <div class="tier-card">
                     <h4>Standard Consultation</h4>
-                    <span class="tier-time">3 - 5 Days Setup</span>
+                    <span class="tier-time">3 - 5 Days Response</span>
                     <div class="tier-price">₦7,000</div>
                     <button class="tier-btn" onclick="bookConsultation('normal')">Book Normal</button>
                 </div>
@@ -787,7 +793,7 @@
                     <i class="fa-solid fa-chevron-down faq-icon"></i>
                 </div>
                 <div class="faq-body">
-                    <p>Spiritual paths depend deeply on structural alignment, dedicated faith, and consistency. While many clients report significant shifts within 7 to 14 days of starting product configurations, individual situations vary based on the depth of the baseline blockages.</p>
+                    <p>Spiritual paths depend on configuration alignment, faith, and consistency. While many see shifts within 7 to 14 days, situations vary based on individual aura parameters and individual blockages.</p>
                 </div>
             </div>
             <div class="faq-item">
@@ -799,16 +805,34 @@
                     <p>Yes. Everything listed across our registry is prepared strictly with 100% natural plant essences, organic botanicals, and safe ancestral spiritual laws—entirely free from negative energetic kickbacks or side-effects.</p>
                 </div>
             </div>
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <h4>How does the multi-item WhatsApp checkout work?</h4>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-body">
+                    <p>When you click 'Add to Basket' on your desired remedies, they stack dynamically into your cart drawer. Clicking checkout bundles your complete order summary, quantities, and totals into an instant message sent directly to our team line.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <h4>Can I request international or out-of-state delivery?</h4>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-body">
+                    <p>Yes. We package and distribute our remedies safely with discreet logistics handling across local regions and international transit lines. Transit details can be finalized directly over your post-checkout consultation thread.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="forms-section section-padding" id="newsletter">
         <div class="premium-form-box">
             <h3>Join Our Inner Circle</h3>
-            <p>Subscribe to receive spiritual alerts, herbal maintenance tips, and prophetic guidance updates directly in your inbox.</p>
+            <p>Subscribe to receive spiritual alerts, botanical maintenance tips, and exclusive prophetic guidance updates directly in your inbox.</p>
             <form action="https://api.web3forms.com/submit" method="POST" onsubmit="alert('Subscription logged securely. Thank you!');">
                 <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-                <input type="hidden" name="subject" value="New Inner Circle Subscriber Added">
+                <input type="hidden" name="subject" value="New Spiritual Circle Subscriber Added">
                 <div class="luxury-input-group">
                     <input type="email" name="email" class="luxury-field" placeholder="Enter your email address" required>
                     <button type="submit" class="luxury-submit-btn">Subscribe Today</button>
@@ -832,6 +856,29 @@
     </section>
 
     <footer>
+        <div class="footer-main-grid">
+            <div class="footer-col footer-brand">
+                <h4>OMOOLOPAASE EMPIRE</h4>
+                <p>Delivering high-fidelity ancestral advice, aura alignments, botanical solutions, and holistic health parameters globally.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Navigation Links</h5>
+                <ul>
+                    <li><a href="#">Home Core</a></li>
+                    <li><a href="#products">Spiritual Remedies</a></li>
+                    <li><a href="#consultation">Consultation Tiers</a></li>
+                    <li><a href="#faq">FAQ Board</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Company Protocols</h5>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Protocol</a></li>
+                    <li><a href="#">Shipping Parameters</a></li>
+                </ul>
+            </div>
+        </div>
         <div class="footer-bottom">
             <p>&copy; 2026 Omoolopaase Empire Limited. All Rights Reserved.</p>
             <p>Designed with ❤️ by <a href="https://www.visioreach.co" class="credit-link" target="_blank">VisioReach Concepts</a></p>
@@ -843,6 +890,8 @@
     </a>
 
     <script>
+        let basketCart = [];
+
         function toggleMobileMenu() {
             const linksMenu = document.getElementById('navLinksMenu');
             const icon = document.getElementById('menuToggleIcon');
@@ -928,11 +977,6 @@
                 item.quantity += shift;
                 if (item.quantity <= 0) { basketCart = basketCart.filter(i => i.name !== name); }
             }
-            updateCartUI();
-        }
-
-        function removeItemFromCart(name) {
-            basketCart = basketCart.filter(item => item.name !== name);
             updateCartUI();
         }
 

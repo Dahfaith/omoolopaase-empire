@@ -73,9 +73,7 @@
             margin-bottom: 10px;
         }
 
-        .heading-container h2 span {
-            color: var(--gold);
-        }
+        .heading-container h2 span { color: var(--gold); }
 
         .heading-container::after {
             content: '✨';
@@ -85,7 +83,7 @@
             margin-top: 10px;
         }
 
-        /* --- 1. STICKY TRANSPARENT NAVBAR --- */
+        /* --- STICKY TRANSPARENT NAVBAR --- */
         nav {
             position: fixed;
             top: 0;
@@ -120,9 +118,7 @@
             z-index: 10002;
         }
 
-        .logo span {
-            color: var(--gold);
-        }
+        .logo span { color: var(--gold); }
 
         .nav-links {
             display: flex;
@@ -200,7 +196,7 @@
             cursor: pointer;
         }
 
-        /* --- SHOPPING CART DRAWER SYSTEM --- */
+        /* --- SHOPPING CART DRAWER --- */
         .cart-drawer {
             position: fixed;
             top: 0;
@@ -304,7 +300,7 @@
 
         .cart-overlay.open { display: block; }
 
-        /* --- 1. HERO SECTION --- */
+        /* --- HERO SECTION --- */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -369,58 +365,13 @@
             font-weight: 600;
         }
 
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px var(--gold-glow); }
-
         .btn-secondary {
             background: transparent;
             color: var(--white);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
-
-        /* --- 2. ABOUT BRAND SECTION --- */
-        .about {
-            position: relative;
-            background-color: #161616;
-        }
-
-        .about-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .about-text h3 {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            color: var(--gold);
-            margin-bottom: 20px;
-        }
-
-        .about-text p { color: #bbb; margin-bottom: 20px; font-size: 1rem; }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .about-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            padding: 30px 20px;
-            border-radius: 8px;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .about-card i { font-size: 2rem; color: var(--gold); margin-bottom: 15px; }
-
-        .about-card h4 { font-family: var(--font-heading); color: var(--white); margin-bottom: 8px; }
-
-        /* --- 3. FEATURED PRODUCTS GRID WITH SMART LAYOUT FALLBACKS --- */
+        /* --- PRODUCT CARDS & PREMIUM PRICING LAYOUT --- */
         .product-tabs {
             display: flex;
             justify-content: center;
@@ -448,41 +399,65 @@
 
         .product-card:hover { transform: translateY(-8px); border-color: var(--gold); }
 
-        /* Multi-Image Slider Box Layout with Mystical Fail-Safe Background Patterns */
         .product-gallery {
             position: relative;
             width: 100%;
-            height: 250px;
+            height: 260px;
             overflow: hidden;
-            background: linear-gradient(135deg, #2c1633 0%, #111111 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Creates a beautiful spiritual placeholder geometric shape behind missing images */
-        .product-gallery::before {
-            content: "✨";
-            position: absolute;
-            font-size: 2.5rem;
-            color: rgba(214, 175, 55, 0.15);
-            z-index: 1;
+            background: linear-gradient(135deg, #2b123a 0%, #111 100%);
         }
 
         .gallery-slides { 
             display: flex; 
             width: 200%; 
             height: 100%; 
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
-            position: relative;
-            z-index: 2;
+            transition: transform 0.5s ease-in-out; 
         }
 
-        .gallery-slides img { 
-            width: 50%; 
+        /* Container system for image frames to preserve sizing */
+        .image-frame {
+            width: 50%;
+            height: 100%;
+            position: relative;
+            background: linear-gradient(135deg, #231130 0%, #0a0a0a 100%);
+        }
+
+        .image-frame img { 
+            width: 100%; 
             height: 100%; 
-            object-fit: cover;
-            background: transparent; 
+            object-fit: cover; 
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-frame img.loaded {
+            opacity: 1;
+        }
+
+        /* Luxury fallbacks for items that haven't been pushed to GitHub yet */
+        .placeholder-card-fallback {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: rgba(214, 175, 55, 0.25);
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            gap: 10px;
+        }
+
+        .placeholder-card-fallback i {
+            font-size: 2rem;
+            animation: pulse 2s infinite alternate;
         }
 
         .gallery-nav {
@@ -496,27 +471,37 @@
             z-index: 5;
         }
 
-        .gallery-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .gallery-dot.active {
-            background: var(--gold);
-            transform: scale(1.2);
-        }
-
         .product-content { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; text-align: center; }
 
-        .product-card h3 { font-family: var(--font-heading); font-size: 1.2rem; color: var(--white); margin-bottom: 8px; letter-spacing: 0.5px; }
+        .product-card h3 { font-family: var(--font-heading); font-size: 1.15rem; color: var(--white); margin-bottom: 8px; }
 
         .product-card p { font-size: 0.85rem; color: #aaa; margin-bottom: 15px; flex-grow: 1; }
 
-        .price-container { margin-bottom: 15px; }
+        /* HIGH CONTRAST SEPARATION PRICING */
+        .price-container { 
+            margin-bottom: 20px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: rgba(0,0,0,0.2);
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        .old-price { 
+            text-decoration: line-through; 
+            color: #888888; 
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        .new-price { 
+            color: var(--gold); 
+            font-weight: 600; 
+            font-size: 1.35rem;
+            text-shadow: 0 0 10px rgba(214, 175, 55, 0.2);
+        }
 
         .buy-btn {
             background: transparent;
@@ -533,22 +518,13 @@
 
         .buy-btn:hover { background: var(--gold); color: var(--black); }
 
-        /* --- 4. CONSULTATION SECTION --- */
+        /* --- CONSULTATION SECTION --- */
         .consultation {
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1515942400758-4588f9a67a3a?auto=format&fit=crop&q=80&w=1200') center/cover;
+            background: #161616;
             text-align: center;
         }
 
-        .consultation-container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: rgba(17, 17, 17, 0.8);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 50px 30px;
-        }
-
-        .consultation-p { max-width: 600px; margin: 0 auto 30px auto; color: #ccc; }
+        .consultation-container { max-width: 900px; margin: 0 auto; }
 
         .tier-grid {
             display: grid;
@@ -564,7 +540,6 @@
             padding: 30px 20px;
             position: relative;
             overflow: hidden;
-            transition: var(--transition);
         }
 
         .tier-card.featured { border-color: var(--gold); background: rgba(91, 33, 103, 0.15); }
@@ -582,201 +557,68 @@
             text-transform: uppercase;
         }
 
-        .tier-card h4 { font-family: var(--font-heading); color: var(--white); }
-
-        .tier-time { font-size: 0.75rem; color: var(--gold); text-transform: uppercase; display: block; margin-top: 4px; }
-
-        .tier-price { font-size: 1.8rem; font-weight: 700; color: var(--white); margin: 15px 0; }
-
-        .tier-features { list-style: none; font-size: 0.85rem; color: #aaa; text-align: left; margin-bottom: 25px; }
-
-        .tier-features li { margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-
-        .tier-features li i { color: var(--gold); font-size: 0.75rem; }
+        .tier-price { font-size: 1.8rem; color: var(--white); font-weight: 700; margin: 15px 0; }
 
         .tier-btn {
             background: transparent;
             border: 1px solid var(--white);
             color: var(--white);
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border-radius: 4px;
-            font-family: var(--font-heading);
             cursor: pointer;
-            transition: var(--transition);
+            font-family: var(--font-heading);
         }
 
         .tier-card.featured .tier-btn { background: var(--gold); border-color: var(--gold); color: var(--black); font-weight: 600; }
 
-        /* --- 5. WHY CHOOSE US SECTION --- */
-        .why-us { background-color: #161616; }
-
-        .why-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
-
-        .why-card {
-            background: var(--glass);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            padding: 30px 20px;
-            border-radius: 8px;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .why-card i { font-size: 2rem; color: var(--gold); margin-bottom: 15px; }
-
-        .why-card h4 { font-family: var(--font-heading); color: var(--white); margin-bottom: 8px; }
-
-        .why-card p { font-size: 0.8rem; color: #999; }
-
-        /* --- 6. TESTIMONIALS SECTION --- */
-        .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-
-        .testimonial-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 8px; padding: 30px; position: relative; }
-
-        .stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 15px; }
-
-        .testimonial-card p { font-size: 0.9rem; color: #ccc; font-style: italic; margin-bottom: 20px; }
-
-        .client-info { display: flex; align-items: center; gap: 12px; }
-
-        .client-avatar { width: 40px; height: 40px; background: var(--purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); border: 1px solid var(--gold); font-weight: bold; }
-
-        /* --- 7. FAQ SECTION --- */
-        .faq { background-color: #161616; }
-
+        /* --- FAQ SECTION --- */
         .faq-container { max-width: 800px; margin: 0 auto; }
 
         .faq-item { background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 6px; margin-bottom: 15px; overflow: hidden; }
 
-        .faq-header { padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
-
-        .faq-header h4 { font-family: var(--font-heading); color: var(--white); }
-
-        .faq-icon { color: var(--gold); transition: var(--transition); }
-
-        .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: rgba(0, 0, 0, 0.2); }
+        .faq-header { padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
 
         .faq-body p { padding: 0 25px 20px 25px; font-size: 0.9rem; color: #bbb; }
 
-        .faq-item.active .faq-icon { transform: rotate(180deg); }
+        /* --- FOOTER & CREDITS --- */
+        footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 5%; text-align: center; }
 
-        /* --- 8. NEWSLETTER SECTION --- */
-        .newsletter { text-align: center; }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; font-size: 0.85rem; }
 
-        .newsletter-box { max-width: 650px; margin: 0 auto; background: #1a1a1a; padding: 40px; border-radius: 8px; border: 1px solid var(--glass-border); box-shadow: 0 0 20px var(--gold-glow); }
+        .credit-link { color: var(--gold); text-decoration: none; }
 
-        .newsletter h3 { font-family: var(--font-heading); color: var(--white); margin-bottom: 10px; }
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 9999; text-decoration: none; }
 
-        .newsletter p { font-size: 0.9rem; color: #aaa; margin-bottom: 25px; }
+        @keyframes pulse { 0% { opacity: 0.3; } 100% { opacity: 0.8; } }
 
-        .subscribe-form { display: flex; gap: 10px; }
-
-        .subscribe-form input { flex-grow: 1; background: #222; border: 1px solid rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 4px; color: var(--white); font-family: var(--font-body); }
-
-        .subscribe-btn { background: var(--gold); color: var(--black); border: none; padding: 0 30px; border-radius: 4px; font-family: var(--font-heading); font-weight: 600; cursor: pointer; }
-
-        /* --- 9. CONTACT SECTION --- */
-        .contact { background-color: #161616; }
-
-        .contact-container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; }
-
-        .contact-info h3 { font-family: var(--font-heading); color: var(--white); margin-bottom: 15px; }
-
-        .contact-info p { color: #aaa; margin-bottom: 30px; }
-
-        .contact-details-list { list-style: none; margin-bottom: 30px; }
-
-        .contact-details-list li { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
-
-        .contact-details-list li i { color: var(--gold); font-size: 1.2rem; }
-
-        .social-row { display: flex; gap: 15px; }
-
-        .social-icon { width: 40px; height: 40px; border-radius: 50%; background: #222; color: var(--cream); display: flex; align-items: center; justify-content: center; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.05); transition: var(--transition); }
-
-        .social-icon:hover { background: var(--purple); color: var(--white); border-color: var(--gold); }
-
-        .contact-form { background: var(--black); padding: 40px; border-radius: 8px; border: 1px solid var(--glass-border); }
-
-        .form-group { margin-bottom: 20px; }
-
-        .form-group input, .form-group textarea { width: 100%; background: #1a1a1a; border: 1px solid rgba(255, 255, 255, 0.05); padding: 12px 15px; color: var(--white); border-radius: 4px; font-family: var(--font-body); }
-
-        .form-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 12px 30px; border-radius: 4px; font-family: var(--font-heading); cursor: pointer; transition: var(--transition); width: 100%; text-align: center; }
-
-        .form-btn:hover { background: var(--gold); color: var(--black); }
-
-        /* --- 10. FOOTER SECTION & MANDATORY VISIOREACH CREDITS --- */
-        footer { background-color: var(--black); padding: 60px 8% 20px 8%; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-
-        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-
-        .footer-brand h4 { font-family: var(--font-heading); color: var(--white); margin-bottom: 15px; }
-
-        .footer-brand p { color: #777; font-size: 0.85rem; max-width: 300px; }
-
-        .footer-links h5 { font-family: var(--font-heading); color: var(--gold); margin-bottom: 15px; }
-
-        .footer-links ul { list-style: none; }
-
-        .footer-links li { margin-bottom: 10px; }
-
-        .footer-links a { color: #777; text-decoration: none; font-size: 0.85rem; transition: var(--transition); }
-
-        .footer-links a:hover { color: var(--white); padding-left: 5px; }
-
-        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #555; flex-wrap: wrap; gap: 15px; }
-
-        .credit-link { color: var(--gold); text-decoration: none; font-weight: 500; transition: var(--transition); }
-
-        .credit-link:hover { color: var(--white); text-decoration: underline; }
-
-        /* --- FLOATING COMFORT CONTROLS --- */
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 9998; text-decoration: none; transition: var(--transition); }
-
-        .whatsapp-float:hover { transform: scale(1.1); }
-
-        /* --- FIXED RESPONSIVE CONTRAST MEDIA BREAKPOINTS --- */
+        /* --- MOBILE RESPONSIVE MEDIA BREAKPOINTS --- */
         @media (max-width: 1024px) {
             .menu-toggle { display: block; }
-            nav { padding: 20px 5%; }
             .nav-links {
                 display: flex;
                 flex-direction: column;
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 300px;
+                width: 280px;
                 height: 100vh;
-                background: #141414 !important; /* Premium Solid Surface Armor */
+                background: #141414 !important;
                 padding: 120px 30px 40px 30px;
-                gap: 25px;
+                gap: 30px;
                 box-shadow: -10px 0 40px rgba(0,0,0,0.9);
                 z-index: 10001;
                 transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             }
             .nav-links.mobile-open { right: 0 !important; }
             .nav-links a { font-size: 1.1rem; width: 100%; text-align: center; color: var(--white); }
-            .nav-links a::after { display: none; }
             .hero h1 { font-size: 2.5rem; }
-            .about-container, .contact-container, .footer-grid { grid-template-columns: 1fr; }
-            .about-grid, .tier-grid, .testimonial-grid { grid-template-columns: 1fr; }
-            .why-grid { grid-template-columns: repeat(3, 1fr); }
-            .tier-card.featured { transform: none; }
+            .tier-grid { grid-template-columns: 1fr; gap: 20px; }
         }
 
         @media (max-width: 768px) {
             .section-padding { padding: 80px 6% 60px 6%; }
-            .why-grid { grid-template-columns: repeat(2, 1fr); }
-            .subscribe-form { flex-direction: column; }
-            .subscribe-btn { padding: 14px; }
             .cart-drawer { width: 100%; right: -100%; }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 { font-size: 2rem; }
-            .why-grid { grid-template-columns: 1fr; }
-            .logo { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -789,7 +631,6 @@
         <a href="#" class="logo">OMOOLOPAASE <span>EMPIRE</span></a>
         <ul class="nav-links" id="navLinksMenu">
             <li><a href="#" onclick="closeMobileMenu()">Home</a></li>
-            <li><a href="#about" onclick="closeMobileMenu()">About Legacy</a></li>
             <li><a href="#products" onclick="closeMobileMenu()">Spiritual Shop</a></li>
             <li><a href="#consultation" onclick="closeMobileMenu()">Consultation</a></li>
             <li><a href="#faq" onclick="closeMobileMenu()">FAQ</a></li>
@@ -835,23 +676,6 @@
         </div>
     </section>
 
-    <section class="about section-padding" id="about">
-        <div class="about-container">
-            <div class="about-text">
-                <h3>Welcome to Omoolopaase Empire</h3>
-                <p>We combine ancestral wisdom, spiritual laws, and potent organic herbal alternatives to bring clarity, protection, and transformation to your lifestyle.</p>
-                <p>Our framework approaches spiritual growth carefully. From breaking deep generational limitations to realigning individual auras, we pinpoint the root cause of systemic blockages.</p>
-                <p style="color: var(--gold); font-weight: 500;">Serious clients only. Results built on faith &amp; consistency.</p>
-            </div>
-            <div class="about-grid">
-                <div class="about-card"><i class="fa-solid fa-eye"></i><h4>Clear Guidance</h4><p>Transparent root diagnostics.</p></div>
-                <div class="about-card"><i class="fa-solid fa-shield-halved"></i><h4>Total Shield</h4><p>Ancestral protection grids.</p></div>
-                <div class="about-card"><i class="fa-solid fa-leaf"></i><h4>100% Organic</h4><p>Finely sorted botanicals.</p></div>
-                <div class="about-card"><i class="fa-solid fa-hands-praying"></i><h4>Aura Realignment</h4><p>Prosperity &amp; favor tracking.</p></div>
-            </div>
-        </div>
-    </section>
-
     <section class="products section-padding" id="products">
         <div class="heading-container">
             <h2>Our Premium <span>Spiritual Solutions</span></h2>
@@ -862,15 +686,20 @@
             <button class="tab-btn" onclick="filterProducts('cleansing')">Cleansing</button>
             <button class="tab-btn" onclick="filterProducts('way-opener')">Way Openers</button>
             <button class="tab-btn" onclick="filterProducts('money')">Money Products</button>
-            <button class="tab-btn" onclick="filterProducts('love')">Love &amp; Attraction</button>
         </div>
 
         <div class="product-grid">
             <div class="product-card" data-category="cleansing">
                 <div class="product-gallery">
                     <div class="gallery-slides" id="slides-p1">
-                        <img src="images/curse-breaker-1.jpg" alt="Curse Breaker 1" onerror="this.style.display='none'">
-                        <img src="images/curse-breaker-2.jpg" alt="Curse Breaker 2" onerror="this.style.display='none'">
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-wand-magic-sparkles"></i><span>Option 1 Loading...</span></div>
+                            <img src="images/curse-breaker-1.jpg" alt="Curse Breaker 1" onload="imageLoaded(this)">
+                        </div>
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-moon"></i><span>Option 2 Loading...</span></div>
+                            <img src="images/curse-breaker-2.jpg" alt="Curse Breaker 2" onload="imageLoaded(this)">
+                        </div>
                     </div>
                     <div class="gallery-nav">
                         <div class="gallery-dot active" onclick="switchGalleryImage('p1', 0, this)"></div>
@@ -880,7 +709,10 @@
                 <div class="product-content">
                     <h3>Curse Breaker Soap</h3>
                     <p>Formulated to clear stubborn blockages, generational hexes, and negative energy holding back progress.</p>
-                    <div class="price-container"><span class="old-price">₦20,000</span><span class="new-price">₦10,000</span></div>
+                    <div class="price-container">
+                        <span class="old-price">₦20,000</span>
+                        <span class="new-price">₦10,000</span>
+                    </div>
                     <button class="buy-btn" onclick="addItemToCart('Curse Breaker Soap', 10000)">Add To Basket</button>
                 </div>
             </div>
@@ -888,8 +720,14 @@
             <div class="product-card" data-category="cleansing">
                 <div class="product-gallery">
                     <div class="gallery-slides" id="slides-p2">
-                        <img src="images/ebe-agba-1.jpg" alt="Ebe Agba 1" onerror="this.style.display='none'">
-                        <img src="images/ebe-agba-2.jpg" alt="Ebe Agba 2" onerror="this.style.display='none'">
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-shield"></i><span>Option 1 Loading...</span></div>
+                            <img src="images/ebe-agba-1.jpg" alt="Ebe Agba 1" onload="imageLoaded(this)">
+                        </div>
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-eye"></i><span>Option 2 Loading...</span></div>
+                            <img src="images/ebe-agba-2.jpg" alt="Ebe Agba 2" onload="imageLoaded(this)">
+                        </div>
                     </div>
                     <div class="gallery-nav">
                         <div class="gallery-dot active" onclick="switchGalleryImage('p2', 0, this)"></div>
@@ -899,7 +737,10 @@
                 <div class="product-content">
                     <h3>Ebe Agba</h3>
                     <p>Traditional shielding formulation built to break old restrictions, negative patterns, and foundational issues.</p>
-                    <div class="price-container"><span class="old-price">₦25,000</span><span class="new-price">₦20,000</span></div>
+                    <div class="price-container">
+                        <span class="old-price">₦25,000</span>
+                        <span class="new-price">₦20,000</span>
+                    </div>
                     <button class="buy-btn" onclick="addItemToCart('Ebe Agba', 20000)">Add To Basket</button>
                 </div>
             </div>
@@ -907,8 +748,14 @@
             <div class="product-card" data-category="cleansing">
                 <div class="product-gallery">
                     <div class="gallery-slides" id="slides-p3">
-                        <img src="images/eyonu-agba-1.jpg" alt="Eyonu Agba 1" onerror="this.style.display='none'">
-                        <img src="images/eyonu-agba-2.jpg" alt="Eyonu Agba 2" onerror="this.style.display='none'">
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-sparkles"></i><span>Option 1 Loading...</span></div>
+                            <img src="images/eyonu-agba-1.jpg" alt="Eyonu Agba 1" onload="imageLoaded(this)">
+                        </div>
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-sun"></i><span>Option 2 Loading...</span></div>
+                            <img src="images/eyonu-agba-2.jpg" alt="Eyonu Agba 2" onload="imageLoaded(this)">
+                        </div>
                     </div>
                     <div class="gallery-nav">
                         <div class="gallery-dot active" onclick="switchGalleryImage('p3', 0, this)"></div>
@@ -918,7 +765,10 @@
                 <div class="product-content">
                     <h3>Eyonu Agba Soap</h3>
                     <p>A premium remedy crafted to clear away friction, severe setbacks, and unexplainable closed doors.</p>
-                    <div class="price-container"><span class="old-price">₦20,000</span><span class="new-price">₦15,000</span></div>
+                    <div class="price-container">
+                        <span class="old-price">₦20,000</span>
+                        <span class="new-price">₦15,000</span>
+                    </div>
                     <button class="buy-btn" onclick="addItemToCart('Eyonu Agba Soap', 15000)">Add To Basket</button>
                 </div>
             </div>
@@ -926,8 +776,14 @@
             <div class="product-card" data-category="cleansing">
                 <div class="product-gallery">
                     <div class="gallery-slides" id="slides-p4">
-                        <img src="images/atude-1.jpg" alt="Atude 1" onerror="this.style.display='none'">
-                        <img src="images/atude-2.jpg" alt="Atude 2" onerror="this.style.display='none'">
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-key"></i><span>Option 1 Loading...</span></div>
+                            <img src="images/atude-1.jpg" alt="Atude 1" onload="imageLoaded(this)">
+                        </div>
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-door-open"></i><span>Option 2 Loading...</span></div>
+                            <img src="images/atude-2.jpg" alt="Atude 2" onload="imageLoaded(this)">
+                        </div>
                     </div>
                     <div class="gallery-nav">
                         <div class="gallery-dot active" onclick="switchGalleryImage('p4', 0, this)"></div>
@@ -937,7 +793,10 @@
                 <div class="product-content">
                     <h3>Atude Soap</h3>
                     <p>Designed explicitly to untie complicated life knots, open stagnated positions, and fast-track opportunities.</p>
-                    <div class="price-container"><span class="old-price">₦20,000</span><span class="new-price">₦15,000</span></div>
+                    <div class="price-container">
+                        <span class="old-price">₦20,000</span>
+                        <span class="new-price">₦15,000</span>
+                    </div>
                     <button class="buy-btn" onclick="addItemToCart('Atude Soap', 15000)">Add To Basket</button>
                 </div>
             </div>
@@ -945,8 +804,14 @@
             <div class="product-card" data-category="way-opener">
                 <div class="product-gallery">
                     <div class="gallery-slides" id="slides-p5">
-                        <img src="images/glory-1.jpg" alt="Glory Retrieval 1" onerror="this.style.display='none'">
-                        <img src="images/glory-2.jpg" alt="Glory Retrieval 2" onerror="this.style.display='none'">
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-gem"></i><span>Option 1 Loading...</span></div>
+                            <img src="images/glory-1.jpg" alt="Glory Retrieval 1" onload="imageLoaded(this)">
+                        </div>
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-crown"></i><span>Option 2 Loading...</span></div>
+                            <img src="images/glory-2.jpg" alt="Glory Retrieval 2" onload="imageLoaded(this)">
+                        </div>
                     </div>
                     <div class="gallery-nav">
                         <div class="gallery-dot active" onclick="switchGalleryImage('p5', 0, this)"></div>
@@ -956,7 +821,10 @@
                 <div class="product-content">
                     <h3>Glory Retrieval (Gbogo Mi Funmi)</h3>
                     <p>Reclaim hijacked configurations, closed destinies, and lost business positioning parameters.</p>
-                    <div class="price-container"><span class="old-price">₦40,000</span><span class="new-price">₦30,000</span></div>
+                    <div class="price-container">
+                        <span class="old-price">₦40,000</span>
+                        <span class="new-price">₦30,000</span>
+                    </div>
                     <button class="buy-btn" onclick="addItemToCart('Glory Retrieval (Gbogo Mi Funmi)', 30000)">Add To Basket</button>
                 </div>
             </div>
@@ -964,8 +832,14 @@
             <div class="product-card" data-category="way-opener">
                 <div class="product-gallery">
                     <div class="gallery-slides" id="slides-p6">
-                        <img src="images/open-door-1.jpg" alt="Open Door Kit 1" onerror="this.style.display='none'">
-                        <img src="images/open-door-2.jpg" alt="Open Door Kit 2" onerror="this.style.display='none'">
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-box-open"></i><span>Option 1 Loading...</span></div>
+                            <img src="images/open-door-1.jpg" alt="Open Door Kit 1" onload="imageLoaded(this)">
+                        </div>
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-unlock"></i><span>Option 2 Loading...</span></div>
+                            <img src="images/open-door-2.jpg" alt="Open Door Kit 2" onload="imageLoaded(this)">
+                        </div>
                     </div>
                     <div class="gallery-nav">
                         <div class="gallery-dot active" onclick="switchGalleryImage('p6', 0, this)"></div>
@@ -975,7 +849,10 @@
                 <div class="product-content">
                     <h3>Open Door Kit</h3>
                     <p>A multi-tiered framework designed to break through heavily restricted setups and financial blocks.</p>
-                    <div class="price-container"><span class="old-price">₦50,000</span><span class="new-price">₦40,000</span></div>
+                    <div class="price-container">
+                        <span class="old-price">₦50,000</span>
+                        <span class="new-price">₦40,000</span>
+                    </div>
                     <button class="buy-btn" onclick="addItemToCart('Open Door Kit', 40000)">Add To Basket</button>
                 </div>
             </div>
@@ -983,8 +860,14 @@
             <div class="product-card" data-category="money">
                 <div class="product-gallery">
                     <div class="gallery-slides" id="slides-p7">
-                        <img src="images/cashout-1.jpg" alt="Cash Out Soap 1" onerror="this.style.display='none'">
-                        <img src="images/cashout-2.jpg" alt="Cash Out Soap 2" onerror="this.style.display='none'">
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-money-bill-trend-up"></i><span>Option 1 Loading...</span></div>
+                            <img src="images/cashout-1.jpg" alt="Cash Out Soap 1" onload="imageLoaded(this)">
+                        </div>
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-vault"></i><span>Option 2 Loading...</span></div>
+                            <img src="images/cashout-2.jpg" alt="Cash Out Soap 2" onload="imageLoaded(this)">
+                        </div>
                     </div>
                     <div class="gallery-nav">
                         <div class="gallery-dot active" onclick="switchGalleryImage('p7', 0, this)"></div>
@@ -994,7 +877,10 @@
                 <div class="product-content">
                     <h3>Cash Out Soap</h3>
                     <p>Our ultra-premium formulation designed for high-profile business negotiations, contracts, and financial favor.</p>
-                    <div class="price-container"><span class="old-price">₦250,000</span><span class="new-price">₦200,000</span></div>
+                    <div class="price-container">
+                        <span class="old-price">₦250,000</span>
+                        <span class="new-price">₦200,000</span>
+                    </div>
                     <button class="buy-btn" onclick="addItemToCart('Cash Out Soap', 200000)">Add To Basket</button>
                 </div>
             </div>
@@ -1002,8 +888,14 @@
             <div class="product-card" data-category="money">
                 <div class="product-gallery">
                     <div class="gallery-slides" id="slides-p8">
-                        <img src="images/breakthrough-1.jpg" alt="Breakthrough Soap 1" onerror="this.style.display='none'">
-                        <img src="images/breakthrough-2.jpg" alt="Breakthrough Soap 2" onerror="this.style.display='none'">
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-coins"></i><span>Option 1 Loading...</span></div>
+                            <img src="images/breakthrough-1.jpg" alt="Breakthrough Soap 1" onload="imageLoaded(this)">
+                        </div>
+                        <div class="image-frame">
+                            <div class="placeholder-card-fallback"><i class="fa-solid fa-chart-line"></i><span>Option 2 Loading...</span></div>
+                            <img src="images/breakthrough-2.jpg" alt="Breakthrough Soap 2" onload="imageLoaded(this)">
+                        </div>
                     </div>
                     <div class="gallery-nav">
                         <div class="gallery-dot active" onclick="switchGalleryImage('p8', 0, this)"></div>
@@ -1013,27 +905,11 @@
                 <div class="product-content">
                     <h3>Breakthrough Soap (Ashina)</h3>
                     <p>Designed to expand business visibility, unlock rapid financial favor, and draw rich clients.</p>
-                    <div class="price-container"><span class="old-price">₦30,000</span><span class="new-price">₦25,000</span></div>
+                    <div class="price-container">
+                        <span class="old-price">₦30,000</span>
+                        <span class="new-price">₦25,000</span>
+                    </div>
                     <button class="buy-btn" onclick="addItemToCart('Breakthrough Soap (Ashina)', 25000)">Add To Basket</button>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="love">
-                <div class="product-gallery">
-                    <div class="gallery-slides" id="slides-p9">
-                        <img src="images/mirror-1.jpg" alt="Stay With Me Mirror 1" onerror="this.style.display='none'">
-                        <img src="images/mirror-2.jpg" alt="Stay With Me Mirror 2" onerror="this.style.display='none'">
-                    </div>
-                    <div class="gallery-nav">
-                        <div class="gallery-dot active" onclick="switchGalleryImage('p9', 0, this)"></div>
-                        <div class="gallery-dot" onclick="switchGalleryImage('p9', 1, this)"></div>
-                    </div>
-                </div>
-                <div class="product-content">
-                    <h3>Stay With Me Mirror</h3>
-                    <p>A specialized luxury Kayamata standard tool constructed for deep relationship stabilization and devotion.</p>
-                    <div class="price-container"><span class="old-price">₦20,000</span><span class="new-price">₦15,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Stay With Me Mirror', 15000)">Add To Basket</button>
                 </div>
             </div>
         </div>
@@ -1050,10 +926,6 @@
                     <h4>Standard Consultation</h4>
                     <span class="tier-time">3 - 5 Days Response</span>
                     <div class="tier-price">₦7,000</div>
-                    <ul class="tier-features">
-                        <li><i class="fa-solid fa-check"></i> Detailed Spiritual Reading</li>
-                        <li><i class="fa-solid fa-check"></i> Root Cause Diagnostics</li>
-                    </ul>
                     <button class="tier-btn" onclick="bookConsultation('normal')">Select Standard</button>
                 </div>
                 <div class="tier-card featured">
@@ -1061,58 +933,14 @@
                     <h4>VIP Consultation</h4>
                     <span class="tier-time">Within 24 Hours</span>
                     <div class="tier-price">₦12,000</div>
-                    <ul class="tier-features">
-                        <li><i class="fa-solid fa-check"></i> Express Reading Execution</li>
-                        <li><i class="fa-solid fa-check"></i> Priority Attention Insight</li>
-                    </ul>
                     <button class="tier-btn" onclick="bookConsultation('vip')">Select VIP</button>
                 </div>
                 <div class="tier-card">
                     <h4>Face To Face</h4>
                     <span class="tier-time">By Appointment</span>
-                    <div class="tier-price">₦15,000</div>
-                    <ul class="tier-features">
-                        <li><i class="fa-solid fa-check"></i> Private Physical Session</li>
-                        <li><i class="fa-solid fa-check"></i> Deep On-Site Testing</li>
-                    </ul>
+                    <div class="tier-price">₦30,000</div>
                     <button class="tier-btn" onclick="bookConsultation('face-to-face')">Select Physical</button>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="why-us section-padding">
-        <div class="heading-container">
-            <h2>Why Seek Our <span>Guidance?</span></h2>
-        </div>
-        <div class="why-grid">
-            <div class="why-card"><i class="fa-solid fa-leaf"></i><h4>100% Organic</h4><p>Pure herbal formulas.</p></div>
-            <div class="why-card"><i class="fa-solid fa-user-shield"></i><h4>Trusted Counsel</h4><p>Years of verified metrics.</p></div>
-            <div class="why-card"><i class="fa-solid fa-truck-fast"></i><h4>Fast Delivery</h4><p>Discreet global transit.</p></div>
-            <div class="why-card"><i class="fa-solid fa-mortar-pestle"></i><h4>Handmade</h4><p>Individually mixed steps.</p></div>
-            <div class="why-card"><i class="fa-solid fa-lock"></i><h4>Confidential</h4><p>100% private security.</p></div>
-        </div>
-    </section>
-
-    <section class="testimonials section-padding">
-        <div class="heading-container">
-            <h2>True <span>Transformation Stories</span></h2>
-        </div>
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"The Curse Breaker soap completely cleared the heavy stagnant weight around my career. Two weeks after, I landed a corporate contract."</p>
-                <div class="client-info"><div class="client-avatar">AO</div><h5>Adeshina O.</h5></div>
-            </div>
-            <div class="testimonial-card">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"I paid for the VIP consultation because things were collapsing rapidly. The root reading was dangerously accurate."</p>
-                <div class="client-info"><div class="client-avatar">CE</div><h5>Chidi E.</h5></div>
-            </div>
-            <div class="testimonial-card">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"The Attraction Oil and Kayamata packages work wonderfully. My long-term partner has completely transformed."</p>
-                <div class="client-info"><div class="client-avatar">TI</div><h5>Titi I.</h5></div>
             </div>
         </div>
     </section>
@@ -1126,19 +954,17 @@
                 <div class="faq-header" onclick="toggleFaq(this)"><h4>How long does it take to see visible results?</h4><i class="fa-solid fa-chevron-down faq-icon"></i></div>
                 <div class="faq-body"><p>Spiritual paths depend on configuration alignment, faith, and consistency. While many see shifts within 7 to 14 days, situations vary based on individual aura parameters.</p></div>
             </div>
-            <div class="faq-item">
-                <div class="faq-header" onclick="toggleFaq(this)"><h4>Are these items safe or associated with any kickbacks?</h4><i class="fa-solid fa-chevron-down faq-icon"></i></div>
-                <div class="faq-body"><p>Everything we offer is formulated using 100% natural herbs, therapeutic plants, and safe ancestral laws—completely free from malicious side effects or kickbacks.</p></div>
-            </div>
         </div>
     </section>
 
-    <section class="newsletter section-padding">
+    <section class="newsletter section-padding" id="newsletter">
         <div class="newsletter-box">
             <h3>Join Our Inner Circle</h3>
             <p>Subscribe to receive spiritual alerts, botanical maintenance tips, and exclusive prophetic guidance updates.</p>
-            <form class="subscribe-form" onsubmit="event.preventDefault(); alert('Subscribed successfully to our spiritual inner circle!');">
-                <input type="email" placeholder="Enter your email address" required>
+            <form class="subscribe-form" action="https://api.web3forms.com/submit" method="POST" onsubmit="handleFormSubmission(event)">
+                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                <input type="hidden" name="subject" value="New Spiritual Circle Subscriber">
+                <input type="email" name="email" placeholder="Enter your email address" required>
                 <button type="submit" class="subscribe-btn">Subscribe</button>
             </form>
         </div>
@@ -1154,45 +980,21 @@
                     <li><i class="fa-solid fa-envelope"></i> contact@omoolopaase.com</li>
                     <li><i class="fa-solid fa-location-dot"></i> Lagos, Nigeria</li>
                 </ul>
-                <div class="social-row">
-                    <a href="https://facebook.com/Omoolopaase" class="social-icon" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://instagram.com/Omoolopaase" class="social-icon" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://tiktok.com/@Omoolopaase1" class="social-icon" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-                </div>
             </div>
             <div class="contact-form">
-                <form onsubmit="event.preventDefault(); alert('Message secure logged successfully.');">
-                    <div class="form-group"><input type="text" placeholder="Your Legal Name" required></div>
-                    <div class="form-group"><input type="email" placeholder="Your Email Address" required></div>
-                    <div class="form-group"><textarea rows="5" placeholder="Describe your current situation details carefully..." required></textarea></div>
-                    <div class="form-btn" onclick="alert('Message logged securely.');">Send Secure Message</div>
+                <form action="https://api.web3forms.com/submit" method="POST" onsubmit="handleFormSubmission(event)">
+                    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                    <input type="hidden" name="subject" value="New Landing Page Customer Inquiry">
+                    <div class="form-group"><input type="text" name="name" placeholder="Your Legal Name" required></div>
+                    <div class="form-group"><input type="email" name="email" placeholder="Your Email Address" required></div>
+                    <div class="form-group"><textarea name="message" rows="5" placeholder="Describe your current situation details carefully..." required></textarea></div>
+                    <button type="submit" class="form-btn">Send Secure Message</button>
                 </form>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <h4>OMOOLOPAASE EMPIRE</h4>
-                <p>Providing pristine spiritual clarity, organic remedies, protective structural shielding, and energetic aura alignment across global standards.</p>
-            </div>
-            <div class="footer-links">
-                <h5>Quick Navigation</h5>
-                <ul>
-                    <li><a href="#">Home Core</a></li>
-                    <li><a href="#about">About Legacy</a></li>
-                    <li><a href="#products">Spiritual Shop</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h5>Legal &amp; Safety</h5>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Protocol</a></li>
-                </ul>
-            </div>
-        </div>
         <div class="footer-bottom">
             <p>&copy; 2026 Omoolopaase Empire Limited. All Rights Reserved.</p>
             <p>Designed with ❤️ by <a href="https://www.visioreach.co" class="credit-link" target="_blank">VisioReach Concepts</a></p>
@@ -1205,12 +1007,6 @@
 
     <script>
         let basketCart = [];
-
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 30) { nav.classList.add('scrolled'); } 
-            else { nav.classList.remove('scrolled'); }
-        });
 
         function toggleMobileMenu() {
             const linksMenu = document.getElementById('navLinksMenu');
@@ -1226,6 +1022,13 @@
         function closeMobileMenu() {
             document.getElementById('navLinksMenu').classList.remove('mobile-open');
             document.getElementById('menuToggleIcon').classList.replace('fa-xmark', 'fa-bars');
+        }
+
+        function imageLoaded(imgElement) {
+            imgElement.classList.add('loaded');
+            // Hide the generic background card once your real photo loads from GitHub
+            const placeholder = imgElement.parentElement.querySelector('.placeholder-card-fallback');
+            if(placeholder) placeholder.style.display = 'none';
         }
 
         function switchGalleryImage(productId, slideIndex, dotElement) {
@@ -1352,6 +1155,11 @@
             if (tierType === 'vip') { msg = "Hey, I'm ready for the Consultation. I would love to sign up for the VIP one."; }
             else if (tierType === 'face-to-face') { msg = "Hey, I'm ready for the Consultation. I want to book a physical face-to-face session."; }
             window.open(`https://wa.me/${baseNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function handleFormSubmission(event) {
+            // Intercepts the form to notify users before external form processors handle the redirect routing
+            alert('Your request details are being processed securely. Thank you!');
         }
     </script>
 </body>

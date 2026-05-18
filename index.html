@@ -1,1746 +1,2118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Omoolopaase Empire – Awaken Your Inner Energy</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-/* ===== CSS RESET & VARIABLES ===== */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --gold: #D4AF37;
-  --gold-light: #F0D060;
-  --gold-dark: #A8861A;
-  --purple: #5B2167;
-  --purple-dark: #3A1240;
-  --purple-light: #8B3DA8;
-  --black: #0D0A0F;
-  --black-soft: #1A1020;
-  --cream: #F5F1E8;
-  --cream-dark: #E8E0CC;
-  --white: #FFFFFF;
-  --text-muted: #B8A8C8;
-  --font-heading: 'Cinzel', serif;
-  --font-display: 'Cinzel Decorative', serif;
-  --font-serif: 'Cormorant Garamond', serif;
-  --font-body: 'Poppins', sans-serif;
-  --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omoolopaase Empire | Premium Spiritual Solutions & Consultation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- DESIGN SYSTEM & CSS VARIABLES --- */
+        :root {
+            --gold: #D4AF37;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --purple: #5B2167;
+            --purple-dark: #3a1343;
+            --black: #111111;
+            --dark-gray: #1a1a1a;
+            --cream: #F5F1E8;
+            --white: #FFFFFF;
+            --glass: rgba(26, 26, 26, 0.75);
+            --glass-border: rgba(214, 175, 55, 0.2);
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Poppins', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
 
-html { scroll-behavior: smooth; }
+        /* --- BASE RESET & SMOOTH SCROLL --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
-body {
-  font-family: var(--font-body);
-  background: var(--black);
-  color: var(--cream);
-  overflow-x: hidden;
-  cursor: default;
-}
+        body {
+            background-color: var(--black);
+            color: var(--cream);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-/* ===== SCROLLBAR ===== */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--black); }
-::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+        /* --- UTILITIES & BACKGROUND GLOW EFFECTS --- */
+        .glow-bg {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--purple) 0%, transparent 70%);
+            opacity: 0.25;
+            filter: blur(60px);
+            z-index: 0;
+            pointer-events: none;
+        }
 
-/* ===== LOADING SCREEN ===== */
-#loader {
-  position: fixed; inset: 0; z-index: 9999;
-  background: var(--black);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
-}
-#loader.hidden { opacity: 0; visibility: hidden; }
-.loader-symbol {
-  width: 80px; height: 80px;
-  border: 2px solid transparent;
-  border-top-color: var(--gold);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  position: relative;
-}
-.loader-symbol::before {
-  content: '✦';
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 28px; color: var(--gold);
-  animation: pulse-glow 1.5s ease-in-out infinite;
-}
-.loader-text {
-  font-family: var(--font-display);
-  color: var(--gold); font-size: 0.85rem;
-  letter-spacing: 4px; margin-top: 24px;
-  animation: fadeFlicker 1.5s ease-in-out infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.5; text-shadow: 0 0 10px var(--gold); }
-  50% { opacity: 1; text-shadow: 0 0 30px var(--gold), 0 0 60px var(--gold-light); }
-}
-@keyframes fadeFlicker {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
-}
+        .section-padding {
+            padding: 100px 8% 80px 8%;
+        }
 
-/* ===== NAVBAR ===== */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  padding: 18px 5%;
-  display: flex; align-items: center; justify-content: space-between;
-  transition: var(--transition);
-  backdrop-filter: blur(0px);
-}
-nav.scrolled {
-  background: rgba(13, 10, 15, 0.92);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-  padding: 12px 5%;
-}
-.nav-logo {
-  font-family: var(--font-display);
-  color: var(--gold); font-size: 1.1rem;
-  letter-spacing: 2px; text-decoration: none;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-}
-.nav-links {
-  display: flex; gap: 36px; list-style: none;
-}
-.nav-links a {
-  font-family: var(--font-heading);
-  color: var(--cream); text-decoration: none;
-  font-size: 0.75rem; letter-spacing: 2px;
-  text-transform: uppercase; transition: var(--transition);
-}
-.nav-links a:hover { color: var(--gold); text-shadow: 0 0 15px rgba(212,175,55,0.6); }
-.nav-cta {
-  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-  color: var(--black) !important;
-  padding: 10px 24px; border-radius: 2px;
-  font-weight: 600 !important;
-}
-.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212,175,55,0.4); }
-.hamburger {
-  display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none;
-}
-.hamburger span {
-  width: 24px; height: 1.5px; background: var(--gold); transition: var(--transition);
-}
+        .heading-container {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
 
-/* ===== HERO ===== */
-#hero {
-  min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-  padding: 100px 5% 60px;
-}
-.hero-bg {
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(91, 33, 103, 0.5) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 80% at 80% 80%, rgba(212, 175, 55, 0.12) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 60% at 20% 60%, rgba(91, 33, 103, 0.3) 0%, transparent 50%),
-    linear-gradient(180deg, #0D0A0F 0%, #1A0D25 50%, #0D0A0F 100%);
-}
-.hero-particles {
-  position: absolute; inset: 0; pointer-events: none;
-}
-.particle {
-  position: absolute; width: 2px; height: 2px;
-  background: var(--gold); border-radius: 50%;
-  animation: float-particle linear infinite;
-  opacity: 0;
-}
-@keyframes float-particle {
-  0% { transform: translateY(100vh) scale(0); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(-20px) scale(1); opacity: 0; }
-}
-.hero-content {
-  position: relative; z-index: 2;
-  text-align: center; max-width: 820px; margin: 0 auto;
-}
-.hero-emblem {
-  width: 120px; height: 120px;
-  border-radius: 50%;
-  border: 2px solid var(--gold);
-  box-shadow: 0 0 40px rgba(212,175,55,0.4), 0 0 80px rgba(91,33,103,0.3);
-  margin: 0 auto 32px;
-  background: radial-gradient(circle, rgba(91,33,103,0.8) 0%, rgba(13,10,15,0.9) 100%);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 52px;
-  animation: emblem-glow 3s ease-in-out infinite;
-}
-@keyframes emblem-glow {
-  0%, 100% { box-shadow: 0 0 40px rgba(212,175,55,0.4), 0 0 80px rgba(91,33,103,0.3); }
-  50% { box-shadow: 0 0 60px rgba(212,175,55,0.7), 0 0 120px rgba(91,33,103,0.5); }
-}
-.hero-brand {
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 4vw, 2.2rem);
-  color: var(--gold); letter-spacing: 4px;
-  margin-bottom: 8px;
-  text-shadow: 0 0 30px rgba(212,175,55,0.5);
-}
-.hero-tagline-sm {
-  font-family: var(--font-heading);
-  font-size: 0.7rem; letter-spacing: 6px;
-  color: var(--text-muted); text-transform: uppercase;
-  margin-bottom: 32px;
-}
-.hero-divider {
-  width: 120px; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  margin: 0 auto 32px;
-}
-.hero-headline {
-  font-family: var(--font-serif);
-  font-size: clamp(2.4rem, 7vw, 5rem);
-  font-weight: 300; line-height: 1.15;
-  color: var(--white); margin-bottom: 24px;
-  font-style: italic;
-}
-.hero-headline span { color: var(--gold); font-style: normal; font-weight: 600; }
-.hero-sub {
-  font-size: 1rem; color: var(--text-muted);
-  line-height: 1.8; max-width: 560px; margin: 0 auto 48px;
-  font-weight: 300;
-}
-.hero-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-.btn-primary {
-  font-family: var(--font-heading);
-  font-size: 0.75rem; letter-spacing: 3px;
-  text-transform: uppercase; text-decoration: none;
-  padding: 16px 40px; border-radius: 2px;
-  background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
-  color: var(--black); font-weight: 700;
-  transition: var(--transition);
-  box-shadow: 0 4px 30px rgba(212,175,55,0.35);
-  position: relative; overflow: hidden;
-}
-.btn-primary::before {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, transparent, rgba(255,255,255,0.2), transparent);
-  transform: translateX(-100%); transition: transform 0.6s ease;
-}
-.btn-primary:hover::before { transform: translateX(100%); }
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(212,175,55,0.5); }
-.btn-secondary {
-  font-family: var(--font-heading);
-  font-size: 0.75rem; letter-spacing: 3px;
-  text-transform: uppercase; text-decoration: none;
-  padding: 15px 40px; border-radius: 2px;
-  border: 1px solid var(--gold); color: var(--gold);
-  background: transparent; transition: var(--transition);
-}
-.btn-secondary:hover {
-  background: rgba(212,175,55,0.1);
-  box-shadow: 0 0 30px rgba(212,175,55,0.2);
-  transform: translateY(-3px);
-}
-.hero-scroll {
-  position: absolute; bottom: 40px; left: 50%;
-  transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-}
-.hero-scroll span {
-  font-family: var(--font-heading);
-  font-size: 0.6rem; letter-spacing: 3px;
-  color: var(--text-muted);
-}
-.scroll-line {
-  width: 1px; height: 60px;
-  background: linear-gradient(180deg, var(--gold), transparent);
-  animation: scroll-pulse 2s ease-in-out infinite;
-}
-@keyframes scroll-pulse {
-  0%, 100% { opacity: 0.4; transform: scaleY(1); }
-  50% { opacity: 1; transform: scaleY(1.1); }
-}
+        .heading-container h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--white);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
 
-/* ===== SECTION STRUCTURE ===== */
-section { padding: 100px 5%; }
-.section-label {
-  font-family: var(--font-heading);
-  font-size: 0.65rem; letter-spacing: 6px;
-  color: var(--gold); text-transform: uppercase;
-  margin-bottom: 16px; display: block;
-}
-.section-title {
-  font-family: var(--font-serif);
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 300; line-height: 1.2;
-  color: var(--white);
-}
-.section-title em { color: var(--gold); font-style: italic; }
-.section-divider {
-  width: 80px; height: 1px;
-  background: linear-gradient(90deg, var(--gold), transparent);
-  margin: 24px 0;
-}
-.section-sub {
-  color: var(--text-muted); line-height: 1.8;
-  font-weight: 300; max-width: 520px;
-}
-.text-center { text-align: center; }
-.text-center .section-divider { margin: 24px auto; }
-.text-center .section-sub { margin: 0 auto; }
+        .heading-container h2 span {
+            color: var(--gold);
+        }
 
-/* ===== ABOUT ===== */
-#about {
-  background: linear-gradient(180deg, var(--black) 0%, var(--black-soft) 50%, var(--black) 100%);
-  position: relative;
-}
-#about::before {
-  content: '';
-  position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-  background: linear-gradient(180deg, transparent, var(--gold), transparent);
-}
-.about-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 80px; align-items: center; margin-top: 60px;
-}
-.about-visual {
-  position: relative;
-}
-.about-frame {
-  aspect-ratio: 3/4; border-radius: 4px;
-  background: linear-gradient(135deg, rgba(91,33,103,0.6) 0%, rgba(13,10,15,0.9) 100%);
-  border: 1px solid rgba(212,175,55,0.3);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 100px; position: relative; overflow: hidden;
-}
-.about-frame::before {
-  content: '';
-  position: absolute; inset: -50%;
-  background: conic-gradient(from 0deg, transparent 0%, rgba(212,175,55,0.1) 25%, transparent 50%, rgba(91,33,103,0.1) 75%, transparent 100%);
-  animation: rotate-slow 8s linear infinite;
-}
-@keyframes rotate-slow { to { transform: rotate(360deg); } }
-.about-badge {
-  position: absolute; bottom: -20px; right: -20px;
-  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-  color: var(--black); padding: 20px 28px; border-radius: 4px;
-  font-family: var(--font-heading); font-size: 0.65rem;
-  letter-spacing: 2px; text-align: center; font-weight: 700;
-}
-.about-badge strong { display: block; font-size: 1.8rem; font-family: var(--font-display); letter-spacing: 0; }
-.about-text { display: flex; flex-direction: column; gap: 28px; }
-.about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
-.about-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(212,175,55,0.15);
-  border-radius: 4px; padding: 20px 18px;
-  transition: var(--transition);
-}
-.about-card:hover {
-  background: rgba(212,175,55,0.07);
-  border-color: rgba(212,175,55,0.4);
-  transform: translateY(-4px);
-}
-.about-card-icon { font-size: 24px; margin-bottom: 10px; }
-.about-card h4 {
-  font-family: var(--font-heading);
-  font-size: 0.7rem; letter-spacing: 2px;
-  color: var(--gold); margin-bottom: 6px;
-}
-.about-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
+        .heading-container::after {
+            content: '✨';
+            display: block;
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-top: 10px;
+        }
 
-/* ===== PRODUCTS ===== */
-#products {
-  background: var(--black);
-  position: relative; overflow: hidden;
-}
-#products::before {
-  content: '';
-  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(91,33,103,0.2) 0%, transparent 70%);
-  pointer-events: none;
-}
-.products-header { text-align: center; margin-bottom: 60px; }
-.product-tabs {
-  display: flex; gap: 12px; justify-content: center;
-  flex-wrap: wrap; margin-bottom: 48px;
-}
-.tab-btn {
-  font-family: var(--font-heading);
-  font-size: 0.65rem; letter-spacing: 2px;
-  padding: 10px 22px; border-radius: 2px;
-  border: 1px solid rgba(212,175,55,0.3);
-  color: var(--text-muted); background: transparent;
-  cursor: pointer; transition: var(--transition);
-  text-transform: uppercase;
-}
-.tab-btn.active, .tab-btn:hover {
-  background: rgba(212,175,55,0.1);
-  border-color: var(--gold); color: var(--gold);
-}
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 28px;
-}
-.product-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(212,175,55,0.12);
-  border-radius: 6px; overflow: hidden;
-  transition: var(--transition); position: relative;
-  cursor: pointer;
-}
-.product-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(212,175,55,0.5);
-  box-shadow: 0 20px 60px rgba(91,33,103,0.3), 0 0 40px rgba(212,175,55,0.1);
-}
-.product-img {
-  height: 220px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 72px; position: relative;
-  background: linear-gradient(135deg, rgba(91,33,103,0.5) 0%, rgba(13,10,15,0.8) 100%);
-}
-.product-badge-tag {
-  position: absolute; top: 14px; left: 14px;
-  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-  color: var(--black); font-family: var(--font-heading);
-  font-size: 0.55rem; letter-spacing: 2px; padding: 5px 12px;
-  border-radius: 2px; font-weight: 700; text-transform: uppercase;
-}
-.product-info { padding: 24px 22px; }
-.product-name {
-  font-family: var(--font-heading);
-  font-size: 0.95rem; letter-spacing: 1px;
-  color: var(--white); margin-bottom: 8px;
-}
-.product-desc {
-  font-size: 0.8rem; color: var(--text-muted);
-  line-height: 1.6; margin-bottom: 20px;
-}
-.product-footer {
-  display: flex; align-items: center;
-  justify-content: space-between;
-}
-.product-price {
-  font-family: var(--font-display);
-  color: var(--gold); font-size: 1.1rem;
-}
-.product-price .old-price {
-  font-family: var(--font-body);
-  text-decoration: line-through; color: var(--text-muted);
-  font-size: 0.75rem; display: block;
-}
-.btn-buy {
-  font-family: var(--font-heading);
-  font-size: 0.6rem; letter-spacing: 2px;
-  padding: 10px 20px; border-radius: 2px;
-  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-  color: var(--black); border: none; cursor: pointer;
-  font-weight: 700; text-transform: uppercase;
-  transition: var(--transition); text-decoration: none;
-  display: inline-block;
-}
-.btn-buy:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(212,175,55,0.4); }
+        /* --- STICKY TRANSPARENT NAVBAR --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 8%;
+            background: rgba(17, 17, 17, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+        }
 
-/* ===== CONSULTATION ===== */
-#consultation {
-  position: relative; overflow: hidden;
-  background: linear-gradient(135deg, var(--purple-dark) 0%, var(--black) 50%, var(--purple-dark) 100%);
-}
-#consultation::before {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 80% 80% at 50% 50%, rgba(212,175,55,0.07) 0%, transparent 60%);
-}
-.consultation-inner {
-  position: relative; z-index: 2;
-  text-align: center; max-width: 900px; margin: 0 auto;
-}
-.consult-packages {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px; margin: 60px 0;
-}
-.consult-card {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(212,175,55,0.25);
-  border-radius: 6px; padding: 36px 28px;
-  transition: var(--transition); position: relative; overflow: hidden;
-  text-align: left;
-}
-.consult-card.featured {
-  border-color: var(--gold);
-  background: rgba(212,175,55,0.08);
-}
-.consult-card.featured::before {
-  content: 'URGENT SERVICE';
-  position: absolute; top: 16px; right: -8px;
-  background: #C41E3A; color: white;
-  font-family: var(--font-heading); font-size: 0.55rem;
-  letter-spacing: 1px; padding: 5px 18px;
-  border-radius: 2px; font-weight: 700;
-}
-.consult-icon { font-size: 36px; margin-bottom: 20px; }
-.consult-tier {
-  font-family: var(--font-heading);
-  font-size: 1rem; letter-spacing: 2px;
-  color: var(--white); margin-bottom: 4px;
-}
-.consult-duration {
-  font-family: var(--font-heading);
-  font-size: 0.65rem; letter-spacing: 2px;
-  color: var(--gold); margin-bottom: 16px; text-transform: uppercase;
-}
-.consult-features { list-style: none; margin-bottom: 24px; }
-.consult-features li {
-  font-size: 0.82rem; color: var(--text-muted);
-  padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-  display: flex; align-items: center; gap: 8px;
-}
-.consult-features li::before { content: '✦'; color: var(--gold); font-size: 0.6rem; }
-.consult-price {
-  font-family: var(--font-display);
-  font-size: 2rem; color: var(--gold);
-  margin-bottom: 20px;
-}
-.consult-price span { font-family: var(--font-body); font-size: 0.9rem; color: var(--text-muted); }
-.wa-book-btn {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: #25D366; color: white;
-  font-family: var(--font-heading);
-  font-size: 0.75rem; letter-spacing: 2px;
-  padding: 16px 40px; border-radius: 2px;
-  text-decoration: none; transition: var(--transition);
-  font-weight: 600; margin-top: 20px;
-}
-.wa-book-btn:hover {
-  background: #1DA851; transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(37,211,102,0.4);
-}
+        nav.scrolled {
+            padding: 15px 8%;
+            background: var(--black);
+            border-bottom: 1px solid var(--glass-border);
+        }
 
-/* ===== WHY CHOOSE US ===== */
-#why {
-  background: var(--black);
-  position: relative;
-}
-.why-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 28px; margin-top: 60px;
-}
-.why-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(212,175,55,0.1);
-  border-radius: 6px; padding: 40px 28px;
-  text-align: center; transition: var(--transition);
-  position: relative; overflow: hidden;
-}
-.why-card::before {
-  content: '';
-  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 0; height: 2px; background: var(--gold);
-  transition: width 0.4s ease;
-}
-.why-card:hover::before { width: 100%; }
-.why-card:hover {
-  transform: translateY(-6px);
-  background: rgba(212,175,55,0.06);
-  border-color: rgba(212,175,55,0.3);
-}
-.why-icon {
-  width: 64px; height: 64px; border-radius: 50%;
-  background: linear-gradient(135deg, rgba(91,33,103,0.5), rgba(212,175,55,0.2));
-  border: 1px solid rgba(212,175,55,0.3);
-  margin: 0 auto 20px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 28px;
-}
-.why-card h3 {
-  font-family: var(--font-heading);
-  font-size: 0.8rem; letter-spacing: 1px;
-  color: var(--gold); margin-bottom: 10px;
-}
-.why-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 2px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-/* ===== TESTIMONIALS ===== */
-#testimonials {
-  background: linear-gradient(180deg, var(--black) 0%, var(--black-soft) 100%);
-  overflow: hidden;
-}
-.testimonials-header { text-align: center; margin-bottom: 60px; }
-.testimonials-track {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 28px;
-}
-.testi-card {
-  background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(212,175,55,0.15);
-  border-radius: 6px; padding: 36px 30px;
-  position: relative; transition: var(--transition);
-}
-.testi-card:hover {
-  border-color: rgba(212,175,55,0.4);
-  transform: translateY(-5px);
-  box-shadow: 0 20px 50px rgba(91,33,103,0.2);
-}
-.testi-quote {
-  font-family: var(--font-serif);
-  font-size: 3rem; color: var(--gold);
-  line-height: 1; margin-bottom: 16px; opacity: 0.5;
-}
-.testi-text {
-  font-family: var(--font-serif);
-  font-size: 1.05rem; color: var(--cream);
-  line-height: 1.7; font-style: italic;
-  margin-bottom: 24px;
-}
-.testi-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 16px; }
-.testi-author {
-  display: flex; align-items: center; gap: 14px;
-  border-top: 1px solid rgba(212,175,55,0.15);
-  padding-top: 20px;
-}
-.testi-avatar {
-  width: 44px; height: 44px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--purple), var(--gold-dark));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; font-weight: 700;
-  color: white; font-family: var(--font-heading);
-  font-size: 1rem;
-}
-.testi-name {
-  font-family: var(--font-heading);
-  font-size: 0.8rem; letter-spacing: 1px; color: var(--gold);
-}
-.testi-loc { font-size: 0.75rem; color: var(--text-muted); }
+        .logo span {
+            color: var(--gold);
+        }
 
-/* ===== PRICE LIST ===== */
-#pricing {
-  background: var(--black); position: relative; overflow: hidden;
-}
-#pricing::before {
-  content: '';
-  position: absolute; right: -200px; top: 50%; transform: translateY(-50%);
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 70%);
-}
-.pricing-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 36px; margin-top: 60px;
-}
-.price-category {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(212,175,55,0.15);
-  border-radius: 6px; overflow: hidden;
-  transition: var(--transition);
-}
-.price-category:hover { border-color: rgba(212,175,55,0.4); }
-.price-cat-header {
-  background: linear-gradient(135deg, rgba(91,33,103,0.8), rgba(58,18,64,0.9));
-  padding: 20px 28px;
-  display: flex; align-items: center; gap: 14px;
-  border-bottom: 1px solid rgba(212,175,55,0.2);
-}
-.price-cat-icon { font-size: 24px; }
-.price-cat-title {
-  font-family: var(--font-heading);
-  font-size: 0.85rem; letter-spacing: 2px;
-  color: var(--gold); text-transform: uppercase;
-}
-.price-items { padding: 0 28px; }
-.price-item {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  transition: var(--transition);
-}
-.price-item:last-child { border-bottom: none; }
-.price-item:hover { padding-left: 8px; }
-.price-item-name { font-size: 0.85rem; color: var(--cream); }
-.price-item-value {
-  font-family: var(--font-heading);
-  font-size: 0.9rem; color: var(--gold); font-weight: 600;
-  white-space: nowrap;
-}
-.price-item-value .striked {
-  text-decoration: line-through; color: var(--text-muted);
-  font-size: 0.7rem; margin-right: 6px;
-}
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
 
-/* ===== FAQ ===== */
-#faq {
-  background: linear-gradient(180deg, var(--black-soft) 0%, var(--black) 100%);
-}
-.faq-container { max-width: 720px; margin: 60px auto 0; }
-.faq-item {
-  border: 1px solid rgba(212,175,55,0.15);
-  border-radius: 4px; margin-bottom: 12px;
-  overflow: hidden; transition: var(--transition);
-}
-.faq-item.open { border-color: rgba(212,175,55,0.4); }
-.faq-q {
-  padding: 22px 28px;
-  display: flex; align-items: center; justify-content: space-between;
-  cursor: pointer; gap: 16px;
-  background: rgba(255,255,255,0.02);
-  transition: var(--transition);
-}
-.faq-q:hover { background: rgba(212,175,55,0.05); }
-.faq-q-text {
-  font-family: var(--font-heading);
-  font-size: 0.85rem; letter-spacing: 0.5px;
-  color: var(--cream);
-}
-.faq-arrow {
-  color: var(--gold); font-size: 1.2rem;
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-}
-.faq-item.open .faq-arrow { transform: rotate(45deg); }
-.faq-a {
-  max-height: 0; overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.3s ease;
-}
-.faq-item.open .faq-a { max-height: 300px; }
-.faq-a-inner {
-  padding: 0 28px 22px;
-  font-size: 0.88rem; color: var(--text-muted);
-  line-height: 1.8;
-}
+        .nav-links a {
+            text-decoration: none;
+            color: var(--cream);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            position: relative;
+        }
 
-/* ===== NEWSLETTER ===== */
-#newsletter {
-  background: linear-gradient(135deg, var(--purple-dark) 0%, var(--black-soft) 60%, var(--purple-dark) 100%);
-  text-align: center; position: relative; overflow: hidden;
-}
-#newsletter::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(212,175,55,0.06) 0%, transparent 70%);
-}
-.newsletter-inner { position: relative; z-index: 2; max-width: 560px; margin: 0 auto; }
-.newsletter-form {
-  display: flex; gap: 12px; margin-top: 40px;
-  flex-wrap: wrap; justify-content: center;
-}
-.newsletter-input {
-  flex: 1; min-width: 240px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(212,175,55,0.3);
-  border-radius: 2px; padding: 16px 22px;
-  color: var(--cream); font-family: var(--font-body);
-  font-size: 0.88rem; outline: none;
-  transition: var(--transition);
-  animation: glow-border 3s ease-in-out infinite;
-}
-.newsletter-input:focus {
-  border-color: var(--gold);
-  box-shadow: 0 0 20px rgba(212,175,55,0.25);
-  animation: none;
-}
-@keyframes glow-border {
-  0%, 100% { box-shadow: 0 0 8px rgba(212,175,55,0.1); }
-  50% { box-shadow: 0 0 20px rgba(212,175,55,0.3); }
-}
-.newsletter-input::placeholder { color: var(--text-muted); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--gold);
+            transition: var(--transition);
+        }
 
-/* ===== CONTACT ===== */
-#contact {
-  background: var(--black);
-}
-.contact-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 80px; margin-top: 60px;
-}
-.contact-info { display: flex; flex-direction: column; gap: 28px; }
-.contact-item {
-  display: flex; align-items: flex-start; gap: 18px;
-  padding: 24px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(212,175,55,0.1);
-  border-radius: 4px; transition: var(--transition);
-  text-decoration: none;
-}
-.contact-item:hover {
-  border-color: rgba(212,175,55,0.4);
-  transform: translateX(6px);
-}
-.contact-icon {
-  width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%;
-  background: linear-gradient(135deg, rgba(91,33,103,0.6), rgba(212,175,55,0.2));
-  border: 1px solid rgba(212,175,55,0.3);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
-}
-.contact-label {
-  font-family: var(--font-heading);
-  font-size: 0.65rem; letter-spacing: 2px;
-  color: var(--gold); margin-bottom: 4px;
-  text-transform: uppercase;
-}
-.contact-value { font-size: 0.9rem; color: var(--cream); }
-.contact-form { display: flex; flex-direction: column; gap: 18px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-.form-input, .form-textarea {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(212,175,55,0.2);
-  border-radius: 2px; padding: 14px 18px;
-  color: var(--cream); font-family: var(--font-body); font-size: 0.88rem;
-  outline: none; transition: var(--transition); width: 100%;
-}
-.form-input:focus, .form-textarea:focus {
-  border-color: var(--gold);
-  box-shadow: 0 0 15px rgba(212,175,55,0.2);
-}
-.form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); }
-.form-textarea { resize: vertical; min-height: 140px; }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-/* ===== FOOTER ===== */
-footer {
-  background: linear-gradient(180deg, var(--black-soft) 0%, #0a0710 100%);
-  border-top: 1px solid rgba(212,175,55,0.15);
-  padding: 60px 5% 30px;
-}
-.footer-main {
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 60px; margin-bottom: 48px;
-}
-.footer-brand {}
-.footer-logo {
-  font-family: var(--font-display);
-  color: var(--gold); font-size: 1rem;
-  letter-spacing: 2px; margin-bottom: 16px; display: block;
-  text-shadow: 0 0 20px rgba(212,175,55,0.4);
-}
-.footer-desc {
-  font-size: 0.82rem; color: var(--text-muted);
-  line-height: 1.8; margin-bottom: 24px;
-}
-.footer-socials { display: flex; gap: 12px; }
-.social-btn {
-  width: 38px; height: 38px; border-radius: 50%;
-  border: 1px solid rgba(212,175,55,0.3);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px; text-decoration: none;
-  transition: var(--transition);
-}
-.social-btn:hover {
-  background: rgba(212,175,55,0.15);
-  border-color: var(--gold);
-  transform: translateY(-3px);
-}
-.footer-col h4 {
-  font-family: var(--font-heading);
-  font-size: 0.7rem; letter-spacing: 3px;
-  color: var(--gold); text-transform: uppercase;
-  margin-bottom: 20px;
-}
-.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.footer-links a {
-  font-size: 0.82rem; color: var(--text-muted);
-  text-decoration: none; transition: var(--transition);
-  display: flex; align-items: center; gap: 6px;
-}
-.footer-links a::before { content: '›'; color: var(--gold); }
-.footer-links a:hover { color: var(--gold); padding-left: 4px; }
-.footer-bottom {
-  border-top: 1px solid rgba(212,175,55,0.1);
-  padding-top: 28px;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 16px;
-}
-.footer-copy {
-  font-size: 0.75rem; color: var(--text-muted);
-}
-.footer-credit {
-  font-size: 0.75rem; color: var(--text-muted);
-}
-.footer-credit a {
-  color: var(--gold); text-decoration: none;
-  font-weight: 600; transition: var(--transition);
-}
-.footer-credit a:hover { text-shadow: 0 0 10px rgba(212,175,55,0.6); }
+        .nav-links a:hover {
+            color: var(--gold);
+        }
 
-/* ===== FLOATING WA ===== */
-.wa-float {
-  position: fixed; bottom: 32px; right: 32px; z-index: 999;
-  width: 56px; height: 56px; border-radius: 50%;
-  background: #25D366;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 26px; text-decoration: none;
-  box-shadow: 0 8px 30px rgba(37,211,102,0.5);
-  animation: wa-bounce 2.5s ease-in-out infinite;
-  transition: var(--transition);
-}
-.wa-float:hover {
-  transform: scale(1.15);
-  box-shadow: 0 12px 40px rgba(37,211,102,0.7);
-  animation: none;
-}
-.wa-float::before {
-  content: '';
-  position: absolute; inset: -4px; border-radius: 50%;
-  border: 2px solid rgba(37,211,102,0.4);
-  animation: wa-ping 2s ease-in-out infinite;
-}
-@keyframes wa-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-@keyframes wa-ping {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.5); opacity: 0; }
-}
+        /* Nav Basket Icon */
+        .cart-icon-nav {
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            margin-left: 10px;
+        }
 
-/* ===== SCROLL ANIMATIONS ===== */
-.reveal {
-  opacity: 0; transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-left {
-  opacity: 0; transform: translateX(-40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.reveal-left.visible { opacity: 1; transform: translateX(0); }
-.reveal-right {
-  opacity: 0; transform: translateX(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.reveal-right.visible { opacity: 1; transform: translateX(0); }
+        .cart-icon-nav:hover {
+            color: var(--gold);
+        }
 
-/* ===== MOBILE ===== */
-@media (max-width: 900px) {
-  .about-grid { grid-template-columns: 1fr; gap: 40px; }
-  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-  .footer-main { grid-template-columns: 1fr 1fr; gap: 40px; }
-  .nav-links { display: none; }
-  .hamburger { display: flex; }
-  .nav-links.open {
-    display: flex; flex-direction: column;
-    position: fixed; inset: 0; top: 64px;
-    background: rgba(13,10,15,0.98);
-    align-items: center; justify-content: center;
-    gap: 32px; z-index: 999;
-  }
-  .nav-links.open a { font-size: 1rem; }
-  .form-row { grid-template-columns: 1fr; }
-}
-@media (max-width: 600px) {
-  section { padding: 70px 5%; }
-  .footer-main { grid-template-columns: 1fr; gap: 32px; }
-  .footer-bottom { flex-direction: column; text-align: center; }
-  .consult-packages { grid-template-columns: 1fr; }
-  .products-grid { grid-template-columns: 1fr; }
-  .hero-btns { flex-direction: column; align-items: center; }
-  .about-cards { grid-template-columns: 1fr; }
-}
-</style>
+        .cart-badge {
+            position: absolute;
+            top: -10px;
+            right: -12px;
+            background: var(--gold);
+            color: var(--black);
+            font-size: 0.7rem;
+            font-weight: bold;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-nav {
+            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+            border: 1px solid var(--gold);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            letter-spacing: 1px;
+            transition: var(--transition);
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .cta-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--gold-glow);
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .menu-toggle {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+            position: relative;
+            background: radial-gradient(circle at center, rgba(91, 33, 103, 0.2) 0%, rgba(11, 11, 11, 1) 75%);
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .hero-logo-container {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .hero-avatar-frame {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            padding: 5px;
+            background: var(--black);
+            box-shadow: 0 0 25px var(--gold-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-avatar-frame svg {
+            width: 80%;
+            height: 80%;
+            fill: var(--cream);
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 3px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            max-width: 900px;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+            display: block;
+            font-size: 1.6rem;
+            letter-spacing: 6px;
+            margin-top: 10px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #ccc;
+            max-width: 650px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), #b89326);
+            color: var(--black);
+            border: none;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--gold-glow);
+            opacity: 0.95;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* --- ABOUT BRAND SECTION --- */
+        .about {
+            position: relative;
+            background-color: #161616;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: #bbb;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .about-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 30px 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .about-card i {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .about-card h4 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        /* --- FEATURED PRODUCTS SECTION --- */
+        .products {
+            position: relative;
+        }
+
+        .product-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: var(--cream);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            transition: var(--transition);
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: 0 12px 30px rgba(91, 33, 103, 0.3);
+        }
+
+        /* Interactive Product Gallery System */
+        .product-gallery {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            background: #222;
+        }
+
+        .gallery-slides {
+            display: flex;
+            width: 200%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-slides img {
+            width: 50%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-nav {
+            position: absolute;
+            bottom: 12px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            z-index: 5;
+        }
+
+        .gallery-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .gallery-dot.active {
+            background: var(--gold);
+            transform: scale(1.2);
+        }
+
+        .product-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .product-card p {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .price-container {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #777;
+            font-size: 0.9rem;
+            margin-right: 8px;
+        }
+
+        .new-price {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+
+        .buy-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            width: 100%;
+            padding: 12px;
+            border-radius: 4px;
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .buy-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* --- MODERN CHECKOUT BASKET DRAWER --- */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 420px;
+            height: 100vh;
+            background: #141414;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.7);
+            border-left: 1px solid var(--glass-border);
+            z-index: 2000;
+            transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            font-family: var(--font-heading);
+            color: var(--white);
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .close-cart {
+            color: var(--gold);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-cart:hover {
+            color: var(--white);
+            transform: rotate(90deg);
+        }
+
+        .cart-items-container {
+            flex-grow: 1;
+            padding: 25px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .empty-cart-msg {
+            color: #666;
+            text-align: center;
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .cart-item-details h4 {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .cart-item-details p {
+            font-size: 0.85rem;
+            color: var(--gold);
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #222;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .quantity-btn {
+            color: var(--cream);
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .quantity-btn:hover {
+            color: var(--gold);
+        }
+
+        .remove-item {
+            color: #ff4444;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .remove-item:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-footer {
+            padding: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: #0d0d0d;
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .cart-total-row span {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--white);
+        }
+
+        .cart-total-row .total-price {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: var(--font-heading);
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .checkout-btn:hover {
+            background: var(--white);
+            box-shadow: 0 5px 20px rgba(214,175,55,0.2);
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.6);
+            z-index: 1999;
+            display: none;
+            backdrop-filter: blur(4px);
+        }
+
+        .cart-overlay.open {
+            display: block;
+        }
+
+        /* --- CONSULTATION SECTION --- */
+        .consultation {
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1515942400758-4588f9a67a3a?auto=format&fit=crop&q=80&w=1200') center/cover;
+            position: relative;
+            text-align: center;
+        }
+
+        .consultation-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(17, 17, 17, 0.8);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 50px 30px;
+            box-shadow: 0 0 40px rgba(91, 33, 103, 0.3);
+        }
+
+        .consultation-p {
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            color: #ccc;
+        }
+
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 45px;
+        }
+
+        .tier-card {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 30px 20px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tier-card.featured {
+            border-color: var(--gold);
+            transform: scale(1.03);
+            background: rgba(91, 33, 103, 0.15);
+        }
+
+        .tier-badge {
+            position: absolute;
+            top: 12px;
+            right: -30px;
+            background: var(--gold);
+            color: var(--black);
+            font-size: 0.65rem;
+            font-weight: bold;
+            padding: 4px 30px;
+            transform: rotate(45deg);
+            text-transform: uppercase;
+        }
+
+        .tier-card h4 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+
+        .tier-time {
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .tier-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        .tier-features {
+            list-style: none;
+            font-size: 0.85rem;
+            color: #aaa;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .tier-features li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tier-features li i {
+            color: var(--gold);
+            font-size: 0.75rem;
+        }
+
+        .tier-btn {
+            background: transparent;
+            border: 1px solid var(--white);
+            color: var(--white);
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: block;
+        }
+
+        .tier-card.featured .tier-btn {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--black);
+            font-weight: 600;
+        }
+
+        .tier-card.featured .tier-btn:hover {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        .tier-btn:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        /* --- WHY CHOOSE US SECTION --- */
+        .why-us {
+            background-color: #161616;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .why-card {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 30px 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .why-card:hover {
+            border-color: var(--gold-border);
+            background: rgba(91, 33, 103, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .why-card i {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .why-card h4 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .why-card p {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        /* --- TESTIMONIALS SECTION --- */
+        .testimonials {
+            position: relative;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: "\201C";
+            font-family: var(--font-heading);
+            font-size: 5rem;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            color: rgba(214, 175, 55, 0.1);
+            line-height: 1;
+        }
+
+        .stars {
+            color: var(--gold);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card p {
+            font-size: 0.9rem;
+            color: #ccc;
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .client-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--white);
+            font-size: 0.9rem;
+            border: 1px solid var(--gold);
+        }
+
+        .client-details h5 {
+            font-family: var(--font-heading);
+            color: var(--white);
+            font-size: 0.9rem;
+            }
+
+        .client-details span {
+            font-size: 0.75rem;
+            color: #777;
+        }
+
+        /* --- FAQ SECTION --- */
+        .faq {
+            background-color: #161616;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-header {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-header h4 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            color: var(--white);
+            letter-spacing: 0.5px;
+        }
+
+        .faq-icon {
+            color: var(--gold);
+            transition: var(--transition);
+        }
+
+        .faq-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .faq-body p {
+            padding: 0 25px 20px 25px;
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-item.active {
+            border-color: var(--glass-border);
+        }
+
+        /* --- NEWSLETTER SECTION --- */
+        .newsletter {
+            text-align: center;
+            position: relative;
+        }
+
+        .newsletter-box {
+            max-width: 650px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(26,26,26,0.9), rgba(17,17,17,0.9));
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .newsletter h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .newsletter p {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 25px;
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .subscribe-form input {
+            flex-grow: 1;
+            background: #222;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 4px;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+        }
+
+        .subscribe-form input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(214, 175, 55, 0.2);
+        }
+
+        .subscribe-btn {
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 0 30px;
+            border-radius: 4px;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .subscribe-btn:hover {
+            background: var(--white);
+            box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact {
+            background-color: #161616;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        .contact-info p {
+            color: #aaa;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .contact-details-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .contact-details-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .contact-details-list li i {
+            color: var(--gold);
+            font-size: 1.2rem;
+            width: 25px;
+        }
+
+        .social-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #222;
+            color: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .social-icon:hover {
+            background: var(--purple);
+            color: var(--white);
+            border-color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            background: var(--black);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 15px;
+            color: var(--white);
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-family: var(--font-heading);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .form-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* --- FOOTER & CREDITS --- */
+        footer {
+            background-color: var(--black);
+            padding: 60px 8% 20px 8%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h4 {
+            font-family: var(--font-heading);
+            color: var(--white);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .footer-brand p {
+            color: #777;
+            font-size: 0.85rem;
+            max-width: 300px;
+        }
+
+        .footer-links h5 {
+            font-family: var(--font-heading);
+            color: var(--gold);
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #777;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #555;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .credit-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .credit-link:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+
+        /* --- FLOATING WHATSAPP CHAT --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            z-index: 1998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        /* --- RESPONSIVE BREAKPOINTS --- */
+        @media (max-width: 1024px) {
+            .why-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .tier-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .tier-card.featured {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 70px 5% 50px 5%;
+            }
+            .nav-links, .nav-btn-container {
+                display: none;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            .hero h1 span {
+                font-size: 1.2rem;
+            }
+            .about-container, .contact-container, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-grid, .tier-grid, .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .subscribe-form {
+                flex-direction: column;
+            }
+            .subscribe-btn {
+                padding: 12px;
+            }
+            .cart-drawer {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-  <div class="loader-symbol"></div>
-  <p class="loader-text">OMOOLOPAASE EMPIRE</p>
-</div>
+    <div class="glow-bg" style="top: 10%; left: -10%;"></div>
+    <div class="glow-bg" style="top: 40%; right: -10%;"></div>
+    <div class="glow-bg" style="top: 70%; left: -10%;"></div>
 
-<!-- FLOATING WHATSAPP -->
-<a href="https://wa.me/2348143644489" class="wa-float" target="_blank" title="Chat on WhatsApp">💬</a>
-
-<!-- NAVBAR -->
-<nav id="navbar">
-  <a href="#hero" class="nav-logo">✦ OMOOLOPAASE</a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#about">About</a></li>
-    <li><a href="#products">Products</a></li>
-    <li><a href="#consultation">Consultation</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#faq">FAQ</a></li>
-    <li><a href="#contact" class="nav-cta">Book Now</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-particles" id="heroParticles"></div>
-  <div class="hero-content reveal">
-    <div class="hero-emblem">🔮</div>
-    <div class="hero-brand">OMOOLOPAASE EMPIRE</div>
-    <div class="hero-tagline-sm">Spiritual Products · Consultation · Family Liberation · Kayamata</div>
-    <div class="hero-divider"></div>
-    <h1 class="hero-headline">
-      Awaken Your<br/><span>Inner Energy</span><br/>Naturally ✨
-    </h1>
-    <p class="hero-sub">
-      Discover the power of authentic spiritual healing, sacred organic products, and divine consultation. Serious results, with faith and consistency.
-    </p>
-    <div class="hero-btns">
-      <a href="#products" class="btn-primary">Shop Products</a>
-      <a href="#consultation" class="btn-secondary">Book Consultation</a>
-    </div>
-  </div>
-  <div class="hero-scroll">
-    <span>SCROLL</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-grid">
-    <div class="about-visual reveal-left">
-      <div class="about-frame">🌿</div>
-      <div class="about-badge">
-        <strong>✦</strong>
-        TRUSTED<br/>SINCE DAY ONE
-      </div>
-    </div>
-    <div class="about-text reveal-right">
-      <div>
-        <span class="section-label">Who We Are</span>
-        <h2 class="section-title">Rooted in<br/><em>Spiritual Truth</em></h2>
-        <div class="section-divider"></div>
-        <p class="section-sub">
-          Omoolopaase Empire Limited is a premium spiritual house of healing, guidance, and transformation. We bridge ancient Yoruba spiritual wisdom with modern-day needs — offering authentic consultation, organic spiritual products, family liberation, Kayamata, and appeasement services. Serious clients only. Results with faith & consistency.
-        </p>
-      </div>
-      <div class="about-cards">
-        <div class="about-card">
-          <div class="about-card-icon">🛡️</div>
-          <h4>Protection</h4>
-          <p>Powerful charms, soaps and spiritual shields against negativity</p>
-        </div>
-        <div class="about-card">
-          <div class="about-card-icon">💫</div>
-          <h4>Spiritual Guidance</h4>
-          <p>Detailed readings, destiny clarity and life-changing insights</p>
-        </div>
-        <div class="about-card">
-          <div class="about-card-icon">🌺</div>
-          <h4>Organic Products</h4>
-          <p>Handcrafted herbal soaps, oils and organic spiritual tools</p>
-        </div>
-        <div class="about-card">
-          <div class="about-card-icon">💑</div>
-          <h4>Love & Relationships</h4>
-          <p>Kayamata, connection perfume, love guidance and harmony</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section id="products">
-  <div class="products-header">
-    <span class="section-label">Sacred Offerings</span>
-    <h2 class="section-title">Our <em>Spiritual</em> Products</h2>
-    <div class="section-divider" style="margin: 24px auto;"></div>
-    <p class="section-sub" style="margin: 0 auto;">
-      Each product is handcrafted with spiritual intent, organic ingredients, and divine blessing.
-    </p>
-  </div>
-  <div class="product-tabs">
-    <button class="tab-btn active">All</button>
-    <button class="tab-btn">Cleansing</button>
-    <button class="tab-btn">Money</button>
-    <button class="tab-btn">Love</button>
-    <button class="tab-btn">Protection</button>
-    <button class="tab-btn">Way Opener</button>
-  </div>
-  <div class="products-grid reveal">
-    <div class="product-card">
-      <div class="product-img">🧼
-        <span class="product-badge-tag">Bestseller</span>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Curse Breaker Soap</div>
-        <div class="product-desc">Powerful spiritual soap formulated to break curses, hexes and negative spiritual ties holding you back.</div>
-        <div class="product-footer">
-          <div class="product-price">
-            <span class="old-price">₦20,000</span>
-            ₦10,000
-          </div>
-          <a href="https://wa.me/2348143644489?text=I want to order Curse Breaker Soap" class="btn-buy" target="_blank">Buy Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img">💰
-        <span class="product-badge-tag">Popular</span>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Cash Out Soap</div>
-        <div class="product-desc">Attract massive financial abundance. Unlock stubborn financial doors and draw unprecedented wealth your way.</div>
-        <div class="product-footer">
-          <div class="product-price">
-            <span class="old-price">₦250,000</span>
-            ₦200,000
-          </div>
-          <a href="https://wa.me/2348143644489?text=I want to order Cash Out Soap" class="btn-buy" target="_blank">Buy Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img">🌸
-        <span class="product-badge-tag">Love</span>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Connection Perfume / Soap</div>
-        <div class="product-desc">Ignite deep romantic connection, attraction and spiritual bonding. Kayamata-infused for powerful results.</div>
-        <div class="product-footer">
-          <div class="product-price">
-            <span class="old-price">₦35,000</span>
-            ₦30,000
-          </div>
-          <a href="https://wa.me/2348143644489?text=I want to order Connection Perfume/Soap" class="btn-buy" target="_blank">Buy Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img">🗝️
-        <span class="product-badge-tag">Way Opener</span>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Open Door Kit</div>
-        <div class="product-desc">Complete spiritual kit to open closed doors of opportunity, career, business and destiny breakthrough.</div>
-        <div class="product-footer">
-          <div class="product-price">
-            <span class="old-price">₦50,000</span>
-            ₦40,000
-          </div>
-          <a href="https://wa.me/2348143644489?text=I want to order Open Door Kit" class="btn-buy" target="_blank">Buy Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img">🛡️
-        <span class="product-badge-tag">Protection</span>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Charm & Poison Destroyer</div>
-        <div class="product-desc">Neutralise spiritual poisons, destroy harmful charms sent against you and fortify your spiritual protection.</div>
-        <div class="product-footer">
-          <div class="product-price">₦15,000</div>
-          <a href="https://wa.me/2348143644489?text=I want to order Charm & Poison Destroyer" class="btn-buy" target="_blank">Buy Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img">💎
-        <span class="product-badge-tag">Glory</span>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Glory Retrieval – Gbogo Mi Funmi</div>
-        <div class="product-desc">Reclaim your stolen glory, destiny and greatness. A powerful way-opener for those who feel spiritually blocked.</div>
-        <div class="product-footer">
-          <div class="product-price">
-            <span class="old-price">₦40,000</span>
-            ₦30,000
-          </div>
-          <a href="https://wa.me/2348143644489?text=I want to order Glory Retrieval" class="btn-buy" target="_blank">Buy Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img">🪬</div>
-      <div class="product-info">
-        <div class="product-name">Commanding Soap</div>
-        <div class="product-desc">Command respect, authority and dominance in every room. Spiritual soap for those ready to walk in power.</div>
-        <div class="product-footer">
-          <div class="product-price">
-            <span class="old-price">₦50,000</span>
-            ₦40,000
-          </div>
-          <a href="https://wa.me/2348143644489?text=I want to order Commanding Soap" class="btn-buy" target="_blank">Buy Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img">🕯️
-        <span class="product-badge-tag">Love Mirror</span>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Stay With Me Mirror</div>
-        <div class="product-desc">A sacred love product to bind your partner's heart, ensure loyalty and deepen romantic commitment.</div>
-        <div class="product-footer">
-          <div class="product-price">₦15,000</div>
-          <a href="https://wa.me/2348143644489?text=I want to order Stay With Me Mirror" class="btn-buy" target="_blank">Buy Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img">✨</div>
-      <div class="product-info">
-        <div class="product-name">Breakthrough Soap – Ashina</div>
-        <div class="product-desc">Break through every wall of stagnation, failure and setback. This is for those ready for a new chapter.</div>
-        <div class="product-footer">
-          <div class="product-price">
-            <span class="old-price">₦30,000</span>
-            ₦25,000
-          </div>
-          <a href="https://wa.me/2348143644489?text=I want to order Breakthrough Soap" class="btn-buy" target="_blank">Buy Now</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div style="text-align: center; margin-top: 48px;">
-    <a href="https://wa.me/2348143644489?text=I want to see your full product list" class="btn-primary" target="_blank">View All Products</a>
-  </div>
-</section>
-
-<!-- CONSULTATION -->
-<section id="consultation">
-  <div class="consultation-inner reveal">
-    <span class="section-label">Spiritual Guidance</span>
-    <h2 class="section-title">Book a <em>Consultation</em></h2>
-    <div class="section-divider" style="margin: 24px auto;"></div>
-    <p class="section-sub" style="margin: 0 auto;">
-      Receive accurate spiritual readings, destiny clarity, love guidance, family liberation counsel, and powerful insights — all 100% private and confidential.
-    </p>
-    <div class="consult-packages">
-      <div class="consult-card">
-        <div class="consult-icon">👑</div>
-        <div class="consult-tier">STANDARD</div>
-        <div class="consult-duration">3 – 5 Days</div>
-        <ul class="consult-features">
-          <li>Detailed Spiritual Reading</li>
-          <li>Spiritual Guidance Session</li>
-          <li>Answers to Your Questions</li>
-          <li>100% Private & Confidential</li>
+    <nav id="navbar">
+        <a href="#" class="logo">
+            OMOOLOPAASE <span>EMPIRE</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#consultation">Consultation</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <div class="cart-icon-nav" onclick="toggleCartDrawer(true)">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <div class="cart-badge" id="cartBadgeCount">0</div>
+            </div>
         </ul>
-        <div class="consult-price">₦7,000 <span>/ session</span></div>
-        <a href="https://wa.me/2348143644489?text=I want to book a Standard Consultation" class="btn-buy" target="_blank" style="width: 100%; text-align: center; display: block;">Book Now</a>
-      </div>
-      <div class="consult-card featured">
-        <div class="consult-icon">⚡</div>
-        <div class="consult-tier">VIP</div>
-        <div class="consult-duration">24 Hours – Urgent</div>
-        <ul class="consult-features">
-          <li>Express Spiritual Reading</li>
-          <li>Priority Attention</li>
-          <li>Quick & Powerful Insights</li>
-          <li>Destiny & Clarity Focus</li>
-        </ul>
-        <div class="consult-price">₦12,000 <span>/ session</span></div>
-        <a href="https://wa.me/2348143644489?text=I want to book a VIP Urgent Consultation" class="btn-buy" target="_blank" style="width: 100%; text-align: center; display: block;">Book VIP Now</a>
-      </div>
-      <div class="consult-card">
-        <div class="consult-icon">🤝</div>
-        <div class="consult-tier">PHYSICAL</div>
-        <div class="consult-duration">Face to Face</div>
-        <ul class="consult-features">
-          <li>Personal Spiritual Guidance</li>
-          <li>Deep Spiritual Reading</li>
-          <li>Fully Private & Confidential</li>
-          <li>Hands-on Spiritual Assessment</li>
-        </ul>
-        <div class="consult-price">₦30,000 <span>/ session</span></div>
-        <a href="https://wa.me/2348143644489?text=I want to book a Physical Consultation" class="btn-buy" target="_blank" style="width: 100%; text-align: center; display: block;">Book Now</a>
-      </div>
+        <div class="nav-btn-container">
+            <a href="https://wa.me/2348143644489?text=Hello%20Omoolopaase%20Empire,%20I%20would%20like%20to%20book%20a%20spiritual%20consultation." class="cta-nav" target="_blank">Book Session</a>
+        </div>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCartDrawer(false)"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Your Ritual Basket</h3>
+            <i class="fa-solid fa-xmark close-cart" onclick="toggleCartDrawer(false)"></i>
+        </div>
+        <div class="cart-items-container" id="cartItemsContainer">
+            <p class="empty-cart-msg">Your basket is currently empty.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Total Amount:</span>
+                <span class="total-price" id="cartTotalDisplay">₦0</span>
+            </div>
+            <button class="checkout-btn" onclick="executeCartCheckout()">
+                <i class="fa-brands fa-whatsapp"></i> Secure WhatsApp Checkout
+            </button>
+        </div>
     </div>
-    <a href="https://wa.me/2348143644489" class="wa-book-btn" target="_blank">
-      <span>💬</span> Book via WhatsApp
+
+    <section class="hero">
+        <div class="hero-logo-container">
+            <div class="hero-avatar-frame">
+                <svg viewBox="0 0 100 100">
+                    <path d="M50,15 C52,15 54,17 54,19 C54,21 52,23 50,23 C48,23 46,21 46,19 C46,17 48,15 50,15 Z M50,27 C58,27 68,35 68,45 C68,48 65,55 60,60 C56,64 53,70 53,78 L47,78 C47,70 44,64 40,60 C35,55 32,48 32,45 C32,35 42,27 50,27 Z" />
+                    <path d="M35,82 L65,82 L62,87 L38,87 Z" fill="#D4AF37"/>
+                </svg>
+            </div>
+        </div>
+        <h1>Awaken Your Inner Energy Naturally <span>Spiritual Healing &amp; Natural Remedies</span></h1>
+        <p>Premium spiritual consultation, deep energetic cleansing, family liberation, and organic solutions tailored to realign your path to abundance, protection, and harmony.</p>
+        <div class="hero-btns">
+            <a href="#products" class="btn btn-primary">Shop Products</a>
+            <a href="#consultation" class="btn btn-secondary">Book Consultation</a>
+        </div>
+    </section>
+
+    <section class="about section-padding" id="about">
+        <div class="about-container">
+            <div class="about-text">
+                <h3>Welcome to Omoolopaase Empire</h3>
+                <p>We combine ancestral wisdom, spiritual laws, and potent organic herbal alternatives to bring clarity, protection, and transformation to your lifestyle.</p>
+                <p>Our comprehensive framework approaches spiritual growth safely and meticulously. From breaking long-standing generational limitations to realigning individual aura profiles, our custom-tailored consultations pinpoint deep core issues to build lasting clarity.</p>
+                <p style="color: var(--gold); font-weight: 500;">Results built safely on structural alignment, dedicated faith, and consistency.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <i class="fa-solid fa-eye"></i>
+                    <h4>Clear Guidance</h4>
+                    <p>Transparent psychic and medium-based structural root diagnostics.</p>
+                </div>
+                <div class="about-card">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h4>Total Protection</h4>
+                    <p>Custom energetic shields against malicious exterior disruptions.</p>
+                </div>
+                <div class="about-card">
+                    <i class="fa-solid fa-leaf"></i>
+                    <h4>100% Organic</h4>
+                    <p>Finely sorted botanical components prepared with strict care.</p>
+                </div>
+                <div class="about-card">
+                    <i class="fa-solid fa-hands-praying"></i>
+                    <h4>Aura Alignment</h4>
+                    <p>Reclaim foundational prosperity, custom favor, and attraction metrics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products section-padding" id="products">
+        <div class="heading-container">
+            <h2>Our Featured <span>Spiritual Solutions</span></h2>
+        </div>
+
+        <div class="product-tabs">
+            <button class="tab-btn active" onclick="filterProducts('all')">All Products</button>
+            <button class="tab-btn" onclick="filterProducts('cleansing')">Cleansing</button>
+            <button class="tab-btn" onclick="filterProducts('money')">Prosperity</button>
+            <button class="tab-btn" onclick="filterProducts('love')">Attraction &amp; Kayamata</button>
+        </div>
+
+        <div class="product-grid">
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery">
+                    <div class="gallery-slides" id="slides-p1">
+                        <img src="https://images.unsplash.com/photo-1607006342456-ba275cd34284?auto=format&fit=crop&q=80&w=500" alt="Curse Breaker Soap View 1">
+                        <img src="https://images.unsplash.com/photo-1546554137-f86b9593a222?auto=format&fit=crop&q=80&w=500" alt="Curse Breaker Soap View 2">
+                    </div>
+                    <div class="gallery-nav">
+                        <div class="gallery-dot active" onclick="switchGalleryImage('p1', 0, this)"></div>
+                        <div class="gallery-dot" onclick="switchGalleryImage('p1', 1, this)"></div>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Curse Breaker Soap</h3>
+                    <p>Formulated to clear stubborn spiritual blockages, generational hexes, and negative patterns holding back progress.</p>
+                    <div class="price-container">
+                        <span class="old-price">₦20,000</span>
+                        <span class="new-price">₦10,000</span>
+                    </div>
+                    <button class="buy-btn" onclick="addItemToCart('Curse Breaker Soap', 10000)">
+                        <i class="fa-solid fa-cart-plus"></i> Add To Basket
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery">
+                    <div class="gallery-slides" id="slides-p2">
+                        <img src="https://images.unsplash.com/photo-1556229010-aa3f7ff66b24?auto=format&fit=crop&q=80&w=500" alt="Eyonu Agba Soap View 1">
+                        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=500" alt="Eyonu Agba Soap View 2">
+                    </div>
+                    <div class="gallery-nav">
+                        <div class="gallery-dot active" onclick="switchGalleryImage('p2', 0, this)"></div>
+                        <div class="gallery-dot" onclick="switchGalleryImage('p2', 1, this)"></div>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Eyonu Agba Soap</h3>
+                    <p>A premium remedy crafted to clear away friction, severe foundational setbacks, and unexplainable closed doors.</p>
+                    <div class="price-container">
+                        <span class="old-price">₦20,000</span>
+                        <span class="new-price">₦15,000</span>
+                    </div>
+                    <button class="buy-btn" onclick="addItemToCart('Eyonu Agba Soap', 15000)">
+                        <i class="fa-solid fa-cart-plus"></i> Add To Basket
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="money">
+                <div class="product-gallery">
+                    <div class="gallery-slides" id="slides-p3">
+                        <img src="https://images.unsplash.com/photo-1590502593747-42a996133562?auto=format&fit=crop&q=80&w=500" alt="Breakthrough Soap View 1">
+                        <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&q=80&w=500" alt="Breakthrough Soap View 2">
+                    </div>
+                    <div class="gallery-nav">
+                        <div class="gallery-dot active" onclick="switchGalleryImage('p3', 0, this)"></div>
+                        <div class="gallery-dot" onclick="switchGalleryImage('p3', 1, this)"></div>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Breakthrough Soap (Ashina)</h3>
+                    <p>Designed to expand business visibility, unlock unexpected windfalls, and draw favorable financial connections.</p>
+                    <div class="price-container">
+                        <span class="old-price">₦30,000</span>
+                        <span class="new-price">₦25,000</span>
+                    </div>
+                    <button class="buy-btn" onclick="addItemToCart('Breakthrough Soap (Ashina)', 25000)">
+                        <i class="fa-solid fa-cart-plus"></i> Add To Basket
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="money">
+                <div class="product-gallery">
+                    <div class="gallery-slides" id="slides-p4">
+                        <img src="https://images.unsplash.com/photo-1631730359577-38e4755d772b?auto=format&fit=crop&q=80&w=500" alt="Cash Out Soap View 1">
+                        <img src="https://images.unsplash.com/photo-1608248597481-496100c80836?auto=format&fit=crop&q=80&w=500" alt="Cash Out Soap View 2">
+                    </div>
+                    <div class="gallery-nav">
+                        <div class="gallery-dot active" onclick="switchGalleryImage('p4', 0, this)"></div>
+                        <div class="gallery-dot" onclick="switchGalleryImage('p4', 1, this)"></div>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Cash Out Premium Soap</h3>
+                    <p>Our ultra-premium formulation designed for high-profile business negotiations, contracts, and financial breakthroughs.</p>
+                    <div class="price-container">
+                        <span class="old-price">₦250,000</span>
+                        <span class="new-price">₦200,000</span>
+                    </div>
+                    <button class="buy-btn" onclick="addItemToCart('Cash Out Premium Soap', 200000)">
+                        <i class="fa-solid fa-cart-plus"></i> Add To Basket
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery">
+                    <div class="gallery-slides" id="slides-p5">
+                        <img src="https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&q=80&w=500" alt="Attraction Oil View 1">
+                        <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&q=80&w=500" alt="Attraction Oil View 2">
+                    </div>
+                    <div class="gallery-nav">
+                        <div class="gallery-dot active" onclick="switchGalleryImage('p5', 0, this)"></div>
+                        <div class="gallery-dot" onclick="switchGalleryImage('p5', 1, this)"></div>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Premium Attraction Oil</h3>
+                    <p>An aromatic botanical formulation to boost aura attraction metrics, love, personal magnetic charm, and romance.</p>
+                    <div class="price-container">
+                        <span class="old-price">₦15,000</span>
+                        <span class="new-price">₦10,000</span>
+                    </div>
+                    <button class="buy-btn" onclick="addItemToCart('Premium Attraction Oil', 10000)">
+                        <i class="fa-solid fa-cart-plus"></i> Add To Basket
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery">
+                    <div class="gallery-slides" id="slides-p6">
+                        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=500" alt="Stay With Me Mirror View 1">
+                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=500" alt="Stay With Me Mirror View 2">
+                    </div>
+                    <div class="gallery-nav">
+                        <div class="gallery-dot active" onclick="switchGalleryImage('p6', 0, this)"></div>
+                        <div class="gallery-dot" onclick="switchGalleryImage('p6', 1, this)"></div>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Stay With Me Mirror</h3>
+                    <p>A specialized luxury Kayamata standard tool constructed for deep relationship stabilization, bonding, and loyalty parameters.</p>
+                    <div class="price-container">
+                        <span class="old-price">₦20,000</span>
+                        <span class="new-price">₦15,000</span>
+                    </div>
+                    <button class="buy-btn" onclick="addItemToCart('Stay With Me Mirror', 15000)">
+                        <i class="fa-solid fa-cart-plus"></i> Add To Basket
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="consultation section-padding" id="consultation">
+        <div class="heading-container">
+            <h2>Spiritual <span>Consultation Tiers</span></h2>
+        </div>
+        <div class="consultation-container">
+            <p class="consultation-p">Gain clear diagnostic analysis into your ancestral frameworks, marital friction points, career limitations, or personal protection vulnerabilities. Select your choice below to open your session directly.</p>
+            
+            <div class="tier-grid">
+                <div class="tier-card">
+                    <h4>Standard Consultation</h4>
+                    <span class="tier-time">3 - 5 Days Response</span>
+                    <div class="tier-price">₦7,000</div>
+                    <ul class="tier-features">
+                        <li><i class="fa-solid fa-check"></i> Detailed Spiritual Reading</li>
+                        <li><i class="fa-solid fa-check"></i> Core Root Cause Identification</li>
+                        <li><i class="fa-solid fa-check"></i> Standard Product Recommendations</li>
+                    </ul>
+                    <button class="tier-btn" onclick="bookConsultation('normal')">Select Standard</button>
+                </div>
+
+                <div class="tier-card featured">
+                    <div class="tier-badge">Urgent</div>
+                    <h4>VIP Consultation</h4>
+                    <span class="tier-time">Within 24 Hours</span>
+                    <div class="tier-price">₦12,000</div>
+                    <ul class="tier-features">
+                        <li><i class="fa-solid fa-check"></i> Express Reading Execution</li>
+                        <li><i class="fa-solid fa-check"></i> Priority Dynamic Support Line</li>
+                        <li><i class="fa-solid fa-check"></i> Quick &amp; Powerful Action Insights</li>
+                        <li><i class="fa-solid fa-check"></i> Detailed Remedial Action Plan</li>
+                    </ul>
+                    <button class="tier-btn" onclick="bookConsultation('vip')">Select VIP Consultation</button>
+                </div>
+
+                <div class="tier-card">
+                    <h4>Face To Face</h4>
+                    <span class="tier-time">By Appointment</span>
+                    <div class="tier-price">₦15,000</div>
+                    <ul class="tier-features">
+                        <li><i class="fa-solid fa-check"></i> Physical, Private Consultation</li>
+                        <li><i class="fa-solid fa-check"></i> Direct Energetic Testing</li>
+                        <li><i class="fa-solid fa-check"></i> Personalized Custom Solutions</li>
+                        <li><i class="fa-solid fa-check"></i> 100% Confidential Environment</li>
+                    </ul>
+                    <button class="tier-btn" onclick="bookConsultation('face-to-face')">Select Physical</button>
+                </div>
+            </div>
+            
+            <p style="font-size:0.85rem; color:var(--gold);">*All sessions are kept strictly private, secure, and fully confidential.</p>
+        </div>
+    </section>
+
+    <section class="why-us section-padding">
+        <div class="heading-container">
+            <h2>Why Seek Our <span>Guidance?</span></h2>
+        </div>
+        <div class="why-grid">
+            <div class="why-card">
+                <i class="fa-solid fa-leaf"></i>
+                <h4>100% Organic</h4>
+                <p>Pure, naturally derived herbal compounds only.</p>
+            </div>
+            <div class="why-card">
+                <i class="fa-solid fa-user-shield"></i>
+                <h4>Trusted Counsel</h4>
+                <p>Years of verified spiritual realignments.</p>
+            </div>
+            <div class="why-card">
+                <i class="fa-solid fa-truck-fast"></i>
+                <h4>Swift Shipping</h4>
+                <p>Discreet and highly secured delivery models.</p>
+            </div>
+            <div class="why-card">
+                <i class="fa-solid fa-mortar-pestle"></i>
+                <h4>Handmade Quality</h4>
+                <p>Each batch is individually mixed under safe spiritual rules.</p>
+            </div>
+            <div class="why-card">
+                <i class="fa-solid fa-lock"></i>
+                <h4>Total Privacy</h4>
+                <p>Your records and sensitive issues remain fully hidden.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials section-padding">
+        <div class="heading-container">
+            <h2>True <span>Transformation Stories</span></h2>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p>"The Curse Breaker soap completely cleared the heavy stagnant weight around my career. Two weeks after completing the instructions, I landed a corporate contract I had been chasing for over a year."</p>
+                <div class="client-info">
+                    <div class="client-avatar">AO</div>
+                    <div class="client-details">
+                        <h5>Adeshina O.</h5>
+                        <span>Lagos, Nigeria</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p>"I paid for the VIP consultation because things were collapsing rapidly in my household. The root diagnostic reading was dangerously accurate. The family liberation services restored peace to my home."</p>
+                <div class="client-info">
+                    <div class="client-avatar">CE</div>
+                    <div class="client-details">
+                        <h5>Chidi E.</h5>
+                        <span>Enugu, Nigeria</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p>"The Attraction Oil and Kayamata packages work wonderfully with consistency. My long-term partner has completely transformed, displaying deep affection, accountability, and real focus."</p>
+                <div class="client-info">
+                    <div class="client-avatar">TI</div>
+                    <div class="client-details">
+                        <h5>Titi I.</h5>
+                        <span>Abuja, Nigeria</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq section-padding" id="faq">
+        <div class="heading-container">
+            <h2>Frequently Asked <span>Questions</span></h2>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <h4>How long does it take to see visible results?</h4>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-body">
+                    <p>Spiritual paths depend deeply on structural alignment, dedicated faith, and consistency. While many clients report significant shifts within 7 to 14 days of proper product configuration, individual situations vary based on the depth of the blockage.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <h4>Are these products safe or associated with negative repercussions?</h4>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-body">
+                    <p>Everything we offer is formulated using 100% natural herbs, therapeutic plants, and safe spiritual principles. Our solutions focus strictly on cleansing, healing, and personal aura enhancement—entirely free from malicious side effects or negative energetic kickbacks.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <h4>How is the VIP consultation different from the Standard tier?</h4>
+                    <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="faq-body">
+                    <p>The Standard tier takes 3 to 5 days to process. The VIP consultation receives immediate priority allocation, bypassing the queue to deliver your in-depth reading, diagnostics, and customized action plan within a guaranteed 24-hour window.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter section-padding">
+        <div class="newsletter-box">
+            <h3>Join Our Inner Circle</h3>
+            <p>Subscribe to receive spiritual alerts, herbal maintenance tips, exclusive discounts, and prophetic guidance updates.</p>
+            <form class="subscribe-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to our spiritual circle updates!');">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="subscribe-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="contact section-padding" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Connect With the Empire</h3>
+                <p>Have specific questions regarding customizable rituals, bulk product selection, or localized shipping parameters? Reach out directly across our active platform networks.</p>
+                <ul class="contact-details-list">
+                    <li><i class="fa-brands fa-whatsapp"></i> 08143644489, 08073733419</li>
+                    <li><i class="fa-solid fa-envelope"></i> contact@omoolopaase.com</li>
+                    <li><i class="fa-solid fa-location-dot"></i> Lagos, Nigeria</li>
+                </ul>
+                <div class="social-row">
+                    <a href="https://facebook.com/Omoolopaase" class="social-icon" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://instagram.com/Omoolopaase" class="social-icon" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://tiktok.com/@Omoolopaase1" class="social-icon" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form onsubmit="event.preventDefault(); alert('Message logged successfully. Our administrative team will reach out via email shortly.');">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Legal Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="5" placeholder="Describe your current situation details carefully..." required></textarea>
+                    </div>
+                    <div class="form-btn">Send Secure Message</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h4>OMOOLOPAASE EMPIRE</h4>
+                <p>Providing pristine spiritual clarity, organic remedies, protective structural shielding, and energetic aura alignment across global standards.</p>
+            </div>
+            <div class="footer-links">
+                <h5>Quick Navigation</h5>
+                <ul>
+                    <li><a href="#">Home Core</a></li>
+                    <li><a href="#about">About Legacy</a></li>
+                    <li><a href="#products">Spiritual Shop</a></li>
+                    <li><a href="#consultation">Bookings</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h5>Legal &amp; Safety</h5>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Protocol</a></li>
+                    <li><a href="#">Shipping Guides</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Omoolopaase Empire Limited. All Rights Reserved.</p>
+            <p>Designed with <i class="fa-solid fa-heart" style="color: #D4AF37;"></i> by <a href="https://www.visioreach.co" class="credit-link" target="_blank">VisioReach Concepts</a></p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/2348143644489?text=Hello%20Omoolopaase%20Empire,%20I%20am%20visiting%20your%20website%20and%20need%20some%20spiritual%20guidance." class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
     </a>
-  </div>
-</section>
 
-<!-- WHY CHOOSE US -->
-<section id="why">
-  <div class="text-center">
-    <span class="section-label">Why Us</span>
-    <h2 class="section-title">Spiritual Excellence<br/><em>You Can Trust</em></h2>
-    <div class="section-divider"></div>
-  </div>
-  <div class="why-grid reveal">
-    <div class="why-card">
-      <div class="why-icon">🌿</div>
-      <h3>100% Organic</h3>
-      <p>All products are formulated from natural, organic, and spiritually charged herbs and ingredients.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">🔒</div>
-      <h3>Confidential</h3>
-      <p>Your consultation and personal details are completely private. We never share client information.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">✦</div>
-      <h3>Trusted Guidance</h3>
-      <p>Backed by deep ancestral spiritual knowledge and hundreds of successful client testimonials.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">🚀</div>
-      <h3>Fast Delivery</h3>
-      <p>Products shipped swiftly across Nigeria. Nationwide delivery available for all orders.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">🙏</div>
-      <h3>Faith-Based Results</h3>
-      <p>We work with clients who believe. With faith and consistency, results are always achievable.</p>
-    </div>
-  </div>
-</section>
+    <script>
+        // GLOBAL CART SYSTEM DATA STATE
+        let basketCart = [];
 
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <div class="testimonials-header">
-    <span class="section-label">Client Stories</span>
-    <h2 class="section-title">What Our <em>Clients</em> Say</h2>
-    <div class="section-divider" style="margin: 24px auto;"></div>
-  </div>
-  <div class="testimonials-track reveal">
-    <div class="testi-card">
-      <div class="testi-quote">"</div>
-      <p class="testi-text">After years of financial stagnation, I used the Cash Out Soap and Open Door Kit. Within three months, doors I never imagined opened for me. Omoolopaase Empire is the real deal.</p>
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-author">
-        <div class="testi-avatar">A</div>
-        <div>
-          <div class="testi-name">Adaeze O.</div>
-          <div class="testi-loc">Lagos, Nigeria</div>
-        </div>
-      </div>
-    </div>
-    <div class="testi-card">
-      <div class="testi-quote">"</div>
-      <p class="testi-text">I booked the VIP consultation and received a reading so accurate it left me speechless. The guidance I received changed my entire perspective on my life's path. Highly recommended.</p>
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-author">
-        <div class="testi-avatar">K</div>
-        <div>
-          <div class="testi-name">Kunle B.</div>
-          <div class="testi-loc">Abuja, Nigeria</div>
-        </div>
-      </div>
-    </div>
-    <div class="testi-card">
-      <div class="testi-quote">"</div>
-      <p class="testi-text">The Curse Breaker Soap cleared something off me that I had carried for years. My health improved, my relationship healed, and my business started thriving. I'm forever grateful.</p>
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-author">
-        <div class="testi-avatar">F</div>
-        <div>
-          <div class="testi-name">Fatimah Y.</div>
-          <div class="testi-loc">Ibadan, Nigeria</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        // STICKY NAVBAR CONTROLLER
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
 
-<!-- PRICING -->
-<section id="pricing">
-  <div class="text-center">
-    <span class="section-label">Full Price List</span>
-    <h2 class="section-title">Transparent <em>Pricing</em></h2>
-    <div class="section-divider"></div>
-    <p class="section-sub" style="margin: 0 auto;">Promo prices currently active. All prices in Nigerian Naira (₦).</p>
-  </div>
-  <div class="pricing-grid reveal">
-    <div class="price-category">
-      <div class="price-cat-header">
-        <div class="price-cat-icon">🧼</div>
-        <div class="price-cat-title">Cleansing Products</div>
-      </div>
-      <div class="price-items">
-        <div class="price-item"><span class="price-item-name">Curse Breaker</span><span class="price-item-value"><span class="striked">₦20k</span>₦10,000</span></div>
-        <div class="price-item"><span class="price-item-name">Ebe Agba</span><span class="price-item-value"><span class="striked">₦25k</span>₦20,000</span></div>
-        <div class="price-item"><span class="price-item-name">Eyonu Agba</span><span class="price-item-value"><span class="striked">₦20k</span>₦15,000</span></div>
-        <div class="price-item"><span class="price-item-name">Atude</span><span class="price-item-value"><span class="striked">₦20k</span>₦15,000</span></div>
-        <div class="price-item"><span class="price-item-name">Abortion Cleansing</span><span class="price-item-value"><span class="striked">₦35k</span>₦25,000</span></div>
-        <div class="price-item"><span class="price-item-name">Back to Sender Soap</span><span class="price-item-value"><span class="striked">₦20k</span>₦15,000</span></div>
-        <div class="price-item"><span class="price-item-name">Protection Soap</span><span class="price-item-value"><span class="striked">₦20k</span>₦15,000</span></div>
-        <div class="price-item"><span class="price-item-name">Memory Soap</span><span class="price-item-value"><span class="striked">₦20k</span>₦15,000</span></div>
-        <div class="price-item"><span class="price-item-name">Cleansing Soap</span><span class="price-item-value"><span class="striked">₦20k</span>₦15,000</span></div>
-        <div class="price-item"><span class="price-item-name">Sea Salt</span><span class="price-item-value"><span class="striked">₦5k</span>₦4,500</span></div>
-        <div class="price-item"><span class="price-item-name">Connection Perfume/Soap</span><span class="price-item-value"><span class="striked">₦35k</span>₦30,000</span></div>
-        <div class="price-item"><span class="price-item-name">Commanding Soap</span><span class="price-item-value"><span class="striked">₦50k</span>₦40,000</span></div>
-      </div>
-    </div>
-    <div class="price-category">
-      <div class="price-cat-header">
-        <div class="price-cat-icon">💰</div>
-        <div class="price-cat-title">Money Products</div>
-      </div>
-      <div class="price-items">
-        <div class="price-item"><span class="price-item-name">Mercy Soap</span><span class="price-item-value"><span class="striked">₦25k</span>₦20,000</span></div>
-        <div class="price-item"><span class="price-item-name">Breakthrough Soap (Ashina)</span><span class="price-item-value"><span class="striked">₦30k</span>₦25,000</span></div>
-        <div class="price-item"><span class="price-item-name">Aje Onigbin Soap</span><span class="price-item-value"><span class="striked">₦30k</span>₦25,000</span></div>
-        <div class="price-item"><span class="price-item-name">Cash Out Soap</span><span class="price-item-value"><span class="striked">₦250k</span>₦200,000</span></div>
-        <div class="price-item"><span class="price-item-name">Favour Soap</span><span class="price-item-value"><span class="striked">₦25k</span>₦20,000</span></div>
-        <div class="price-item"><span class="price-item-name">Money Drawing</span><span class="price-item-value">₦15,000</span></div>
-        <div class="price-item"><span class="price-item-name">Big Girl Soap</span><span class="price-item-value"><span class="striked">₦40k</span>₦30,000</span></div>
-        <div class="price-item"><span class="price-item-name">Contract Soap</span><span class="price-item-value"><span class="striked">₦50k</span>₦40,000</span></div>
-      </div>
-      <div class="price-cat-header" style="margin-top: 2px;">
-        <div class="price-cat-icon">🗝️</div>
-        <div class="price-cat-title">Way Opener Products</div>
-      </div>
-      <div class="price-items">
-        <div class="price-item"><span class="price-item-name">Glory Retrieval (Gbogo Mi Funmi)</span><span class="price-item-value"><span class="striked">₦40k</span>₦30,000</span></div>
-        <div class="price-item"><span class="price-item-name">Open Door Kit</span><span class="price-item-value"><span class="striked">₦50k</span>₦40,000</span></div>
-        <div class="price-item"><span class="price-item-name">Attraction Perfume</span><span class="price-item-value"><span class="striked">₦20k</span>₦15,000</span></div>
-        <div class="price-item"><span class="price-item-name">Protection/Attraction Beads</span><span class="price-item-value"><span class="striked">₦20k</span>₦15,000</span></div>
-      </div>
-    </div>
-    <div class="price-category">
-      <div class="price-cat-header">
-        <div class="price-cat-icon">🛡️</div>
-        <div class="price-cat-title">Protection Products</div>
-      </div>
-      <div class="price-items">
-        <div class="price-item"><span class="price-item-name">Charm & Poison Destroyer</span><span class="price-item-value">₦15,000</span></div>
-        <div class="price-item"><span class="price-item-name">Monitoring Spirit Blocker</span><span class="price-item-value">₦15,000</span></div>
-        <div class="price-item"><span class="price-item-name">Adodun</span><span class="price-item-value">₦8,500</span></div>
-      </div>
-      <div class="price-cat-header" style="margin-top: 2px;">
-        <div class="price-cat-icon">💕</div>
-        <div class="price-cat-title">Love Products</div>
-      </div>
-      <div class="price-items">
-        <div class="price-item"><span class="price-item-name">Stay With Me Mirror</span><span class="price-item-value">₦15,000</span></div>
-        <div class="price-item"><span class="price-item-name">Fortified Sea Salt</span><span class="price-item-value">₦9,000</span></div>
-        <div class="price-item"><span class="price-item-name">Sea Salt / Cea Salt</span><span class="price-item-value">₦4,500</span></div>
-        <div class="price-item"><span class="price-item-name">Money Drawing</span><span class="price-item-value">₦15,000</span></div>
-      </div>
-      <div class="price-cat-header" style="margin-top: 2px;">
-        <div class="price-cat-icon">🙏</div>
-        <div class="price-cat-title">Appeasement Services</div>
-      </div>
-      <div class="price-items">
-        <div class="price-item"><span class="price-item-name">Egbe Appeasement</span><span class="price-item-value">₦60,000+</span></div>
-        <div class="price-item"><span class="price-item-name">Spiritual Spouse</span><span class="price-item-value">₦100,000</span></div>
-        <div class="price-item"><span class="price-item-name">Special Prayer</span><span class="price-item-value">₦50,000</span></div>
-      </div>
-    </div>
-  </div>
-  <div style="text-align:center; margin-top: 48px;">
-    <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 16px;">Payment: WEMA BANK · Account: 0125637994 · OMOOLOPAASE EMPIRE LIMITED</p>
-    <a href="https://wa.me/2348143644489?text=I want to place an order" class="btn-primary" target="_blank">Order via WhatsApp</a>
-  </div>
-</section>
+        // INTERACTIVE PRODUCT GALLERY SWITCHER
+        function switchGalleryImage(productId, slideIndex, dotElement) {
+            const slidesContainer = document.getElementById(`slides-${productId}`);
+            if (slidesContainer) {
+                slidesContainer.style.transform = `translateX(-${slideIndex * 50}%)`;
+                
+                // Reset sibling active dots
+                const parentNav = dotElement.parentElement;
+                parentNav.querySelectorAll('.gallery-dot').forEach(dot => dot.classList.remove('active'));
+                dotElement.classList.add('active');
+            }
+        }
 
-<!-- FAQ -->
-<section id="faq">
-  <div class="text-center">
-    <span class="section-label">Common Questions</span>
-    <h2 class="section-title">Frequently <em>Asked</em></h2>
-    <div class="section-divider"></div>
-  </div>
-  <div class="faq-container">
-    <div class="faq-item open">
-      <div class="faq-q">
-        <span class="faq-q-text">How do I book a consultation?</span>
-        <span class="faq-arrow">+</span>
-      </div>
-      <div class="faq-a">
-        <div class="faq-a-inner">Simply send us a WhatsApp message on 08143644489 or 08073733419. Tell us your need and the consultation type you prefer (Standard, VIP or Physical), and our team will guide you through the process.</div>
-      </div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">
-        <span class="faq-q-text">How long does it take to see results from products?</span>
-        <span class="faq-arrow">+</span>
-      </div>
-      <div class="faq-a">
-        <div class="faq-a-inner">Results vary depending on the individual situation and the product. Most clients begin experiencing positive shifts within 1–4 weeks of consistent use. Faith and consistency are key — as we always say, "Results with faith & consistency."</div>
-      </div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">
-        <span class="faq-q-text">Is my consultation private and confidential?</span>
-        <span class="faq-arrow">+</span>
-      </div>
-      <div class="faq-a">
-        <div class="faq-a-inner">Absolutely. All consultations are 100% private and confidential. We never share, discuss or disclose any client information. Your spiritual journey is sacred and stays between you and our consultant.</div>
-      </div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">
-        <span class="faq-q-text">Do you ship products nationwide?</span>
-        <span class="faq-arrow">+</span>
-      </div>
-      <div class="faq-a">
-        <div class="faq-a-inner">Yes! We deliver across all states in Nigeria. Shipping fees vary by location and will be communicated at the time of ordering. We package all products discretely for your privacy.</div>
-      </div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">
-        <span class="faq-q-text">What payment methods do you accept?</span>
-        <span class="faq-arrow">+</span>
-      </div>
-      <div class="faq-a">
-        <div class="faq-a-inner">We accept bank transfer only. Account Name: OMOOLOPAASE EMPIRE LIMITED · Account No: 0125637994 · Bank: WEMA BANK. Payment must be confirmed before orders are processed or consultations begin.</div>
-      </div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">
-        <span class="faq-q-text">What is Kayamata and is it safe?</span>
-        <span class="faq-arrow">+</span>
-      </div>
-      <div class="faq-a">
-        <div class="faq-a-inner">Kayamata is a Northern Nigerian tradition of love and attraction herbs, often presented as organic body and beauty products that enhance intimacy and connection. All our Kayamata products are carefully formulated from natural ingredients and are safe for use as directed.</div>
-      </div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">
-        <span class="faq-q-text">What is an Egbe Appeasement and who needs it?</span>
-        <span class="faq-arrow">+</span>
-      </div>
-      <div class="faq-a">
-        <div class="faq-a-inner">Egbe is a Yoruba spiritual concept — a heavenly peer group. People with unresolved Egbe issues often experience repeated misfortune, relationship failures, stagnation, or strange afflictions. Appeasement restores harmony with your Egbe and unlocks your true destiny. Contact us for a consultation to find out if this applies to you.</div>
-      </div>
-    </div>
-  </div>
-</section>
+        // FAQ ACCORDION CONTROLLER
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            const body = item.querySelector('.faq-body');
+            
+            if (item.classList.contains('active')) {
+                body.style.maxHeight = null;
+                item.classList.remove('active');
+            } else {
+                document.querySelectorAll('.faq-item').forEach(el => {
+                    el.classList.remove('active');
+                    el.querySelector('.faq-body').style.maxHeight = null;
+                });
+                
+                item.classList.add('active');
+                body.style.maxHeight = body.scrollHeight + "px";
+            }
+        }
 
-<!-- NEWSLETTER -->
-<section id="newsletter">
-  <div class="newsletter-inner reveal">
-    <span class="section-label">Stay Connected</span>
-    <h2 class="section-title">Join Our <em>Spiritual</em> Community</h2>
-    <div class="section-divider" style="margin: 24px auto;"></div>
-    <p class="section-sub" style="margin: 0 auto;">Receive spiritual tips, product updates, promo offers and exclusive insights directly to your inbox.</p>
-    <div class="newsletter-form">
-      <input type="email" class="newsletter-input" placeholder="Enter your email address" />
-      <button class="btn-primary" onclick="subscribeNewsletter()">Subscribe</button>
-    </div>
-  </div>
-</section>
+        // SHOP PRODUCT FILTER SYSTEM
+        function filterProducts(category) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
 
-<!-- CONTACT -->
-<section id="contact">
-  <div>
-    <span class="section-label">Get In Touch</span>
-    <h2 class="section-title">Reach <em>Us</em></h2>
-    <div class="section-divider"></div>
-  </div>
-  <div class="contact-grid">
-    <div class="contact-info reveal-left">
-      <a href="https://wa.me/2348143644489" class="contact-item" target="_blank">
-        <div class="contact-icon">💬</div>
-        <div>
-          <div class="contact-label">WhatsApp (Primary)</div>
-          <div class="contact-value">08143644489</div>
-        </div>
-      </a>
-      <a href="https://wa.me/2348073733419" class="contact-item" target="_blank">
-        <div class="contact-icon">📱</div>
-        <div>
-          <div class="contact-label">WhatsApp (Secondary)</div>
-          <div class="contact-value">08073733419</div>
-        </div>
-      </a>
-      <a href="https://www.facebook.com/Omoolopaase" class="contact-item" target="_blank">
-        <div class="contact-icon">👥</div>
-        <div>
-          <div class="contact-label">Facebook</div>
-          <div class="contact-value">Omoolopaase</div>
-        </div>
-      </a>
-      <a href="https://www.instagram.com/Omoolopaase" class="contact-item" target="_blank">
-        <div class="contact-icon">📸</div>
-        <div>
-          <div class="contact-label">Instagram</div>
-          <div class="contact-value">@Omoolopaase</div>
-        </div>
-      </a>
-      <a href="https://www.tiktok.com/@Omoolopaase1" class="contact-item" target="_blank">
-        <div class="contact-icon">🎵</div>
-        <div>
-          <div class="contact-label">TikTok</div>
-          <div class="contact-value">@Omoolopaase 1</div>
-        </div>
-      </a>
-    </div>
-    <div class="contact-form reveal-right">
-      <h3 style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--white); margin-bottom: 28px; font-style: italic;">Send a Message</h3>
-      <div class="form-row">
-        <input type="text" class="form-input" placeholder="Your Name" />
-        <input type="tel" class="form-input" placeholder="Your Phone" />
-      </div>
-      <input type="email" class="form-input" placeholder="Your Email" />
-      <input type="text" class="form-input" placeholder="Subject" />
-      <textarea class="form-textarea" placeholder="Tell us about your situation or request..."></textarea>
-      <button class="btn-primary" onclick="sendMessage()" style="width: 100%;">Send Message</button>
-    </div>
-  </div>
-</section>
+            document.querySelectorAll('.product-card').forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-main">
-    <div class="footer-brand">
-      <span class="footer-logo">✦ OMOOLOPAASE EMPIRE</span>
-      <p class="footer-desc">
-        A premium spiritual house of healing, guidance, and transformation. Bridging ancient Yoruba wisdom with modern needs. Serious clients only. Results with faith & consistency.
-      </p>
-      <div class="footer-socials">
-        <a href="https://www.facebook.com/Omoolopaase" class="social-btn" target="_blank">f</a>
-        <a href="https://www.instagram.com/Omoolopaase" class="social-btn" target="_blank">📸</a>
-        <a href="https://www.tiktok.com/@Omoolopaase1" class="social-btn" target="_blank">🎵</a>
-        <a href="https://wa.me/2348143644489" class="social-btn" target="_blank">💬</a>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4>Services</h4>
-      <ul class="footer-links">
-        <li><a href="#consultation">Spiritual Consultation</a></li>
-        <li><a href="#consultation">Family Liberation</a></li>
-        <li><a href="#consultation">Cleansing Guidance</a></li>
-        <li><a href="#consultation">Love & Relationships</a></li>
-        <li><a href="#consultation">Egbe Appeasement</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Products</h4>
-      <ul class="footer-links">
-        <li><a href="#products">Spiritual Soaps</a></li>
-        <li><a href="#products">Money Products</a></li>
-        <li><a href="#products">Way Opener Kits</a></li>
-        <li><a href="#products">Protection Charms</a></li>
-        <li><a href="#products">Kayamata</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <ul class="footer-links">
-        <li><a href="https://wa.me/2348143644489" target="_blank">WhatsApp Booking</a></li>
-        <li><a href="#faq">FAQs</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#pricing">Full Price List</a></li>
-      </ul>
-      <div style="margin-top: 20px; padding: 16px; background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.2); border-radius: 4px;">
-        <div style="font-family: var(--font-heading); font-size: 0.6rem; letter-spacing: 2px; color: var(--gold); margin-bottom: 8px;">PAYMENT DETAILS</div>
-        <div style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.8;">
-          WEMA BANK<br/>0125637994<br/>OMOOLOPAASE EMPIRE LIMITED
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p class="footer-copy">© 2025 Omoolopaase Empire Limited. All Rights Reserved.</p>
-    <p class="footer-credit">
-      Designed with ❤️ by <a href="https://www.visioreach.co" target="_blank">VisioReach Concepts</a>
-    </p>
-  </div>
-</footer>
+        // MOBILE NAVIGATION DRAWER
+        function toggleMobileMenu() {
+            const links = document.querySelector('.nav-links');
+            if (links.style.display === 'flex') {
+                links.style.display = 'none';
+            } else {
+                links.style.display = 'flex';
+                links.style.flexDirection = 'column';
+                links.style.position = 'absolute';
+                links.style.top = '100%';
+                links.style.left = '0';
+                links.style.width = '100%';
+                links.style.background = '#111';
+                links.style.padding = '20px';
+                links.style.borderBottom = '1px solid var(--gold)';
+            }
+        }
 
-<script>
-// ===== LOADER =====
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('loader').classList.add('hidden');
-  }, 1800);
-});
+        /* --- ADVANCED CART PROCESSING LOGIC --- */
+        function toggleCartDrawer(openStatus) {
+            const drawer = document.getElementById('cartDrawer');
+            const overlay = document.getElementById('cartOverlay');
+            if (openStatus) {
+                drawer.classList.add('open');
+                overlay.classList.add('open');
+            } else {
+                drawer.classList.remove('open');
+                overlay.classList.remove('open');
+            }
+        }
 
-// ===== NAVBAR =====
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 60);
-});
+        function addItemToCart(name, price) {
+            const existingItem = basketCart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                basketCart.push({ name: name, price: price, quantity: 1 });
+            }
+            updateCartUI();
+            toggleCartDrawer(true); // Open the drawer immediately to show progress
+        }
 
-// ===== HAMBURGER =====
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-});
-navLinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => navLinks.classList.remove('open'));
-});
+        function adjustItemQuantity(name, shift) {
+            const item = basketCart.find(item => item.name === name);
+            if (item) {
+                item.quantity += shift;
+                if (item.quantity <= 0) {
+                    basketCart = basketCart.filter(i => i.name !== name);
+                }
+            }
+            updateCartUI();
+        }
 
-// ===== PARTICLES =====
-const particlesContainer = document.getElementById('heroParticles');
-for (let i = 0; i < 30; i++) {
-  const p = document.createElement('div');
-  p.className = 'particle';
-  p.style.left = Math.random() * 100 + '%';
-  p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
-  const duration = Math.random() * 10 + 8;
-  const delay = Math.random() * 10;
-  p.style.animationDuration = duration + 's';
-  p.style.animationDelay = delay + 's';
-  particlesContainer.appendChild(p);
-}
+        function removeItemFromCart(name) {
+            basketCart = basketCart.filter(item => item.name !== name);
+            updateCartUI();
+        }
 
-// ===== SCROLL ANIMATIONS =====
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      observer.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.1 });
+        function updateCartUI() {
+            const container = document.getElementById('cartItemsContainer');
+            const badge = document.getElementById('cartBadgeCount');
+            const totalDisplay = document.getElementById('cartTotalDisplay');
+            
+            // Calculate total count and price sum
+            let totalItemCount = 0;
+            let grandTotalSum = 0;
+            
+            container.innerHTML = '';
+            
+            if (basketCart.length === 0) {
+                container.innerHTML = '<p class="empty-cart-msg">Your basket is currently empty.</p>';
+            } else {
+                basketCart.forEach(item => {
+                    totalItemCount += item.quantity;
+                    grandTotalSum += (item.price * item.quantity);
+                    
+                    const itemHTML = `
+                        <div class="cart-item">
+                            <div class="cart-item-details">
+                                <h4>${item.name}</h4>
+                                <p>₦${(item.price * item.quantity).toLocaleString()}</p>
+                            </div>
+                            <div class="cart-item-actions">
+                                <div class="quantity-control">
+                                    <span class="quantity-btn" onclick="adjustItemQuantity('${item.name}', -1)">-</span>
+                                    <span>${item.quantity}</span>
+                                    <span class="quantity-btn" onclick="adjustItemQuantity('${item.name}', 1)">+</span>
+                                </div>
+                                <i class="fa-solid fa-trash-can remove-item" onclick="removeItemFromCart('${item.name}')"></i>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += itemHTML;
+                });
+            }
+            
+            badge.innerText = totalItemCount;
+            totalDisplay.innerText = '₦' + grandTotalSum.toLocaleString();
+        }
 
-document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+        // REDIRECT ROUTER: MULTI-PRODUCT COMBINED WHATSAPP CHECKOUT
+        function executeCartCheckout() {
+            if (basketCart.length === 0) {
+                alert('Your ritual basket is empty! Please add a spiritual solution first.');
+                return;
+            }
+            
+            const baseNumber = "2348143644489";
+            let orderSummary = "Hello Omoolopaase Empire, I am ready to complete checkout for the following spiritual products:\n\n";
+            let grandTotal = 0;
+            
+            basketCart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                grandTotal += itemTotal;
+                orderSummary += `${index + 1}. ${item.name} (x${item.quantity}) - ₦${itemTotal.toLocaleString()}\n`;
+            });
+            
+            orderSummary += `\n🎯 Grand Total: ₦${grandTotal.toLocaleString()}\n\nPlease verify availability and provide corporate payment pathways.`;
+            
+            const encodedText = encodeURIComponent(orderSummary);
+            window.open(`https://wa.me/${baseNumber}?text=${encodedText}`, '_blank');
+        }
 
-// ===== FAQ ACCORDION =====
-document.querySelectorAll('.faq-q').forEach(q => {
-  q.addEventListener('click', () => {
-    const item = q.parentElement;
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  });
-});
-
-// ===== PRODUCT TABS =====
-const tabBtns = document.querySelectorAll('.tab-btn');
-tabBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    tabBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    // Filter logic placeholder — all cards remain shown
-  });
-});
-
-// ===== NEWSLETTER =====
-function subscribeNewsletter() {
-  const input = document.querySelector('.newsletter-input');
-  if (input.value && input.value.includes('@')) {
-    input.value = '';
-    input.placeholder = '✦ You\'re subscribed! Welcome to the journey.';
-    setTimeout(() => input.placeholder = 'Enter your email address', 4000);
-  } else {
-    input.style.borderColor = '#C41E3A';
-    setTimeout(() => input.style.borderColor = 'rgba(212,175,55,0.3)', 2000);
-  }
-}
-
-// ===== CONTACT FORM =====
-function sendMessage() {
-  const btn = event.target;
-  btn.textContent = '✦ Message Sent!';
-  btn.style.background = 'linear-gradient(135deg, #3A7D44, #52B96B)';
-  setTimeout(() => {
-    btn.textContent = 'Send Message';
-    btn.style.background = '';
-  }, 3000);
-}
-
-// ===== SMOOTH HOVER ON PRODUCT CARDS =====
-document.querySelectorAll('.product-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 8;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 8;
-    card.style.transform = `translateY(-8px) rotateX(${-y}deg) rotateY(${x}deg)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-    card.style.transition = 'transform 0.5s ease';
-  });
-});
-</script>
+        // REDIRECT ROUTER: DYNAMIC CONSULTATION BOOKING
+        function bookConsultation(tierType) {
+            const baseNumber = "2348143644489";
+            let consultationText = "";
+            
+            if (tierType === 'vip') {
+                consultationText = "Hey, I'm ready for the Consultation. I would love to sign up for the VIP one.";
+            } else if (tierType === 'normal') {
+                consultationText = "Hey, I'm ready for the Consultation. I want to select the normal one.";
+            } else {
+                consultationText = "Hey, I'm ready for the Consultation. I want to book a physical session.";
+            }
+            
+            const encodedText = encodeURIComponent(consultationText);
+            window.open(`https://wa.me/${baseNumber}?text=${encodedText}`, '_blank');
+        }
+    </script>
 </body>
 </html>

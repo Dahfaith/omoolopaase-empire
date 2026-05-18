@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omoolopaase Empire | Premium Spiritual Solutions & Consultation</title>
+    <title>Omoolopaase Empire | Premium Spiritual Solutions &amp; Consultation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -43,7 +43,6 @@
             line-height: 1.6;
         }
 
-        /* --- UTILITIES & GLOW OBJECTS --- */
         .glow-bg {
             position: absolute;
             width: 400px;
@@ -93,7 +92,7 @@
             left: 0;
             width: 100%;
             padding: 25px 5%;
-            background: rgba(17, 17, 17, 0.85);
+            background: rgba(17, 17, 17, 0.95);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -194,28 +193,6 @@
             justify-content: center;
         }
 
-        .cta-nav {
-            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
-            border: 1px solid var(--gold);
-            color: var(--white);
-            padding: 10px 22px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: var(--font-heading);
-            letter-spacing: 1px;
-            text-decoration: none;
-            font-size: 0.8rem;
-            white-space: nowrap;
-            transition: var(--transition);
-        }
-
-        .cta-nav:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px var(--gold-glow);
-            background: var(--gold);
-            color: var(--black);
-        }
-
         .menu-toggle {
             display: none;
             color: var(--white);
@@ -223,7 +200,7 @@
             cursor: pointer;
         }
 
-        /* --- CART DRAWER HUB --- */
+        /* --- SHOPPING CART DRAWER SYSTEM --- */
         .cart-drawer {
             position: fixed;
             top: 0;
@@ -443,7 +420,7 @@
 
         .about-card h4 { font-family: var(--font-heading); color: var(--white); margin-bottom: 8px; }
 
-        /* --- 3. FEATURED PRODUCTS SECTION --- */
+        /* --- 3. FEATURED PRODUCTS GRID WITH SMART LAYOUT FALLBACKS --- */
         .product-tabs {
             display: flex;
             justify-content: center;
@@ -471,17 +448,42 @@
 
         .product-card:hover { transform: translateY(-8px); border-color: var(--gold); }
 
+        /* Multi-Image Slider Box Layout with Mystical Fail-Safe Background Patterns */
         .product-gallery {
             position: relative;
             width: 100%;
             height: 250px;
             overflow: hidden;
-            background: #222;
+            background: linear-gradient(135deg, #2c1633 0%, #111111 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .gallery-slides { display: flex; width: 200%; height: 100%; transition: transform 0.4s ease; }
+        /* Creates a beautiful spiritual placeholder geometric shape behind missing images */
+        .product-gallery::before {
+            content: "✨";
+            position: absolute;
+            font-size: 2.5rem;
+            color: rgba(214, 175, 55, 0.15);
+            z-index: 1;
+        }
 
-        .gallery-slides img { width: 50%; height: 100%; object-fit: cover; }
+        .gallery-slides { 
+            display: flex; 
+            width: 200%; 
+            height: 100%; 
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery-slides img { 
+            width: 50%; 
+            height: 100%; 
+            object-fit: cover;
+            background: transparent; 
+        }
 
         .gallery-nav {
             position: absolute;
@@ -494,11 +496,27 @@
             z-index: 5;
         }
 
-        .product-content { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
+        .gallery-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: var(--transition);
+        }
 
-        .product-card h3 { font-family: var(--font-heading); font-size: 1.2rem; color: var(--white); margin-bottom: 8px; }
+        .gallery-dot.active {
+            background: var(--gold);
+            transform: scale(1.2);
+        }
+
+        .product-content { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; text-align: center; }
+
+        .product-card h3 { font-family: var(--font-heading); font-size: 1.2rem; color: var(--white); margin-bottom: 8px; letter-spacing: 0.5px; }
 
         .product-card p { font-size: 0.85rem; color: #aaa; margin-bottom: 15px; flex-grow: 1; }
+
+        .price-container { margin-bottom: 15px; }
 
         .buy-btn {
             background: transparent;
@@ -529,6 +547,8 @@
             border-radius: 12px;
             padding: 50px 30px;
         }
+
+        .consultation-p { max-width: 600px; margin: 0 auto 30px auto; color: #ccc; }
 
         .tier-grid {
             display: grid;
@@ -628,7 +648,7 @@
 
         .faq-item { background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 6px; margin-bottom: 15px; overflow: hidden; }
 
-        .faq-header { padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .faq-header { padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
 
         .faq-header h4 { font-family: var(--font-heading); color: var(--white); }
 
@@ -686,7 +706,7 @@
 
         .form-btn:hover { background: var(--gold); color: var(--black); }
 
-        /* --- 10. FOOTER SECTION --- */
+        /* --- 10. FOOTER SECTION & MANDATORY VISIOREACH CREDITS --- */
         footer { background-color: var(--black); padding: 60px 8% 20px 8%; border-top: 1px solid rgba(255, 255, 255, 0.05); }
 
         .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
@@ -711,12 +731,12 @@
 
         .credit-link:hover { color: var(--white); text-decoration: underline; }
 
-        /* --- FLOATING WHATSAPP SYSTEM --- */
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 1998; text-decoration: none; transition: var(--transition); }
+        /* --- FLOATING COMFORT CONTROLS --- */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 9998; text-decoration: none; transition: var(--transition); }
 
         .whatsapp-float:hover { transform: scale(1.1); }
 
-        /* --- MULTI-DEVICE RESPONSIVE LAYOUT RESPONSES --- */
+        /* --- FIXED RESPONSIVE CONTRAST MEDIA BREAKPOINTS --- */
         @media (max-width: 1024px) {
             .menu-toggle { display: block; }
             nav { padding: 20px 5%; }
@@ -728,7 +748,7 @@
                 right: -100%;
                 width: 300px;
                 height: 100vh;
-                background: #141414 !important; /* Forces thick solid black backdrop layers */
+                background: #141414 !important; /* Premium Solid Surface Armor */
                 padding: 120px 30px 40px 30px;
                 gap: 25px;
                 box-shadow: -10px 0 40px rgba(0,0,0,0.9);
@@ -849,10 +869,13 @@
             <div class="product-card" data-category="cleansing">
                 <div class="product-gallery">
                     <div class="gallery-slides" id="slides-p1">
-                        <img src="images/curse-breaker-1.jpg" alt="Curse Breaker 1">
-                        <img src="images/curse-breaker-2.jpg" alt="Curse Breaker 2">
+                        <img src="images/curse-breaker-1.jpg" alt="Curse Breaker 1" onerror="this.style.display='none'">
+                        <img src="images/curse-breaker-2.jpg" alt="Curse Breaker 2" onerror="this.style.display='none'">
                     </div>
-                    <div class="gallery-nav"><div class="gallery-dot active" onclick="switchGalleryImage('p1', 0, this)"></div><div class="gallery-dot" onclick="switchGalleryImage('p1', 1, this)"></div></div>
+                    <div class="gallery-nav">
+                        <div class="gallery-dot active" onclick="switchGalleryImage('p1', 0, this)"></div>
+                        <div class="gallery-dot" onclick="switchGalleryImage('p1', 1, this)"></div>
+                    </div>
                 </div>
                 <div class="product-content">
                     <h3>Curse Breaker Soap</h3>
@@ -865,26 +888,70 @@
             <div class="product-card" data-category="cleansing">
                 <div class="product-gallery">
                     <div class="gallery-slides" id="slides-p2">
-                        <img src="images/eyonu-agba-1.jpg" alt="Eyonu Agba 1">
-                        <img src="images/eyonu-agba-2.jpg" alt="Eyonu Agba 2">
+                        <img src="images/ebe-agba-1.jpg" alt="Ebe Agba 1" onerror="this.style.display='none'">
+                        <img src="images/ebe-agba-2.jpg" alt="Ebe Agba 2" onerror="this.style.display='none'">
                     </div>
-                    <div class="gallery-nav"><div class="gallery-dot active" onclick="switchGalleryImage('p2', 0, this)"></div><div class="gallery-dot" onclick="switchGalleryImage('p2', 1, this)"></div></div>
+                    <div class="gallery-nav">
+                        <div class="gallery-dot active" onclick="switchGalleryImage('p2', 0, this)"></div>
+                        <div class="gallery-dot" onclick="switchGalleryImage('p2', 1, this)"></div>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Ebe Agba</h3>
+                    <p>Traditional shielding formulation built to break old restrictions, negative patterns, and foundational issues.</p>
+                    <div class="price-container"><span class="old-price">₦25,000</span><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Ebe Agba', 20000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery">
+                    <div class="gallery-slides" id="slides-p3">
+                        <img src="images/eyonu-agba-1.jpg" alt="Eyonu Agba 1" onerror="this.style.display='none'">
+                        <img src="images/eyonu-agba-2.jpg" alt="Eyonu Agba 2" onerror="this.style.display='none'">
+                    </div>
+                    <div class="gallery-nav">
+                        <div class="gallery-dot active" onclick="switchGalleryImage('p3', 0, this)"></div>
+                        <div class="gallery-dot" onclick="switchGalleryImage('p3', 1, this)"></div>
+                    </div>
                 </div>
                 <div class="product-content">
                     <h3>Eyonu Agba Soap</h3>
-                    <p>A premium remedy crafted to clear away friction, severe setbacks, and closed doors.</p>
+                    <p>A premium remedy crafted to clear away friction, severe setbacks, and unexplainable closed doors.</p>
                     <div class="price-container"><span class="old-price">₦20,000</span><span class="new-price">₦15,000</span></div>
                     <button class="buy-btn" onclick="addItemToCart('Eyonu Agba Soap', 15000)">Add To Basket</button>
                 </div>
             </div>
 
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery">
+                    <div class="gallery-slides" id="slides-p4">
+                        <img src="images/atude-1.jpg" alt="Atude 1" onerror="this.style.display='none'">
+                        <img src="images/atude-2.jpg" alt="Atude 2" onerror="this.style.display='none'">
+                    </div>
+                    <div class="gallery-nav">
+                        <div class="gallery-dot active" onclick="switchGalleryImage('p4', 0, this)"></div>
+                        <div class="gallery-dot" onclick="switchGalleryImage('p4', 1, this)"></div>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Atude Soap</h3>
+                    <p>Designed explicitly to untie complicated life knots, open stagnated positions, and fast-track opportunities.</p>
+                    <div class="price-container"><span class="old-price">₦20,000</span><span class="new-price">₦15,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Atude Soap', 15000)">Add To Basket</button>
+                </div>
+            </div>
+
             <div class="product-card" data-category="way-opener">
                 <div class="product-gallery">
-                    <div class="gallery-slides" id="slides-p3">
-                        <img src="images/glory-1.jpg" alt="Glory Retrieval 1">
-                        <img src="images/glory-2.jpg" alt="Glory Retrieval 2">
+                    <div class="gallery-slides" id="slides-p5">
+                        <img src="images/glory-1.jpg" alt="Glory Retrieval 1" onerror="this.style.display='none'">
+                        <img src="images/glory-2.jpg" alt="Glory Retrieval 2" onerror="this.style.display='none'">
                     </div>
-                    <div class="gallery-nav"><div class="gallery-dot active" onclick="switchGalleryImage('p3', 0, this)"></div><div class="gallery-dot" onclick="switchGalleryImage('p3', 1, this)"></div></div>
+                    <div class="gallery-nav">
+                        <div class="gallery-dot active" onclick="switchGalleryImage('p5', 0, this)"></div>
+                        <div class="gallery-dot" onclick="switchGalleryImage('p5', 1, this)"></div>
+                    </div>
                 </div>
                 <div class="product-content">
                     <h3>Glory Retrieval (Gbogo Mi Funmi)</h3>
@@ -894,17 +961,39 @@
                 </div>
             </div>
 
+            <div class="product-card" data-category="way-opener">
+                <div class="product-gallery">
+                    <div class="gallery-slides" id="slides-p6">
+                        <img src="images/open-door-1.jpg" alt="Open Door Kit 1" onerror="this.style.display='none'">
+                        <img src="images/open-door-2.jpg" alt="Open Door Kit 2" onerror="this.style.display='none'">
+                    </div>
+                    <div class="gallery-nav">
+                        <div class="gallery-dot active" onclick="switchGalleryImage('p6', 0, this)"></div>
+                        <div class="gallery-dot" onclick="switchGalleryImage('p6', 1, this)"></div>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Open Door Kit</h3>
+                    <p>A multi-tiered framework designed to break through heavily restricted setups and financial blocks.</p>
+                    <div class="price-container"><span class="old-price">₦50,000</span><span class="new-price">₦40,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Open Door Kit', 40000)">Add To Basket</button>
+                </div>
+            </div>
+
             <div class="product-card" data-category="money">
                 <div class="product-gallery">
-                    <div class="gallery-slides" id="slides-p4">
-                        <img src="images/cashout-1.jpg" alt="Cash Out Soap 1">
-                        <img src="images/cashout-2.jpg" alt="Cash Out Soap 2">
+                    <div class="gallery-slides" id="slides-p7">
+                        <img src="images/cashout-1.jpg" alt="Cash Out Soap 1" onerror="this.style.display='none'">
+                        <img src="images/cashout-2.jpg" alt="Cash Out Soap 2" onerror="this.style.display='none'">
                     </div>
-                    <div class="gallery-nav"><div class="gallery-dot active" onclick="switchGalleryImage('p4', 0, this)"></div><div class="gallery-dot" onclick="switchGalleryImage('p4', 1, this)"></div></div>
+                    <div class="gallery-nav">
+                        <div class="gallery-dot active" onclick="switchGalleryImage('p7', 0, this)"></div>
+                        <div class="gallery-dot" onclick="switchGalleryImage('p7', 1, this)"></div>
+                    </div>
                 </div>
                 <div class="product-content">
                     <h3>Cash Out Soap</h3>
-                    <p>Our ultra-premium formulation designed for high-profile negotiations, business windfalls, and contracts.</p>
+                    <p>Our ultra-premium formulation designed for high-profile business negotiations, contracts, and financial favor.</p>
                     <div class="price-container"><span class="old-price">₦250,000</span><span class="new-price">₦200,000</span></div>
                     <button class="buy-btn" onclick="addItemToCart('Cash Out Soap', 200000)">Add To Basket</button>
                 </div>
@@ -912,15 +1001,18 @@
 
             <div class="product-card" data-category="money">
                 <div class="product-gallery">
-                    <div class="gallery-slides" id="slides-p5">
-                        <img src="images/breakthrough-1.jpg" alt="Breakthrough Soap 1">
-                        <img src="images/breakthrough-2.jpg" alt="Breakthrough Soap 2">
+                    <div class="gallery-slides" id="slides-p8">
+                        <img src="images/breakthrough-1.jpg" alt="Breakthrough Soap 1" onerror="this.style.display='none'">
+                        <img src="images/breakthrough-2.jpg" alt="Breakthrough Soap 2" onerror="this.style.display='none'">
                     </div>
-                    <div class="gallery-nav"><div class="gallery-dot active" onclick="switchGalleryImage('p5', 0, this)"></div><div class="gallery-dot" onclick="switchGalleryImage('p5', 1, this)"></div></div>
+                    <div class="gallery-nav">
+                        <div class="gallery-dot active" onclick="switchGalleryImage('p8', 0, this)"></div>
+                        <div class="gallery-dot" onclick="switchGalleryImage('p8', 1, this)"></div>
+                    </div>
                 </div>
                 <div class="product-content">
                     <h3>Breakthrough Soap (Ashina)</h3>
-                    <p>Designed to expand sales visibility, unlock rapid financial favor, and draw rich clients.</p>
+                    <p>Designed to expand business visibility, unlock rapid financial favor, and draw rich clients.</p>
                     <div class="price-container"><span class="old-price">₦30,000</span><span class="new-price">₦25,000</span></div>
                     <button class="buy-btn" onclick="addItemToCart('Breakthrough Soap (Ashina)', 25000)">Add To Basket</button>
                 </div>
@@ -928,15 +1020,18 @@
 
             <div class="product-card" data-category="love">
                 <div class="product-gallery">
-                    <div class="gallery-slides" id="slides-p6">
-                        <img src="images/mirror-1.jpg" alt="Stay With Me Mirror 1">
-                        <img src="images/mirror-2.jpg" alt="Stay With Me Mirror 2">
+                    <div class="gallery-slides" id="slides-p9">
+                        <img src="images/mirror-1.jpg" alt="Stay With Me Mirror 1" onerror="this.style.display='none'">
+                        <img src="images/mirror-2.jpg" alt="Stay With Me Mirror 2" onerror="this.style.display='none'">
                     </div>
-                    <div class="gallery-nav"><div class="gallery-dot active" onclick="switchGalleryImage('p6', 0, this)"></div><div class="gallery-dot" onclick="switchGalleryImage('p6', 1, this)"></div></div>
+                    <div class="gallery-nav">
+                        <div class="gallery-dot active" onclick="switchGalleryImage('p9', 0, this)"></div>
+                        <div class="gallery-dot" onclick="switchGalleryImage('p9', 1, this)"></div>
+                    </div>
                 </div>
                 <div class="product-content">
                     <h3>Stay With Me Mirror</h3>
-                    <p>A specialized luxury Kayamata standard tool constructed for partnership stabilization and devotion tracking.</p>
+                    <p>A specialized luxury Kayamata standard tool constructed for deep relationship stabilization and devotion.</p>
                     <div class="price-container"><span class="old-price">₦20,000</span><span class="new-price">₦15,000</span></div>
                     <button class="buy-btn" onclick="addItemToCart('Stay With Me Mirror', 15000)">Add To Basket</button>
                 </div>
@@ -968,7 +1063,7 @@
                     <div class="tier-price">₦12,000</div>
                     <ul class="tier-features">
                         <li><i class="fa-solid fa-check"></i> Express Reading Execution</li>
-                        <li><i class="fa-solid fa-check"></i> Priority 24H Admin Track</li>
+                        <li><i class="fa-solid fa-check"></i> Priority Attention Insight</li>
                     </ul>
                     <button class="tier-btn" onclick="bookConsultation('vip')">Select VIP</button>
                 </div>
@@ -978,7 +1073,7 @@
                     <div class="tier-price">₦15,000</div>
                     <ul class="tier-features">
                         <li><i class="fa-solid fa-check"></i> Private Physical Session</li>
-                        <li><i class="fa-solid fa-check"></i> Deep On-Site Consultation</li>
+                        <li><i class="fa-solid fa-check"></i> Deep On-Site Testing</li>
                     </ul>
                     <button class="tier-btn" onclick="bookConsultation('face-to-face')">Select Physical</button>
                 </div>
@@ -995,7 +1090,7 @@
             <div class="why-card"><i class="fa-solid fa-user-shield"></i><h4>Trusted Counsel</h4><p>Years of verified metrics.</p></div>
             <div class="why-card"><i class="fa-solid fa-truck-fast"></i><h4>Fast Delivery</h4><p>Discreet global transit.</p></div>
             <div class="why-card"><i class="fa-solid fa-mortar-pestle"></i><h4>Handmade</h4><p>Individually mixed steps.</p></div>
-            <div class="why-card"><i class="fa-solid fa-lock"></i><h4>Confidential</h4><p>100% secure privacy protection.</p></div>
+            <div class="why-card"><i class="fa-solid fa-lock"></i><h4>Confidential</h4><p>100% private security.</p></div>
         </div>
     </section>
 
@@ -1053,7 +1148,7 @@
         <div class="contact-container">
             <div class="contact-info">
                 <h3>Connect With the Empire</h3>
-                <p>Have specific questions regarding customized setups or global shipping rules? Reach out across our networks.</p>
+                <p>Have specific questions regarding customizable setups or global shipping rules? Reach out across our networks.</p>
                 <ul class="contact-details-list">
                     <li><i class="fa-brands fa-whatsapp"></i> 08143644489, 08073733419</li>
                     <li><i class="fa-solid fa-envelope"></i> contact@omoolopaase.com</li>

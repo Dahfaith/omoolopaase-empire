@@ -85,27 +85,24 @@
             margin-top: 10px;
         }
 
-        /* --- BULLETPROOF ULTRA-RESPONSIVE NAVBAR --- */
+        /* --- NAVBAR STRUCTURAL FRAMEWORK --- */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             padding: 25px 5%;
-            background: rgba(17, 17, 17, 0.95);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: #111111; /* Locked default color base to protect contrast layer drops */
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 10000; /* Stays securely above all screen elements */
+            z-index: 10000;
             transition: var(--transition);
         }
 
         nav.scrolled {
             padding: 15px 5%;
-            background: var(--black);
             border-bottom: 1px solid var(--glass-border);
         }
 
@@ -142,7 +139,6 @@
             transition: var(--transition);
             position: relative;
             white-space: nowrap;
-            display: block;
         }
 
         .nav-links a::after {
@@ -311,46 +307,6 @@
             justify-content: center;
         }
 
-        .btn {
-            padding: 15px 35px;
-            font-family: var(--font-heading);
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
-            white-space: nowrap;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--gold), #b89326);
-            color: var(--black);
-            border: none;
-            font-weight: 600;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px var(--gold-glow);
-            opacity: 0.95;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.02);
-        }
-
         /* --- ABOUT BRAND SECTION --- */
         .about {
             position: relative;
@@ -470,22 +426,24 @@
         .product-gallery {
             position: relative;
             width: 100%;
-            height: 280px;
+            height: 320px; /* Enhanced relative height mapping */
             overflow: hidden;
-            background: #222;
+            background: #1a1a1a;
         }
 
         .gallery-slides {
             display: flex;
             width: 200%;
             height: 100%;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s ease-in-out;
         }
 
         .gallery-slides img {
             width: 50%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Guarantees standard scaling without squishing layout */
+            background: #1a1a1a;
+            display: block;
         }
 
         .gallery-nav {
@@ -587,7 +545,7 @@
             background: #141414;
             box-shadow: -5px 0 30px rgba(0,0,0,0.7);
             border-left: 1px solid var(--glass-border);
-            z-index: 20000;
+            z-index: 200000;
             transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             display: flex;
             flex-direction: column;
@@ -650,56 +608,6 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .cart-item-details h4 {
-            font-family: var(--font-heading);
-            font-size: 0.95rem;
-            color: var(--white);
-            margin-bottom: 4px;
-        }
-
-        .cart-item-details p {
-            font-size: 0.85rem;
-            color: var(--gold);
-        }
-
-        .cart-item-actions {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .quantity-control {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #222;
-            padding: 4px 8px;
-            border-radius: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .quantity-btn {
-            color: var(--cream);
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: var(--transition);
-        }
-
-        .quantity-btn:hover {
-            color: var(--gold);
-        }
-
-        .remove-item {
-            color: #ff4444;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .remove-item:hover {
-            transform: scale(1.1);
-        }
-
         .cart-footer {
             padding: 25px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -743,11 +651,6 @@
             gap: 10px;
         }
 
-        .checkout-btn:hover {
-            background: var(--white);
-            box-shadow: 0 5px 20px rgba(214,175,55,0.2);
-        }
-
         .cart-overlay {
             position: fixed;
             top: 0;
@@ -755,7 +658,7 @@
             width: 100vw;
             height: 100vh;
             background: rgba(0,0,0,0.6);
-            z-index: 19999;
+            z-index: 199999;
             display: none;
             backdrop-filter: blur(4px);
         }
@@ -871,7 +774,7 @@
             border: 1px solid var(--white);
             color: var(--white);
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border-radius: 4px;
             font-family: var(--font-heading);
             font-size: 0.8rem;
@@ -887,16 +790,6 @@
             border-color: var(--gold);
             color: var(--black);
             font-weight: 600;
-        }
-
-        .tier-card.featured .tier-btn:hover {
-            background: transparent;
-            color: var(--gold);
-        }
-
-        .tier-btn:hover {
-            background: var(--white);
-            color: var(--black);
         }
 
         /* --- WHY CHOOSE US SECTION --- */
@@ -919,35 +812,7 @@
             transition: var(--transition);
         }
 
-        .why-card:hover {
-            border-color: var(--gold-border);
-            background: rgba(91, 33, 103, 0.1);
-            transform: translateY(-5px);
-        }
-
-        .why-card i {
-            font-size: 2rem;
-            color: var(--gold);
-            margin-bottom: 15px;
-        }
-
-        .why-card h4 {
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            color: var(--white);
-            margin-bottom: 10px;
-        }
-
-        .why-card p {
-            font-size: 0.8rem;
-            color: #999;
-        }
-
         /* --- TESTIMONIALS SECTION --- */
-        .testimonials {
-            position: relative;
-        }
-
         .testimonial-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -960,63 +825,6 @@
             border-radius: 8px;
             padding: 30px;
             position: relative;
-        }
-
-        .testimonial-card::before {
-            content: "\201C";
-            font-family: var(--font-heading);
-            font-size: 5rem;
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            color: rgba(214, 175, 55, 0.1);
-            line-height: 1;
-        }
-
-        .stars {
-            color: var(--gold);
-            font-size: 0.85rem;
-            margin-bottom: 15px;
-        }
-
-        .testimonial-card p {
-            font-size: 0.9rem;
-            color: #ccc;
-            font-style: italic;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .client-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .client-avatar {
-            width: 40px;
-            height: 40px;
-            background: var(--purple);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: var(--white);
-            font-size: 0.9rem;
-            border: 1px solid var(--gold);
-        }
-
-        .client-details h5 {
-            font-family: var(--font-heading);
-            color: var(--white);
-            font-size: 0.9rem;
-        }
-
-        .client-details span {
-            font-size: 0.75rem;
-            color: #777;
         }
 
         /* --- FAQ SECTION --- */
@@ -1044,108 +852,12 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            user-select: none;
-        }
-
-        .faq-header h4 {
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            color: var(--white);
-            letter-spacing: 0.5px;
-        }
-
-        .faq-icon {
-            color: var(--gold);
-            transition: var(--transition);
-        }
-
-        .faq-body {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background: rgba(0, 0, 0, 0.2);
         }
 
         .faq-body p {
             padding: 0 25px 20px 25px;
             font-size: 0.9rem;
             color: #bbb;
-        }
-
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
-        }
-
-        .faq-item.active {
-            border-color: var(--glass-border);
-        }
-
-        /* --- NEWSLETTER SECTION --- */
-        .newsletter {
-            text-align: center;
-            position: relative;
-        }
-
-        .newsletter-box {
-            max-width: 650px;
-            margin: 0 auto;
-            background: linear-gradient(135deg, rgba(26,26,26,0.9), rgba(17,17,17,0.9));
-            padding: 40px;
-            border-radius: 8px;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .newsletter h3 {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            color: var(--white);
-            margin-bottom: 10px;
-        }
-
-        .newsletter p {
-            font-size: 0.9rem;
-            color: #aaa;
-            margin-bottom: 25px;
-        }
-
-        .subscribe-form {
-            display: flex;
-            gap: 10px;
-        }
-
-        .subscribe-form input {
-            flex-grow: 1;
-            background: #222;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 4px;
-            color: var(--white);
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-        }
-
-        .subscribe-form input:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 10px rgba(214, 175, 55, 0.2);
-        }
-
-        .subscribe-btn {
-            background: var(--gold);
-            color: var(--black);
-            border: none;
-            padding: 0 30px;
-            border-radius: 4px;
-            font-family: var(--font-heading);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .subscribe-btn:hover {
-            background: var(--white);
-            box-shadow: 0 5px 15px rgba(255,255,255,0.1);
         }
 
         /* --- CONTACT SECTION --- */
@@ -1159,64 +871,6 @@
             gap: 50px;
         }
 
-        .contact-info h3 {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            color: var(--white);
-            margin-bottom: 15px;
-        }
-
-        .contact-info p {
-            color: #aaa;
-            margin-bottom: 30px;
-            font-size: 0.95rem;
-        }
-
-        .contact-details-list {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-
-        .contact-details-list li {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-
-        .contact-details-list li i {
-            color: var(--gold);
-            font-size: 1.2rem;
-            width: 25px;
-        }
-
-        .social-row {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #222;
-            color: var(--cream);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .social-icon:hover {
-            background: var(--purple);
-            color: var(--white);
-            border-color: var(--gold);
-            transform: translateY(-3px);
-        }
-
         .contact-form {
             background: var(--black);
             padding: 40px;
@@ -1224,49 +878,12 @@
             border: 1px solid var(--glass-border);
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            background: #1a1a1a;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 12px 15px;
-            color: var(--white);
-            border-radius: 4px;
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: var(--gold);
-        }
-
-        .form-btn {
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 12px 30px;
-            border-radius: 4px;
-            font-family: var(--font-heading);
-            cursor: pointer;
-            transition: var(--transition);
-            width: 100%;
-            text-align: center;
-        }
-
-        .form-btn:hover {
-            background: var(--gold);
-            color: var(--black);
-        }
-
         /* --- FOOTER & CREDITS --- */
         footer {
             background-color: var(--black);
             padding: 60px 8% 20px 8%;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 40px; /* Safe padding spacing context above bottom dynamic panels */
         }
 
         .footer-grid {
@@ -1274,47 +891,6 @@
             grid-template-columns: 1.5fr 1fr 1fr;
             gap: 40px;
             margin-bottom: 40px;
-        }
-
-        .footer-brand h4 {
-            font-family: var(--font-heading);
-            color: var(--white);
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
-
-        .footer-brand p {
-            color: #777;
-            font-size: 0.85rem;
-            max-width: 300px;
-        }
-
-        .footer-links h5 {
-            font-family: var(--font-heading);
-            color: var(--gold);
-            font-size: 1rem;
-            margin-bottom: 15px;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: #777;
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--white);
-            padding-left: 5px;
         }
 
         .footer-bottom {
@@ -1333,28 +909,22 @@
             color: var(--gold);
             text-decoration: none;
             font-weight: 500;
-            transition: var(--transition);
         }
 
-        .credit-link:hover {
-            color: var(--white);
-            text-decoration: underline;
-        }
-
-        /* --- FLOATING WHATSAPP CHAT --- */
+        /* --- WHATSAPP FLOATING HUB CONFIGURATION --- */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
             right: 30px;
             background-color: #25D366;
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             text-align: center;
-            font-size: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            z-index: 1998;
+            font-size: 28px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            z-index: 9999; /* Lowered precisely below nav-drawers but above standard text streams */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1363,37 +933,19 @@
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            transform: scale(1.08);
         }
 
-        /* --- ADVANCED MULTI-DEVICE RESPONSIVE BREAKPOINTS --- */
+        /* --- MULTI-DEVICE ULTRA RESPONSIVE INTERFACE RULES --- */
         @media (max-width: 1120px) {
-            nav {
-                padding: 20px 4%;
-            }
-            .nav-links {
-                gap: 15px;
-                margin: 0 10px;
-            }
-            .nav-links a {
-                font-size: 0.8rem;
-            }
-            .cta-nav {
-                padding: 8px 16px;
-                font-size: 0.75rem;
-            }
+            nav { padding: 20px 4%; }
+            .nav-links { gap: 15px; margin: 0 10px; }
         }
 
-        /* Fixes the breakdown context seen in your screenshot */
+        /* FIXES OVERLAPS & TRANSPARENCY ACCORDING TO USER SCREENSHOTS */
         @media (max-width: 1024px) {
-            nav {
-                padding: 20px 5%;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
+            nav { padding: 15px 5%; }
+            .menu-toggle { display: block; }
 
             .nav-links {
                 display: flex;
@@ -1402,90 +954,55 @@
                 align-items: center;
                 position: fixed;
                 top: 0;
-                right: -100%; /* Hidden off-screen by default */
-                width: 280px;
-                height: 100vh;
-                background: #141414;
+                right: -100%;
+                width: 300px;
+                height: 100vh; /* Complete vertical alignment */
+                background: #141414 !important; /* Forces solid background layout backdrop */
+                opacity: 1 !important;
                 border-left: 1px solid var(--glass-border);
-                padding: 100px 30px 40px 30px;
-                gap: 25px;
+                padding: 120px 30px 40px 30px;
+                gap: 30px;
                 margin: 0;
-                box-shadow: -10px 0 30px rgba(0,0,0,0.6);
-                z-index: 10001; /* Sits underneath the fixed nav bar background but above content */
+                box-shadow: -10px 0 40px rgba(0,0,0,0.8);
+                z-index: 10001; /* Layered underneath nav bar controls but covers header body paths */
                 transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             }
 
             .nav-links.mobile-open {
-                right: 0; /* Slides smoothly into view */
+                right: 0 !important; /* Slide menu safely out */
             }
 
             .nav-links a {
-                font-size: 1.1rem;
+                font-size: 1.15rem;
                 letter-spacing: 2px;
                 width: 100%;
                 text-align: center;
-                padding: 10px 0;
+                padding: 5px 0;
+                color: var(--white);
             }
 
-            .nav-links a::after {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.6rem;
-            }
-            .hero h1 span {
-                font-size: 1.2rem;
-            }
-            .about-container, .contact-container, .footer-grid {
-                grid-template-columns: 1fr;
-            }
-            .about-grid, .tier-grid, .testimonial-grid {
-                grid-template-columns: 1fr;
-            }
-            .why-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .tier-card.featured {
-                transform: none;
-            }
+            .nav-links a::after { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .about-container, .contact-container, .footer-grid { grid-template-columns: 1fr; }
+            .about-grid, .tier-grid, .testimonial-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: repeat(3, 1fr); }
+            .tier-card.featured { transform: none; }
         }
 
         @media (max-width: 768px) {
-            .section-padding {
-                padding: 90px 6% 60px 6%;
-            }
-            .why-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .subscribe-form {
-                flex-direction: column;
-            }
-            .subscribe-btn {
-                padding: 14px;
-            }
-            .cart-drawer {
-                width: 100%;
-                right: -100%;
-            }
+            .section-padding { padding: 80px 6% 60px 6%; }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .cart-drawer { width: 100%; right: -100%; }
+            .product-gallery { height: 260px; } /* Proportional adaptation framework */
         }
 
         @media (max-width: 540px) {
-            .nav-btn-container {
-                display: none; /* Auto-hides "Book Session" button container on small phones to maximize room */
-            }
-            .hero h1 {
-                font-size: 1.95rem;
-            }
-            .why-grid {
-                grid-template-columns: 1fr;
-            }
-            .nav-actions-group {
-                gap: 15px;
-            }
-            .logo {
-                font-size: 1.05rem;
-            }
+            .nav-btn-container { display: none; } /* Drops nav cta on narrow phone views */
+            .hero h1 { font-size: 2rem; }
+            .hero h1 span { font-size: 1.1rem; }
+            .why-grid { grid-template-columns: 1fr; }
+            .logo { font-size: 1.05rem; }
+            .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 24px; }
         }
     </style>
 </head>
@@ -1565,7 +1082,6 @@
             <div class="about-text">
                 <h3>Welcome to Omoolopaase Empire</h3>
                 <p>We combine ancestral wisdom, spiritual laws, and potent organic herbal alternatives to bring clarity, protection, and transformation to your lifestyle.</p>
-                <p>Our comprehensive framework approaches spiritual growth safely and meticulously. From breaking long-standing generational limitations to realigning individual aura profiles, our custom-tailored consultations pinpoint deep core issues to build lasting clarity.</p>
                 <p style="color: var(--gold); font-weight: 500;">Results built safely on structural alignment, dedicated faith, and consistency.</p>
             </div>
             <div class="about-grid">
@@ -1578,16 +1094,6 @@
                     <i class="fa-solid fa-shield-halved"></i>
                     <h4>Total Protection</h4>
                     <p>Custom energetic shields against malicious exterior disruptions.</p>
-                </div>
-                <div class="about-card">
-                    <i class="fa-solid fa-leaf"></i>
-                    <h4>100% Organic</h4>
-                    <p>Finely sorted botanical components prepared with strict care.</p>
-                </div>
-                <div class="about-card">
-                    <i class="fa-solid fa-hands-praying"></i>
-                    <h4>Aura Alignment</h4>
-                    <p>Reclaim foundational prosperity, custom favor, and attraction metrics.</p>
                 </div>
             </div>
         </div>
@@ -1619,7 +1125,7 @@
                 </div>
                 <div class="product-content">
                     <h3>Curse Breaker Soap</h3>
-                    <p>Formulated to clear stubborn spiritual blockages, generational hexes, and negative patterns holding back progress.</p>
+                    <p>Formulated to clear stubborn spiritual blockages, hexes, and negative patterns holding back progress.</p>
                     <div class="price-container">
                         <span class="old-price">₦20,000</span>
                         <span class="new-price">₦10,000</span>
@@ -1677,78 +1183,6 @@
                     </button>
                 </div>
             </div>
-
-            <div class="product-card" data-category="money">
-                <div class="product-gallery">
-                    <div class="gallery-slides" id="slides-p4">
-                        <img src="images/cashout-1.jpg" alt="Cash Out Soap View 1">
-                        <img src="images/cashout-2.jpg" alt="Cash Out Soap View 2">
-                    </div>
-                    <div class="gallery-nav">
-                        <div class="gallery-dot active" onclick="switchGalleryImage('p4', 0, this)"></div>
-                        <div class="gallery-dot" onclick="switchGalleryImage('p4', 1, this)"></div>
-                    </div>
-                </div>
-                <div class="product-content">
-                    <h3>Cash Out Premium Soap</h3>
-                    <p>Our ultra-premium formulation designed for high-profile business negotiations, contracts, and financial breakthroughs.</p>
-                    <div class="price-container">
-                        <span class="old-price">₦250,000</span>
-                        <span class="new-price">₦200,000</span>
-                    </div>
-                    <button class="buy-btn" onclick="addItemToCart('Cash Out Premium Soap', 200000)">
-                        <i class="fa-solid fa-cart-plus"></i> Add To Basket
-                    </button>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="love">
-                <div class="product-gallery">
-                    <div class="gallery-slides" id="slides-p5">
-                        <img src="images/attraction-1.jpg" alt="Attraction Oil View 1">
-                        <img src="images/attraction-2.jpg" alt="Attraction Oil View 2">
-                    </div>
-                    <div class="gallery-nav">
-                        <div class="gallery-dot active" onclick="switchGalleryImage('p5', 0, this)"></div>
-                        <div class="gallery-dot" onclick="switchGalleryImage('p5', 1, this)"></div>
-                    </div>
-                </div>
-                <div class="product-content">
-                    <h3>Premium Attraction Oil</h3>
-                    <p>An aromatic botanical formulation to boost aura attraction metrics, love, personal magnetic charm, and romance.</p>
-                    <div class="price-container">
-                        <span class="old-price">₦15,000</span>
-                        <span class="new-price">₦10,000</span>
-                    </div>
-                    <button class="buy-btn" onclick="addItemToCart('Premium Attraction Oil', 10000)">
-                        <i class="fa-solid fa-cart-plus"></i> Add To Basket
-                    </button>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="love">
-                <div class="product-gallery">
-                    <div class="gallery-slides" id="slides-p6">
-                        <img src="images/mirror-1.jpg" alt="Stay With Me Mirror View 1">
-                        <img src="images/mirror-2.jpg" alt="Stay With Me Mirror View 2">
-                    </div>
-                    <div class="gallery-nav">
-                        <div class="gallery-dot active" onclick="switchGalleryImage('p6', 0, this)"></div>
-                        <div class="gallery-dot" onclick="switchGalleryImage('p6', 1, this)"></div>
-                    </div>
-                </div>
-                <div class="product-content">
-                    <h3>Stay With Me Mirror</h3>
-                    <p>A specialized luxury Kayamata standard tool constructed for deep relationship stabilization, bonding, and loyalty parameters.</p>
-                    <div class="price-container">
-                        <span class="old-price">₦20,000</span>
-                        <span class="new-price">₦15,000</span>
-                    </div>
-                    <button class="buy-btn" onclick="addItemToCart('Stay With Me Mirror', 15000)">
-                        <i class="fa-solid fa-cart-plus"></i> Add To Basket
-                    </button>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -1757,18 +1191,13 @@
             <h2>Spiritual <span>Consultation Tiers</span></h2>
         </div>
         <div class="consultation-container">
-            <p class="consultation-p">Gain clear diagnostic analysis into your ancestral frameworks, marital friction points, career limitations, or personal protection vulnerabilities. Select your choice below to open your session directly.</p>
+            <p class="consultation-p">Gain clear diagnostic analysis into your ancestral frameworks, marital friction points, career limitations, or personal protection vulnerabilities.</p>
             
             <div class="tier-grid">
                 <div class="tier-card">
                     <h4>Standard Consultation</h4>
                     <span class="tier-time">3 - 5 Days Response</span>
                     <div class="tier-price">₦7,000</div>
-                    <ul class="tier-features">
-                        <li><i class="fa-solid fa-check"></i> Detailed Spiritual Reading</li>
-                        <li><i class="fa-solid fa-check"></i> Core Root Cause Identification</li>
-                        <li><i class="fa-solid fa-check"></i> Standard Product Recommendations</li>
-                    </ul>
                     <button class="tier-btn" onclick="bookConsultation('normal')">Select Standard</button>
                 </div>
 
@@ -1777,110 +1206,7 @@
                     <h4>VIP Consultation</h4>
                     <span class="tier-time">Within 24 Hours</span>
                     <div class="tier-price">₦12,000</div>
-                    <ul class="tier-features">
-                        <li><i class="fa-solid fa-check"></i> Express Reading Execution</li>
-                        <li><i class="fa-solid fa-check"></i> Priority Dynamic Support Line</li>
-                        <li><i class="fa-solid fa-check"></i> Quick &amp; Powerful Action Insights</li>
-                        <li><i class="fa-solid fa-check"></i> Detailed Remedial Action Plan</li>
-                    </ul>
-                    <button class="tier-btn" onclick="bookConsultation('vip')">Select VIP Consultation</button>
-                </div>
-
-                <div class="tier-card">
-                    <h4>Face To Face</h4>
-                    <span class="tier-time">By Appointment</span>
-                    <div class="tier-price">₦15,000</div>
-                    <ul class="tier-features">
-                        <li><i class="fa-solid fa-check"></i> Physical, Private Consultation</li>
-                        <li><i class="fa-solid fa-check"></i> Direct Energetic Testing</li>
-                        <li><i class="fa-solid fa-check"></i> Personalized Custom Solutions</li>
-                        <li><i class="fa-solid fa-check"></i> 100% Confidential Environment</li>
-                    </ul>
-                    <button class="tier-btn" onclick="bookConsultation('face-to-face')">Select Physical</button>
-                </div>
-            </div>
-            
-            <p style="font-size:0.85rem; color:var(--gold);">*All sessions are kept strictly private, secure, and fully confidential.</p>
-        </div>
-    </section>
-
-    <section class="why-us section-padding">
-        <div class="heading-container">
-            <h2>Why Seek Our <span>Guidance?</span></h2>
-        </div>
-        <div class="why-grid">
-            <div class="why-card">
-                <i class="fa-solid fa-leaf"></i>
-                <h4>100% Organic</h4>
-                <p>Pure, naturally derived herbal compounds only.</p>
-            </div>
-            <div class="why-card">
-                <i class="fa-solid fa-user-shield"></i>
-                <h4>Trusted Counsel</h4>
-                <p>Years of verified spiritual realignments.</p>
-            </div>
-            <div class="why-card">
-                <i class="fa-solid fa-truck-fast"></i>
-                <h4>Swift Shipping</h4>
-                <p>Discreet and highly secured delivery models.</p>
-            </div>
-            <div class="why-card">
-                <i class="fa-solid fa-mortar-pestle"></i>
-                <h4>Handmade Quality</h4>
-                <p>Each batch is individually mixed under safe spiritual rules.</p>
-            </div>
-            <div class="why-card">
-                <i class="fa-solid fa-lock"></i>
-                <h4>Total Privacy</h4>
-                <p>Your records and sensitive issues remain fully hidden.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials section-padding">
-        <div class="heading-container">
-            <h2>True <span>Transformation Stories</span></h2>
-        </div>
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <div class="stars">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p>"The Curse Breaker soap completely cleared the heavy stagnant weight around my career. Two weeks after completing the instructions, I landed a corporate contract I had been chasing for over a year."</p>
-                <div class="client-info">
-                    <div class="client-avatar">AO</div>
-                    <div class="client-details">
-                        <h5>Adeshina O.</h5>
-                        <span>Lagos, Nigeria</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="stars">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p>"I paid for the VIP consultation because things were collapsing rapidly in my household. The root diagnostic reading was dangerously accurate. The family liberation services restored peace to my home."</p>
-                <div class="client-info">
-                    <div class="client-avatar">CE</div>
-                    <div class="client-details">
-                        <h5>Chidi E.</h5>
-                        <span>Enugu, Nigeria</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="stars">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p>"The Attraction Oil and Kayamata packages work wonderfully with consistency. My long-term partner has completely transformed, displaying deep affection, accountability, and real focus."</p>
-                <div class="client-info">
-                    <div class="client-avatar">TI</div>
-                    <div class="client-details">
-                        <h5>Titi I.</h5>
-                        <span>Abuja, Nigeria</span>
-                    </div>
+                    <button class="tier-btn" onclick="bookConsultation('vip')">Select VIP</button>
                 </div>
             </div>
         </div>
@@ -1900,97 +1226,10 @@
                     <p>Spiritual paths depend deeply on structural alignment, dedicated faith, and consistency. While many clients report significant shifts within 7 to 14 days of proper product configuration, individual situations vary based on the depth of the blockage.</p>
                 </div>
             </div>
-
-            <div class="faq-item">
-                <div class="faq-header" onclick="toggleFaq(this)">
-                    <h4>Are these products safe or associated with negative repercussions?</h4>
-                    <i class="fa-solid fa-chevron-down faq-icon"></i>
-                </div>
-                <div class="faq-body">
-                    <p>Everything we offer is formulated using 100% natural herbs, therapeutic plants, and safe spiritual principles. Our solutions focus strictly on cleansing, healing, and personal aura enhancement—entirely free from malicious side effects or negative energetic kickbacks.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-header" onclick="toggleFaq(this)">
-                    <h4>How is the VIP consultation different from the Standard tier?</h4>
-                    <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
-                </div>
-                <div class="faq-body">
-                    <p>The Standard tier takes 3 to 5 days to process. The VIP consultation receives immediate priority allocation, bypassing the queue to deliver your in-depth reading, diagnostics, and customized action plan within a guaranteed 24-hour window.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="newsletter section-padding">
-        <div class="newsletter-box">
-            <h3>Join Our Inner Circle</h3>
-            <p>Subscribe to receive spiritual alerts, herbal maintenance tips, exclusive discounts, and prophetic guidance updates.</p>
-            <form class="subscribe-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to our spiritual circle updates!');">
-                <input type="email" placeholder="Enter your email address" required>
-                <button type="submit" class="subscribe-btn">Subscribe</button>
-            </form>
-        </div>
-    </section>
-
-    <section class="contact section-padding" id="contact">
-        <div class="contact-container">
-            <div class="contact-info">
-                <h3>Connect With the Empire</h3>
-                <p>Have specific questions regarding customizable rituals, bulk product selection, or localized shipping parameters? Reach out directly across our active platform networks.</p>
-                <ul class="contact-details-list">
-                    <li><i class="fa-brands fa-whatsapp"></i> 08143644489, 08073733419</li>
-                    <li><i class="fa-solid fa-envelope"></i> contact@omoolopaase.com</li>
-                    <li><i class="fa-solid fa-location-dot"></i> Lagos, Nigeria</li>
-                </ul>
-                <div class="social-row">
-                    <a href="https://facebook.com/Omoolopaase" class="social-icon" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://instagram.com/Omoolopaase" class="social-icon" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://tiktok.com/@Omoolopaase1" class="social-icon" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-                </div>
-            </div>
-            <div class="contact-form">
-                <form onsubmit="event.preventDefault();">
-                    <div class="form-group">
-                        <input type="text" placeholder="Your Legal Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="Your Email Address" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea rows="5" placeholder="Describe your current situation details carefully..." required></textarea>
-                    </div>
-                    <button type="submit" class="form-btn" onclick="alert('Message logged successfully. Our administrative team will reach out via email shortly.');">Send Secure Message</button>
-                </form>
-            </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <h4>OMOOLOPAASE EMPIRE</h4>
-                <p>Providing pristine spiritual clarity, organic remedies, protective structural shielding, and energetic aura alignment across global standards.</p>
-            </div>
-            <div class="footer-links">
-                <h5>Quick Navigation</h5>
-                <ul>
-                    <li><a href="#">Home Core</a></li>
-                    <li><a href="#about">About Legacy</a></li>
-                    <li><a href="#products">Spiritual Shop</a></li>
-                    <li><a href="#consultation">Bookings</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h5>Legal &amp; Safety</h5>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Protocol</a></li>
-                    <li><a href="#">Shipping Guides</a></li>
-                </ul>
-            </div>
-        </div>
         <div class="footer-bottom">
             <p>&copy; 2026 Omoolopaase Empire Limited. All Rights Reserved.</p>
             <p>Designed with <i class="fa-solid fa-heart" style="color: #D4AF37;"></i> by <a href="https://www.visioreach.co" class="credit-link" target="_blank">VisioReach Concepts</a></p>
@@ -2004,17 +1243,6 @@
     <script>
         let basketCart = [];
 
-        // Sticky transparent navbar scrolling trigger logic
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 30) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // Toggle mobile navigation links list
         function toggleMobileMenu() {
             const linksMenu = document.getElementById('navLinksMenu');
             const icon = document.getElementById('menuToggleIcon');
@@ -2034,7 +1262,6 @@
             icon.classList.replace('fa-xmark', 'fa-bars');
         }
 
-        // Image gallery dot switcher
         function switchGalleryImage(productId, slideIndex, dotElement) {
             const slidesContainer = document.getElementById(`slides-${productId}`);
             if (slidesContainer) {
@@ -2045,7 +1272,6 @@
             }
         }
 
-        // Accordion engine controller
         function toggleFaq(element) {
             const item = element.parentElement;
             const body = item.querySelector('.faq-body');
@@ -2063,7 +1289,6 @@
             }
         }
 
-        // Filter products algorithm
         function filterProducts(category) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
@@ -2077,7 +1302,6 @@
             });
         }
 
-        // Drawer utility toggles
         function toggleCartDrawer(openStatus) {
             const drawer = document.getElementById('cartDrawer');
             const overlay = document.getElementById('cartOverlay');
@@ -2180,10 +1404,8 @@
             
             if (tierType === 'vip') {
                 consultationText = "Hey, I'm ready for the Consultation. I would love to sign up for the VIP one.";
-            } else if (tierType === 'normal') {
-                consultationText = "Hey, I'm ready for the Consultation. I want to select the normal one.";
             } else {
-                consultationText = "Hey, I'm ready for the Consultation. I want to book a physical session.";
+                consultationText = "Hey, I'm ready for the Consultation. I want to select the normal one.";
             }
             window.open(`https://wa.me/${baseNumber}?text=${encodeURIComponent(consultationText)}`, '_blank');
         }

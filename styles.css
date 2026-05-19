@@ -1155,5 +1155,5 @@ footer {
     .hero { padding-top: 140px; }
     .tier-card.featured { transform: none; }
     .tier-card.featured:hover { transform: translateY(-5px); }
-    .sales-toast { bottom: 100px; max-width: 280px; } /* Above whatsapp float on mobile */
+    .sales-toast { bottom: 100px; max-width: 280px; }
 }

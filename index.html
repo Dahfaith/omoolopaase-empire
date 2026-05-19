@@ -72,7 +72,7 @@
             margin-top: 8px;
         }
 
-        /* --- LUXURY FIXED NAVBAR --- */
+        /* --- STICKY LUXURY FIXED NAVBAR --- */
         nav {
             position: fixed;
             top: 0;
@@ -242,7 +242,7 @@
         .hero-btns .btn-link.btn-secondary { border: 1px solid rgba(255,255,255,0.2); color: var(--white); }
         .hero-btns .btn-link:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(214, 175, 55, 0.2); }
 
-        /* --- HORIZONTAL NAVIGATION SCROLL SWIPER --- */
+        /* --- HORIZONTAL SCROLL NAVIGATION TABS --- */
         .product-tabs-wrapper {
             width: 100%;
             overflow-x: auto;
@@ -385,7 +385,7 @@
             flex-grow: 1;
         }
 
-        /* --- FLAT BLACK LIST PRICE CONTAINER OVERHAUL --- */
+        /* --- BALANCED CLEAN BLACK-LIST PRICING --- */
         .price-container {
             display: flex;
             align-items: center;
@@ -419,7 +419,7 @@
 
         .buy-btn:hover { background: var(--gold); color: var(--black); }
 
-        /* --- CONSULTATION TIER PLANS --- */
+        /* --- CONSULTATION PLANS --- */
         .consultation { background: #141414; text-align: center; }
         .consultation-container { max-width: 900px; margin: 0 auto; }
         .consultation-p { font-size: 0.9rem; color: #b5b5b5; margin-bottom: 30px; }
@@ -448,7 +448,7 @@
         }
         .tier-card.featured .tier-btn { background: var(--gold); border-color: var(--gold); color: var(--black); font-weight: 600; }
 
-        /* --- FAQ ACCORDION --- */
+        /* --- FAQ BOARD --- */
         .faq { background: #161616; }
         .faq-container { max-width: 750px; margin: 0 auto; }
         .faq-item { background: var(--black); border: 1px solid rgba(255,255,255,0.03); border-radius: 6px; margin-bottom: 12px; overflow: hidden; }
@@ -459,7 +459,7 @@
         .faq-body p { padding: 0 20px 16px 20px; font-size: 0.8rem; color: #a5a5a5; text-align: left; }
         .faq-item.active .faq-icon { transform: rotate(180deg); }
 
-        /* --- WEB SUBMISSION FORMS --- */
+        /* --- LUXURY WEB FORMS --- */
         .forms-section { background: var(--black); text-align: center; }
         .premium-form-box {
             max-width: 580px; margin: 0 auto 40px auto;
@@ -484,7 +484,7 @@
             font-weight: 600; font-size: 0.8rem; cursor: pointer; letter-spacing: 1px;
         }
 
-        /* --- PRESTIGE LINK FOOTER --- */
+        /* --- MULTI-COLUMN PREMIUM LINK FOOTER --- */
         footer { border-top: 1px solid rgba(255,255,255,0.04); padding: 50px 8% 20px 8%; background: #0c0c0c; }
         .footer-main-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; margin-bottom: 40px; text-align: left; }
         .footer-brand h4 { font-family: var(--font-heading); color: var(--white); font-size: 1.15rem; margin-bottom: 12px; }
@@ -494,11 +494,16 @@
         .footer-col a { color: #8a8a8a; text-decoration: none; font-size: 0.8rem; transition: var(--transition); }
         .footer-col a:hover { color: var(--white); padding-left: 4px; }
         
+        /* Social Media Icons Matrix Styling Row */
+        .footer-social-row { display: flex; gap: 12px; margin-top: 15px; }
+        .footer-social-icon { width: 35px; height: 35px; border-radius: 50%; background: #1c1c1c; border: 1px solid rgba(255,255,255,0.05); color: var(--cream); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: var(--transition); font-size: 0.9rem; }
+        .footer-social-icon:hover { background: var(--purple); color: var(--white); border-color: var(--gold); transform: translateY(-2px); }
+
         .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 0.75rem; color: #606060; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 20px; }
         .credit-link { color: var(--gold); text-decoration: none; font-weight: 500; }
         .credit-link:hover { text-decoration: underline; }
 
-        /* --- BASKET DRAWER STRUCTURAL SCHEME --- */
+        /* --- CART DRAW DRAWER SYSTEM --- */
         .cart-drawer {
             position: fixed; top: 0; right: -100%; width: 100%; max-width: 380px; height: 100vh;
             background: #141414; box-shadow: -5px 0 25px rgba(0,0,0,0.8); z-index: 200000;
@@ -511,7 +516,7 @@
         .cart-footer { padding: 20px; background: #0d0d0d; border-top: 1px solid rgba(255,255,255,0.05); }
         .checkout-btn { width: 100%; background: var(--gold); color: var(--black); border: none; padding: 14px; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: 4px; }
 
-        /* --- LIGHTBOX MODAL PREVIEW SCREEN --- */
+        /* --- LIGHTBOX MODAL --- */
         .lightbox-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(11, 11, 11, 0.96); backdrop-filter: blur(10px);
@@ -648,7 +653,7 @@
                 <div class="product-gallery" onclick="openLightboxModal('images/atude.jpg')">
                     <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
                     <div class="image-frame">
-                        <div class="mystical-fallback"><i class="fa-solid fa-key"></i><span>Atude Soap</span></div>
+                        <div class="mystical-fallback"><i class="fa-solid fa-key"></i><span>Atude</span></div>
                         <img src="images/atude.jpg" alt="Atude Soap" onload="imageLoaded(this)">
                     </div>
                 </div>

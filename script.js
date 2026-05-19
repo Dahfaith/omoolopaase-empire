@@ -32,7 +32,7 @@ function imageLoaded(img) {
 }
 
 function imageError(img) {
-    // If the user hasn't uploaded the image yet, keep the fallback visible and hide the broken img icon.
+    // Keep the fallback visible and hide the broken browser img icon frame.
     img.style.display = 'none';
 }
 
@@ -40,12 +40,10 @@ function openLightboxModal(imageSrc) {
     const lightbox = document.getElementById('imageLightbox');
     const targetImg = document.getElementById('lightboxTargetImage');
     
-    // We check if there's an image element with this source that loaded successfully.
-    // If we're using the placeholder, we won't open it or we'll show an alert.
     const matchingImages = document.querySelectorAll(`img[src="${imageSrc}"]`);
     let isLoaded = false;
     if(matchingImages.length > 0) {
-        if(matchingImages[0].classList.contains('loaded') && matchingImages[0].style.display !== 'none') {
+        if(matchingImages[0].style.display !== 'none') {
             isLoaded = true;
         }
     }
@@ -185,7 +183,6 @@ const exchangeRates = { NGN: 1, USD: 1/1500, GBP: 1/1900, EUR: 1/1600 };
 const currencySymbols = { NGN: '₦', USD: '$', GBP: '£', EUR: '€' };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Store original NGN base prices on load
     document.querySelectorAll('.new-price, .tier-price').forEach(el => {
         let rawNum = el.innerText.replace(/[^0-9]/g, '');
         el.setAttribute('data-base-price', rawNum);
@@ -207,9 +204,9 @@ function changeCurrency(currency) {
     updateCartUI();
 }
 
-/* --- SALES TOAST NOTIFICATIONS --- */
-const salesLocations = ["Lagos, Nigeria", "London, UK", "Abuja, Nigeria", "Atlanta, USA", "Houston, USA", "Abeokuta, Ogun State", "Ogbomosho, Nigeria" "Port Harcourt", "Ibadan, Nigeria", "Toronto, Canada", "Kano, Nigeria", "Dubai, UAE", "Lekki, Lagos"];
-const salesProducts = ["Cash Out Soap", "Stay With Me Mirror", "Curse Breaker Soap" "Breakthrough Soap", "VIP Consultation", "Atude Soap", "Eyonu Agba", "Fuck & Pay", "Glory Retrieval", "Open Door Kit"];
+/* --- FIXED ARRAYS: ALL COMMAS ARE RESTORED CORECTLY --- */
+const salesLocations = ["Lagos, Nigeria", "London, UK", "Abuja, Nigeria", "Atlanta, USA", "Houston, USA", "Abeokuta, Ogun State", "Ogbomosho, Nigeria", "Port Harcourt", "Ibadan, Nigeria", "Toronto, Canada", "Kano, Nigeria", "Dubai, UAE", "Lekki, Lagos"];
+const salesProducts = ["Cash Out Soap", "Stay With Me Mirror", "Curse Breaker Soap", "Breakthrough Soap", "VIP Consultation", "Atude Soap", "Eyonu Agba", "Fuck & Pay", "Glory Retrieval", "Open Door Kit"];
 
 function showSalesToast() {
     const toast = document.getElementById('salesToast');
@@ -225,12 +222,10 @@ function showSalesToast() {
     
     setTimeout(() => {
         toast.classList.remove('show');
-    }, 5000); // Hide after 5 seconds
+    }, 5000); 
 }
 
-// Start showing toasts after 8 seconds, then randomly every 15 to 30 seconds
 setTimeout(() => {
     showSalesToast();
     setInterval(showSalesToast, Math.floor(Math.random() * 15000) + 15000);
 }, 8000);
-

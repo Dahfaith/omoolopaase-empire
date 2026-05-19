@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Omoolopaase Empire | Premium Spiritual Solutions &amp; Consultation</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2 family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -26,7 +28,7 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- GLOBAL BASE OVERHAUL --- */
+        /* --- GLOBAL RESET & SCROLL OPTIMIZATION --- */
         * {
             margin: 0;
             padding: 0;
@@ -40,6 +42,7 @@
             font-family: var(--font-body);
             overflow-x: hidden;
             width: 100%;
+            scroll-behavior: smooth;
         }
 
         .section-padding {
@@ -69,7 +72,7 @@
             margin-top: 8px;
         }
 
-        /* --- STICKY TRANSMISSION NAVBAR --- */
+        /* --- STICKY LUXURY FIXED NAVBAR --- */
         nav {
             position: fixed;
             top: 0;
@@ -108,6 +111,7 @@
             font-size: 0.8rem;
             letter-spacing: 1px;
             text-transform: uppercase;
+            font-family: var(--font-body);
             transition: var(--transition);
         }
 
@@ -178,29 +182,29 @@
 
         /* --- HERO BANNER --- */
         .hero {
-            min-height: 85vh;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 110px 6% 40px 6%;
+            padding: 120px 6% 40px 6%;
             background: radial-gradient(circle at center, var(--purple-dark) 0%, var(--black) 100%);
         }
 
         .hero h1 {
             font-family: var(--font-heading);
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             color: var(--white);
-            line-height: 1.25;
+            line-height: 1.3;
             margin-bottom: 16px;
-            max-width: 800px;
+            max-width: 850px;
         }
 
         .hero h1 span {
             color: var(--gold);
             display: block;
-            font-size: 1.15rem;
+            font-size: 1.25rem;
             letter-spacing: 3px;
             margin-top: 10px;
         }
@@ -209,7 +213,7 @@
             font-size: 0.95rem;
             color: #b5b5b5;
             max-width: 600px;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         .hero-btns {
@@ -220,7 +224,7 @@
             justify-content: center;
         }
 
-        /* --- PRODUCT CATALOG SWIPER NAVIGATION --- */
+        /* --- HORIZONTAL NAVIGATION SCROLL SWIPER --- */
         .product-tabs-wrapper {
             width: 100%;
             overflow-x: auto;
@@ -236,7 +240,26 @@
             width: max-content;
         }
 
-        /* --- PRODUCT GRIDS & PHOTO FRAME SYSTEM --- */
+        .tab-btn {
+            background: #1c1c1c;
+            border: 1px solid rgba(255,255,255,0.05);
+            color: #b5b5b5;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: var(--font-body);
+            white-space: nowrap;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+        }
+
+        /* --- PRODUCTS GRID & SINGLE FRAME LIGHTBOX CONTROLS --- */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
@@ -278,7 +301,7 @@
             transition: opacity 0.25s ease-in, transform 0.3s ease;
         }
 
-        .product-gallery:hover .image-frame img.loaded { transform: scale(1.05); }
+        .product-gallery:hover .image-frame img.loaded { transform: scale(1.04); }
         .image-frame img.loaded { opacity: 1; }
 
         .mystical-fallback {
@@ -332,6 +355,7 @@
             font-size: 1.05rem;
             color: var(--white);
             margin-bottom: 6px;
+            letter-spacing: 0.5px;
         }
 
         .product-card p {
@@ -341,7 +365,7 @@
             flex-grow: 1;
         }
 
-        /* --- BALANCED CLEAN PRICING CONTAINER --- */
+        /* --- FLAT PREMIUM BLACK LIST PRICING --- */
         .price-container {
             display: flex;
             align-items: center;
@@ -375,7 +399,7 @@
 
         .buy-btn:hover { background: var(--gold); color: var(--black); }
 
-        /* --- CONSULTATION REGISTRY --- */
+        /* --- CONSULTATION TIER PLANS --- */
         .consultation { background: #141414; text-align: center; }
         .consultation-container { max-width: 900px; margin: 0 auto; }
         .consultation-p { font-size: 0.9rem; color: #b5b5b5; margin-bottom: 30px; }
@@ -397,7 +421,7 @@
             font-size: 0.6rem; font-weight: bold;
             padding: 2px 24px; transform: rotate(45deg);
         }
-        .tier-price { font-size: 1.6rem; font-weight: 700; color: var(--white); margin: 12px 0; }
+        .tier-price { font-size: 1.6rem; font-weight: 700; color: var(--white); margin: 12px 0; font-family: var(--font-body); }
         .tier-btn {
             background: transparent; border: 1px solid var(--white); color: var(--white);
             width: 100%; padding: 10px; border-radius: 4px; font-family: var(--font-heading); font-size: 0.75rem; cursor: pointer;
@@ -415,7 +439,7 @@
         .faq-body p { padding: 0 20px 16px 20px; font-size: 0.8rem; color: #a5a5a5; text-align: left; }
         .faq-item.active .faq-icon { transform: rotate(180deg); }
 
-        /* --- LUXURY WEB FORMS --- */
+        /* --- LUXURY EMBED WEB FORMS --- */
         .forms-section { background: var(--black); text-align: center; }
         .premium-form-box {
             max-width: 580px; margin: 0 auto 40px auto;
@@ -440,7 +464,7 @@
             font-weight: 600; font-size: 0.8rem; cursor: pointer; letter-spacing: 1px;
         }
 
-        /* --- FOOTER COMPONENT WITH MANDATORY VISIOREACH CREDITS --- */
+        /* --- FOOTER MAIN GRID --- */
         footer { border-top: 1px solid rgba(255,255,255,0.04); padding: 50px 8% 20px 8%; background: #0c0c0c; }
         .footer-main-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; margin-bottom: 40px; text-align: left; }
         .footer-brand h4 { font-family: var(--font-heading); color: var(--white); font-size: 1.15rem; margin-bottom: 12px; }
@@ -454,7 +478,7 @@
         .credit-link { color: var(--gold); text-decoration: none; font-weight: 500; }
         .credit-link:hover { text-decoration: underline; }
 
-        /* --- BASKET DRAWER STRUCTURAL SCHEME --- */
+        /* --- CART DRAW DRAWER SYSTEM --- */
         .cart-drawer {
             position: fixed; top: 0; right: -100%; width: 100%; max-width: 380px; height: 100vh;
             background: #141414; box-shadow: -5px 0 25px rgba(0,0,0,0.8); z-index: 200000;
@@ -467,7 +491,7 @@
         .cart-footer { padding: 20px; background: #0d0d0d; border-top: 1px solid rgba(255,255,255,0.05); }
         .checkout-btn { width: 100%; background: var(--gold); color: var(--black); border: none; padding: 14px; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: 4px; }
 
-        /* --- LIGHTBOX MODAL PREVIEW SCREEN --- */
+        /* --- LIGHTBOX MODAL --- */
         .lightbox-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(11, 11, 11, 0.96); backdrop-filter: blur(10px);
@@ -549,7 +573,7 @@
                 <button class="tab-btn" onclick="filterProducts('way-opener')">Way Openers</button>
                 <button class="tab-btn" onclick="filterProducts('money')">Money Products</button>
                 <button class="tab-btn" onclick="filterProducts('protection')">Protection Products</button>
-                <button class="tab-btn" onclick="filterProducts('appeasement')">Appeasement Services</button>
+                <button class="tab-btn" onclick="filterProducts('appeasement')">Appeasements &amp; Liberation</button>
             </div>
         </div>
 
@@ -566,8 +590,8 @@
                 <div class="product-content">
                     <h3>Curse Breaker Soap</h3>
                     <p>Clears deep foundational blockages, generational hexes, and stagnant obstacles.</p>
-                    <div class="price-container"><span class="new-price">₦10,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Curse Breaker Soap', 10000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Curse Breaker Soap', 20000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -582,8 +606,8 @@
                 <div class="product-content">
                     <h3>Ebe Agba Soap</h3>
                     <p>Defensive structural shielding solution configured to unlock ancient blockades.</p>
-                    <div class="price-container"><span class="new-price">₦20,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Ebe Agba Soap', 20000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦25,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Ebe Agba Soap', 25000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -598,8 +622,8 @@
                 <div class="product-content">
                     <h3>Eyonu Agba Soap</h3>
                     <p>Ancestral favor preparation crafted to clear away friction loops and unexplainable bottlenecks.</p>
-                    <div class="price-container"><span class="new-price">₦15,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Eyonu Agba Soap', 15000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Eyonu Agba Soap', 20000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -614,8 +638,8 @@
                 <div class="product-content">
                     <h3>Atude Soap</h3>
                     <p>Explicitly engineered to safely untie complex life restrictions and fast-track breakthroughs.</p>
-                    <div class="price-container"><span class="new-price">₦15,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Atude Soap', 15000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Atude Soap', 20000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -630,24 +654,24 @@
                 <div class="product-content">
                     <h3>Abortion Cleansing</h3>
                     <p>Targeted aura cleansing to dissolve energetic trailing residues safely.</p>
-                    <div class="price-container"><span class="new-price">₦25,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Abortion Cleansing', 25000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦35,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Abortion Cleansing', 35000)">Add To Basket</button>
                 </div>
             </div>
 
             <div class="product-card" data-category="cleansing">
-                <div class="product-gallery" onclick="openLightboxModal('images/back-to-sender.jpg')">
+                <div class="product-gallery" onclick="openLightboxModal('images/back-to-sender-soap.jpg')">
                     <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
                     <div class="image-frame">
                         <div class="mystical-fallback"><i class="fa-solid fa-arrow-rotate-left"></i><span>Back To Sender</span></div>
-                        <img src="images/back-to-sender.jpg" alt="Back To Sender Soap" onload="imageLoaded(this)">
+                        <img src="images/back-to-sender-soap.jpg" alt="Back To Sender Soap" onload="imageLoaded(this)">
                     </div>
                 </div>
                 <div class="product-content">
                     <h3>Back To Sender Soap</h3>
                     <p>Reflects toxic targeted spiritual trajectories directly back to their source.</p>
-                    <div class="price-container"><span class="new-price">₦15,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Back To Sender Soap', 15000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Back To Sender Soap', 20000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -662,8 +686,8 @@
                 <div class="product-content">
                     <h3>Protection Soap</h3>
                     <p>Establishes a solid, safe boundary parameter around your home and actions.</p>
-                    <div class="price-container"><span class="new-price">₦15,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Protection Soap', 15000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Protection Soap', 20000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -678,8 +702,8 @@
                 <div class="product-content">
                     <h3>Memory Soap</h3>
                     <p>Calibrates mental clarity, baseline tracking focus, and cognitive retentive capacity.</p>
-                    <div class="price-container"><span class="new-price">₦15,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Memory Soap', 15000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Memory Soap', 20000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -694,8 +718,8 @@
                 <div class="product-content">
                     <h3>Cleansing Soap</h3>
                     <p>General utility flush to purge accumulated environmental dense micro-elements.</p>
-                    <div class="price-container"><span class="new-price">₦15,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Cleansing Soap', 15000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Cleansing Soap', 20000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -710,8 +734,8 @@
                 <div class="product-content">
                     <h3>Sea Salt</h3>
                     <p>Fortified crystalline base utilized to balance localized spatial field frameworks.</p>
-                    <div class="price-container"><span class="new-price">₦4,500</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Sea Salt', 4500)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦5,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Sea Salt', 5000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -726,8 +750,8 @@
                 <div class="product-content">
                     <h3>Connection Perfume/Soap</h3>
                     <p>Dual-action energetic bundle built to connect networks and favorable partnerships.</p>
-                    <div class="price-container"><span class="new-price">₦30,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Connection Perfume/Soap', 30000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦35,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Connection Perfume/Soap', 35000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -742,8 +766,8 @@
                 <div class="product-content">
                     <h3>Commanding Soap</h3>
                     <p>High-level authority catalyst designed to heavily sway negotiations and spaces in your favor.</p>
-                    <div class="price-container"><span class="new-price">₦40,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Commanding Soap', 40000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦50,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Commanding Soap', 50000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -757,9 +781,9 @@
                 </div>
                 <div class="product-content">
                     <h3>Glory Retrieval (Gbogo Mi Funmi)</h3>
-                    <p>Reclaim hijacked configurations, stolen stars, and misplaced personal spiritual properties.</p>
-                    <div class="price-container"><span class="new-price">₦30,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Glory Retrieval (Gbogo Mi Funmi)', 30000)">Add To Basket</button>
+                    <p>Reclaim missing personal spiritual configurations, stolen stars, and misplaced personal spiritual properties.</p>
+                    <div class="price-container"><span class="new-price">₦40,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Glory Retrieval (Gbogo Mi Funmi)', 40000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -774,8 +798,8 @@
                 <div class="product-content">
                     <h3>Open Door Kit</h3>
                     <p>A multi-tiered framework designed to shatter highly restrictive business and career dead-ends.</p>
-                    <div class="price-container"><span class="new-price">₦40,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Open Door Kit', 40000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦50,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Open Door Kit', 50000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -790,8 +814,8 @@
                 <div class="product-content">
                     <h3>Attraction Perfume</h3>
                     <p>Highly concentrated pheromonal aromatic base formulated to project an attractive field.</p>
-                    <div class="price-container"><span class="new-price">₦15,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Attraction Perfume', 15000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Attraction Perfume', 20000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -806,8 +830,8 @@
                 <div class="product-content">
                     <h3>Protection/Attraction Beads</h3>
                     <p>Fortified crystalline alignment beads built for body defense shielding matrices.</p>
-                    <div class="price-container"><span class="new-price">₦15,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Protection/Attraction Beads', 15000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Protection/Attraction Beads', 20000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -815,15 +839,15 @@
                 <div class="product-gallery" onclick="openLightboxModal('images/mercy-soap.jpg')">
                     <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
                     <div class="image-frame">
-                        <div class="mystical-fallback"><i class="fa-solid fa-hand-holding-heart"></i><span>Mercy Soap</span></div>
+                        <div class="mystical-fallback"><i class="fa-solid fa-handholding-heart"></i><span>Mercy Soap</span></div>
                         <img src="images/mercy-soap.jpg" alt="Mercy Soap" onload="imageLoaded(this)">
                     </div>
                 </div>
                 <div class="product-content">
                     <h3>Mercy Soap</h3>
                     <p>Washes away negative social biases, aura dampeners, and unexplainable job rejections.</p>
-                    <div class="price-container"><span class="new-price">₦20,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Mercy Soap', 20000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦25,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Mercy Soap', 25000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -838,8 +862,8 @@
                 <div class="product-content">
                     <h3>Breakthrough Soap (Ashina)</h3>
                     <p>Designed to expand business visibility loops and accelerate ongoing client favor deals.</p>
-                    <div class="price-container"><span class="new-price">₦25,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Breakthrough Soap (Ashina)', 25000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦30,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Breakthrough Soap (Ashina)', 30000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -854,8 +878,8 @@
                 <div class="product-content">
                     <h3>Aje Onigbin Soap</h3>
                     <p>Market favor alignment made specifically to boost foot-traffic and retail storefront transactions.</p>
-                    <div class="price-container"><span class="new-price">₦25,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Aje Onigbin Soap', 25000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦30,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Aje Onigbin Soap', 30000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -870,8 +894,8 @@
                 <div class="product-content">
                     <h3>Cash Out Soap</h3>
                     <p>Our ultra-premium signature compound built for high-profile business windfalls and contracts.</p>
-                    <div class="price-container"><span class="new-price">₦200,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Cash Out Soap', 200000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦250,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Cash Out Soap', 250000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -886,8 +910,8 @@
                 <div class="product-content">
                     <h3>Favour Soap</h3>
                     <p>Restores personal light frequencies to draw unexpected corporate support allocations.</p>
-                    <div class="price-container"><span class="new-price">₦20,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Favour Soap', 20000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦25,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Favour Soap', 25000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -918,8 +942,8 @@
                 <div class="product-content">
                     <h3>Big Girl Soap</h3>
                     <p>Highly specialized premium empowerment compound built to pull luxury high-net-worth client profiles.</p>
-                    <div class="price-container"><span class="new-price">₦30,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Big Girl Soap', 30000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦40,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Big Girl Soap', 40000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -934,8 +958,8 @@
                 <div class="product-content">
                     <h3>Contract Soap</h3>
                     <p>A corporate-grade aura builder configured exclusively to anchor high-value legal and tender bid signatures.</p>
-                    <div class="price-container"><span class="new-price">₦40,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Contract Soap', 40000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦50,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Contract Soap', 50000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -950,8 +974,8 @@
                 <div class="product-content">
                     <h3>Destroyer Soap</h3>
                     <p>Emergency countermeasure configured to target and clear active malicious hex parameters.</p>
-                    <div class="price-container"><span class="new-price">₦15,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Destroyer Soap', 15000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Destroyer Soap', 20000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -966,8 +990,8 @@
                 <div class="product-content">
                     <h3>Monitoring Spirit Blocker</h3>
                     <p>Blinds distant energetic spying nodes tasked to track your developmental movements.</p>
-                    <div class="price-container"><span class="new-price">₦20,000</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Monitoring Spirit Blocker', 20000)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦25,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Monitoring Spirit Blocker', 25000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -982,8 +1006,8 @@
                 <div class="product-content">
                     <h3>Adodun Premium</h3>
                     <p>Traditional structural spice remedy built to heighten attraction metrics and focus parameters.</p>
-                    <div class="price-container"><span class="new-price">₦8,500</span></div>
-                    <button class="buy-btn" onclick="addItemToCart('Adodun Premium', 8500)">Add To Basket</button>
+                    <div class="price-container"><span class="new-price">₦10,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Adodun Premium', 10000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -1159,6 +1183,8 @@
     </a>
 
     <script>
+        let basketCart = [];
+
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 30) { nav.classList.add('scrolled'); } 
@@ -1196,7 +1222,7 @@
                 targetImg.src = imageSrc;
                 lightbox.style.display = 'flex';
             } else {
-                alert("This premium remedy asset image will display here inside your lightbox viewer as soon as you push your imagery folder matching this exact filename to your GitHub images directory.");
+                alert("This custom placeholder card image asset will open for close inspection as soon as you push your imagery folder matching this reference URL to your GitHub directory branch.");
             }
         }
 
@@ -1307,12 +1333,11 @@
             window.open(`https://wa.me/${baseNumber}?text=${encodeURIComponent(orderSummary)}`, '_blank');
         }
 
-        // REDIRECT ROUTER LOGIC FOR ALL CONSULTATIONS
         function bookConsultation(tierType) {
             const baseNumber = "2348143644489";
-            let msg = "Hey, I'm ready for the Consultation. I want to select the normal one.";
-            if (tierType === 'vip') { msg = "Hey, I'm ready for the Consultation. I would love to sign up for the VIP one."; }
-            else if (tierType === 'face-to-face') { msg = "Hey, I'm ready for the Consultation. I want to book a physical face-to-face session."; }
+            let msg = "Hello, I am ready for the Consultation. I want to select the normal one.";
+            if (tierType === 'vip') { msg = "Hello, I am ready for the Consultation. I would love to sign up for the VIP one."; }
+            else if (tierType === 'face-to-face') { msg = "Hello, I am ready for the Consultation. I want to book a physical face-to-face session."; }
             window.open(`https://wa.me/${baseNumber}?text=${encodeURIComponent(msg)}`, '_blank');
         }
     </script>

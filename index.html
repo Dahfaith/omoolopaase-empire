@@ -224,6 +224,36 @@
             justify-content: center;
         }
 
+        .hero-btns .btn-link {
+            flex: 1;
+            padding: 14px 20px;
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 4px;
+            text-align: center;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+
+        .hero-btns .btn-link.btn-primary {
+            background: var(--gold);
+            color: var(--black);
+            font-weight: 600;
+        }
+
+        .hero-btns .btn-link.btn-secondary {
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--white);
+        }
+
+        .hero-btns .btn-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(214, 175, 55, 0.2);
+        }
+
         /* --- HORIZONTAL NAVIGATION SCROLL SWIPER --- */
         .product-tabs-wrapper {
             width: 100%;
@@ -276,6 +306,8 @@
             flex-direction: column;
             justify-content: space-between;
         }
+
+        .product-card:hover { transform: translateY(-8px); border-color: var(--gold); }
 
         .product-gallery {
             position: relative;
@@ -354,7 +386,7 @@
             font-family: var(--font-heading);
             font-size: 1.05rem;
             color: var(--white);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             letter-spacing: 0.5px;
         }
 
@@ -365,7 +397,7 @@
             flex-grow: 1;
         }
 
-        /* --- FLAT PREMIUM BLACK LIST PRICING --- */
+        /* --- BALANCED CLEAN BLACK-LIST PRICING --- */
         .price-container {
             display: flex;
             align-items: center;
@@ -464,7 +496,7 @@
             font-weight: 600; font-size: 0.8rem; cursor: pointer; letter-spacing: 1px;
         }
 
-        /* --- FOOTER MAIN GRID --- */
+        /* --- PRESTIGE LINK FOOTER --- */
         footer { border-top: 1px solid rgba(255,255,255,0.04); padding: 50px 8% 20px 8%; background: #0c0c0c; }
         .footer-main-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; margin-bottom: 40px; text-align: left; }
         .footer-brand h4 { font-family: var(--font-heading); color: var(--white); font-size: 1.15rem; margin-bottom: 12px; }
@@ -478,7 +510,7 @@
         .credit-link { color: var(--gold); text-decoration: none; font-weight: 500; }
         .credit-link:hover { text-decoration: underline; }
 
-        /* --- CART DRAW DRAWER SYSTEM --- */
+        /* --- BASKET DRAWER STRUCTURAL SCHEME --- */
         .cart-drawer {
             position: fixed; top: 0; right: -100%; width: 100%; max-width: 380px; height: 100vh;
             background: #141414; box-shadow: -5px 0 25px rgba(0,0,0,0.8); z-index: 200000;
@@ -491,7 +523,7 @@
         .cart-footer { padding: 20px; background: #0d0d0d; border-top: 1px solid rgba(255,255,255,0.05); }
         .checkout-btn { width: 100%; background: var(--gold); color: var(--black); border: none; padding: 14px; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: 4px; }
 
-        /* --- LIGHTBOX MODAL --- */
+        /* --- LIGHTBOX MODAL PREVIEW SCREEN --- */
         .lightbox-modal {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: rgba(11, 11, 11, 0.96); backdrop-filter: blur(10px);
@@ -501,10 +533,6 @@
         .close-lightbox { position: absolute; top: 25px; right: 25px; color: var(--gold); font-size: 2rem; cursor: pointer; }
 
         .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 999; text-decoration: none; }
-
-        @media (max-width: 1024px) {
-            .footer-main-grid { grid-template-columns: 1fr; gap: 30px; }
-        }
     </style>
 </head>
 <body>
@@ -556,8 +584,8 @@
         <h1>Awaken Your Inner Energy Naturally <span>Spiritual Healing &amp; Natural Remedies</span></h1>
         <p>Premium spiritual consultations and botanical alternatives tailored to align your path to abundance and protection.</p>
         <div class="hero-btns">
-            <a href="#products" class="btn btn-primary">Shop Remedies</a>
-            <a href="#consultation" class="btn btn-secondary">Book Reading</a>
+            <a href="#products" class="btn-link btn-primary">Shop Remedies</a>
+            <a href="#consultation" class="btn-link btn-secondary">Book Reading</a>
         </div>
     </section>
 
@@ -572,8 +600,9 @@
                 <button class="tab-btn" onclick="filterProducts('cleansing')">Cleansing Remedies</button>
                 <button class="tab-btn" onclick="filterProducts('way-opener')">Way Openers</button>
                 <button class="tab-btn" onclick="filterProducts('money')">Money Products</button>
+                <button class="tab-btn" onclick="filterProducts('love')">Love Products</button>
                 <button class="tab-btn" onclick="filterProducts('protection')">Protection Products</button>
-                <button class="tab-btn" onclick="filterProducts('appeasement')">Appeasements &amp; Liberation</button>
+                <button class="tab-btn" onclick="filterProducts('appeasement')">Appeasement Services</button>
             </div>
         </div>
 
@@ -660,11 +689,11 @@
             </div>
 
             <div class="product-card" data-category="cleansing">
-                <div class="product-gallery" onclick="openLightboxModal('images/back-to-sender-soap.jpg')">
+                <div class="product-gallery" onclick="openLightboxModal('images/back-to-sender.jpg')">
                     <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
                     <div class="image-frame">
                         <div class="mystical-fallback"><i class="fa-solid fa-arrow-rotate-left"></i><span>Back To Sender</span></div>
-                        <img src="images/back-to-sender-soap.jpg" alt="Back To Sender Soap" onload="imageLoaded(this)">
+                        <img src="images/back-to-sender.jpg" alt="Back To Sender Soap" onload="imageLoaded(this)">
                     </div>
                 </div>
                 <div class="product-content">
@@ -839,7 +868,7 @@
                 <div class="product-gallery" onclick="openLightboxModal('images/mercy-soap.jpg')">
                     <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
                     <div class="image-frame">
-                        <div class="mystical-fallback"><i class="fa-solid fa-handholding-heart"></i><span>Mercy Soap</span></div>
+                        <div class="mystical-fallback"><i class="fa-solid fa-hand-holding-heart"></i><span>Mercy Soap</span></div>
                         <img src="images/mercy-soap.jpg" alt="Mercy Soap" onload="imageLoaded(this)">
                     </div>
                 </div>
@@ -960,6 +989,198 @@
                     <p>A corporate-grade aura builder configured exclusively to anchor high-value legal and tender bid signatures.</p>
                     <div class="price-container"><span class="new-price">₦50,000</span></div>
                     <button class="buy-btn" onclick="addItemToCart('Contract Soap', 50000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/stay-with-me-mirror.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-heart"></i><span>Devotion Mirror</span></div>
+                        <img src="images/stay-with-me-mirror.jpg" alt="Stay With Me Mirror" onload="imageLoaded(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Stay With Me Mirror</h3>
+                    <p>Specialized relationship tool crafted for tracking fidelity parameters and partner focus.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Stay With Me Mirror', 20000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/fortified-sea-salt.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-sparkles"></i><span>Fortified Salt</span></div>
+                        <img src="images/fortified-sea-salt.jpg" alt="Fortified Sea Salt" onload="imageLoaded(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Fortified Sea Salt</h3>
+                    <p>Consecrated alignment salts configured specifically to draw favorable household affection vectors.</p>
+                    <div class="price-container"><span class="new-price">₦10,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Fortified Sea Salt', 10000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/mercy-by-force.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-hand-holding-heart"></i><span>Mercy Force</span></div>
+                        <img src="images/mercy-by-force.jpg" alt="Mercy By Force" onload="imageLoaded(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Mercy By Force</h3>
+                    <p>Heavy attraction compound formulated to break thick external emotional coldness loops instantly.</p>
+                    <div class="price-container"><span class="new-price">₦30,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Mercy By Force', 30000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/fuck-and-pay.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-wallet"></i><span>Intimate Draw</span></div>
+                        <img src="images/fuck-and-pay.jpg" alt="Fuck &amp; Pay" onload="imageLoaded(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Fuck &amp; Pay</h3>
+                    <p>Traditional Kayamata formulation tailored to prompt voluntary partner financial allocations.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Fuck &amp; Pay', 20000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/separation-candle.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-fire-burner"></i><span>Separation Element</span></div>
+                        <img src="images/separation-candle.jpg" alt="Separation Candle" onload="imageLoaded(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Separation Candle</h3>
+                    <p>Targeted element burning channel designed to dissolve toxic external relationship side tracking.</p>
+                    <div class="price-container"><span class="new-price">₦35,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Separation Candle', 35000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/commanding-concoction.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-gavel"></i><span>Command Blend</span></div>
+                        <img src="images/commanding-concoction.jpg" alt="Commanding Concoction" onload="imageLoaded(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Commanding Concoction</h3>
+                    <p>High authority alignment blend designed to back verbal commands inside family spaces.</p>
+                    <div class="price-container"><span class="new-price">₦50,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Commanding Concoction', 50000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/protection-ring.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-ring"></i><span>Shield Ring</span></div>
+                        <img src="images/protection-ring.jpg" alt="Protection Ring" onload="imageLoaded(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Protection Ring</h3>
+                    <p>Fortified structural item crafted to shield romantic connections from interior bad-luck vectors.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Protection Ring', 20000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/love-trap.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-heart-circle-bolt"></i><span>Love Trap</span></div>
+                        <img src="images/love-trap.jpg" alt="Love Trap" onload="imageLoaded(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Love Trap</h3>
+                    <p>Calibrates a secure affectionate net field around a partner to enforce absolute focus parameters.</p>
+                    <div class="price-container"><span class="new-price">₦40,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Love Trap', 40000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/brain-tonic.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-brain"></i><span>Brain Tonic</span></div>
+                        <img src="images/brain-tonic.jpg" alt="Brain Tonic" onload="imageLoaded(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Brain Tonic</h3>
+                    <p>Botanical essence designed to ground obsessive mental circles, restoring clear strategic tracking focus.</p>
+                    <div class="price-container"><span class="new-price">₦10,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Brain Tonic', 10000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/no-rival.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-crown"></i><span>No Rival</span></div>
+                        <img src="images/no-rival.jpg" alt="No Rival" onload="imageLoaded(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>No Rival</h3>
+                    <p>Potent aura barrier crafted to secure prime relational standing, displacing competitor footprints.</p>
+                    <div class="price-container"><span class="new-price">₦10,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('No Rival', 10000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/aporo-ofa.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-shield-halved"></i><span>Aporo Ofa</span></div>
+                        <img src="images/aporo-ofa.jpg" alt="Aporo Ofa" onload="imageLoaded(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Aporo Ofa</h3>
+                    <p>Specialized counter-acting clean liquid to clear tracking nodes planted inside your emotional stream.</p>
+                    <div class="price-container"><span class="new-price">₦10,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Aporo Ofa', 10000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/good-luck-honey.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-jar"></i><span>Luck Honey</span></div>
+                        <img src="images/good-luck-honey.jpg" alt="Good Luck Honey" onload="imageLoaded(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Good Luck Honey</h3>
+                    <p>Consecrated organic nectar used as a speech sweetener baseline catalyst before critical presentations.</p>
+                    <div class="price-container"><span class="new-price">₦10,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Good Luck Honey', 10000)">Add To Basket</button>
                 </div>
             </div>
 
@@ -1222,7 +1443,7 @@
                 targetImg.src = imageSrc;
                 lightbox.style.display = 'flex';
             } else {
-                alert("This custom placeholder card image asset will open for close inspection as soon as you push your imagery folder matching this reference URL to your GitHub directory branch.");
+                alert("This premium remedy asset image will display here inside your lightbox viewer as soon as you push your imagery folder matching this exact filename to your GitHub images directory.");
             }
         }
 

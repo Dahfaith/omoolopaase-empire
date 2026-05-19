@@ -891,6 +891,15 @@
             </div>
             <div class="faq-item">
                 <div class="faq-header" onclick="toggleFaq(this)">
+                    <h4>What if my product image is missing?</h4>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-body">
+                    <p>We designed the site to gracefully fallback to a beautiful mystical icon until you upload your custom pictures into the 'images' folder. It will always look premium!</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
                     <h4>Can I request international or out-of-state delivery?</h4>
                     <i class="fa-solid fa-chevron-down faq-icon"></i>
                 </div>
@@ -916,11 +925,11 @@
         <div class="premium-form-box">
             <h3>Connect With the Empire</h3>
             <p>Describe your current situation carefully below. Submissions are processed securely via encrypted protocols.</p>
-            <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Message submitted securely.');">
+            <form id="empireContactForm">
                 <div class="luxury-input-group">
-                    <input type="text" name="name" class="luxury-field" placeholder="Your Legal Name" required>
-                    <input type="email" name="email" class="luxury-field" placeholder="Your Email Address" required>
-                    <textarea name="message" class="luxury-field" rows="4" placeholder="How can we assist your spiritual journey?" required></textarea>
+                    <input type="text" id="userName" class="luxury-field" placeholder="Your Legal Name" required>
+                    <input type="email" id="userEmail" class="luxury-field" placeholder="Your Email Address" required>
+                    <textarea id="userMessage" class="luxury-field" rows="4" placeholder="How can we assist your spiritual journey?" required></textarea>
                     <button type="submit" class="luxury-submit-btn">Send Secure Message</button>
                 </div>
             </form>
@@ -934,7 +943,7 @@
                 <p>Delivering high-fidelity ancestral advice, aura alignments, botanical solutions, and holistic health parameters globally.</p>
                 
                 <div style="margin-top: 20px;">
-                    <p style="color: var(--text-primary); margin-bottom: 5px; font-weight: 400;"><i class="fa-solid fa-location-dot" style="color: var(--gold-primary); margin-right: 8px;"></i> Pepsi bustop off akinolugbade Abeokuta ogun state</p>
+                    <p style="color: var(--text-primary); margin-bottom: 5px; font-weight: 400;"><i class="fa-solid fa-location-dot" style="color: var(--gold-primary); margin-right: 8px;"></i> Abeokuta, Ogun State</p>
                     <p style="color: var(--text-primary); font-weight: 400;"><i class="fa-solid fa-envelope" style="color: var(--gold-primary); margin-right: 8px;"></i> <a href="mailto:omoolopaaseempire@gmail.com" style="color: var(--text-primary); text-decoration: none;">omoolopaaseempire@gmail.com</a></p>
                 </div>
 
@@ -950,7 +959,7 @@
                     <li><a href="#">Home Core</a></li>
                     <li><a href="#products">Spiritual Shop</a></li>
                     <li><a href="#consultation">Consultation Tiers</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#faq">FAQ Board</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -980,6 +989,12 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.js"></script>
+    <script type="text/javascript">
+       (function(){
+           emailjs.init("Ez9VredESPBSD0kEp"); /* Linked directly to your Public Key */
+       })();
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

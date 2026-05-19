@@ -109,6 +109,7 @@ function addItemToCart(name, price) {
     toggleCartDrawer(true);
 }
 
+// Fixed standard 'Add To Cart' callback connection logic parameter tracking framework
 function adjustItemQuantity(name, shift) {
     const item = basketCart.find(item => item.name === name);
     if (item) {
@@ -229,12 +230,14 @@ setTimeout(() => {
     setInterval(showSalesToast, Math.floor(Math.random() * 15000) + 15000);
 }, 8000);
 
-/* --- EMAILJS SECURE FORM PROCESSING --- */
+/* --- EMAILJS SECURE FORM PROCESSING & POSITION STACK RESET FIX --- */
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. CONNECT WITH THE EMPIRE - INQUIRY PORTAL
     const contactForm = document.getElementById('empireContactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(event) {
-            event.preventDefault();
+            event.preventDefault(); // HALTS THE ACTION '#' NATIVE PAGE RESET JUMP
             
             const submitBtn = this.querySelector('.luxury-submit-btn');
             const originalText = submitBtn.innerText;
@@ -247,7 +250,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 message: document.getElementById('userMessage').value
             };
 
-            // Fully configured connection using your real service and template parameters
             emailjs.send('service_x9pc811', 'template_pd71q72', templateParams)
                 .then(() => {
                     alert('Your spiritual request has been logged and transmitted securely.');
@@ -259,6 +261,40 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.error('EmailJS Error Block:', error);
                     submitBtn.innerText = originalText;
                     submitBtn.disabled = false;
+                });
+        });
+    }
+
+    // 2. JOIN OUR INNER CIRCLE - SPIRITUAL ALERTS RETRIEVAL
+    const subscribeForm = document.getElementById('empireSubscribeForm');
+    if (subscribeForm) {
+        subscribeForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // HALTS THE ACTION '#' NATIVE PAGE RESET JUMP
+            
+            const subBtn = document.getElementById('subscribeBtn');
+            const originalSubText = subBtn.innerText;
+            subBtn.innerText = "Securing Star...";
+            subBtn.disabled = true;
+
+            const inputEmail = document.getElementById('subscriberEmail').value;
+
+            const templateParams = {
+                from_name: "Inner Circle Subscriber",
+                reply_to: inputEmail,
+                message: `Shalom Empire Team,\n\nA new vessel has requested access to the Inner Circle. Please add their email address to receive spiritual alerts, prophetic updates, and maintenance parameters:\n\n📧 Subscriber Target Email: ${inputEmail}`
+            };
+
+            emailjs.send('service_x9pc811', 'template_pd71q72', templateParams)
+                .then(() => {
+                    alert('Subscription confirmed. Your aura parameter has been synchronized with the Empire Inner Circle.');
+                    subscribeForm.reset();
+                    subBtn.innerText = originalSubText;
+                    subBtn.disabled = false;
+                }, (error) => {
+                    alert('Subscription alignment interrupted. Check your network.');
+                    console.error('EmailJS Subscription Error:', error);
+                    subBtn.innerText = originalSubText;
+                    subBtn.disabled = false;
                 });
         });
     }

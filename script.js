@@ -134,11 +134,12 @@ function updateCartUI() {
         basketCart.forEach(item => {
             totalItemCount += item.quantity;
             grandTotalSum += (item.price * item.quantity);
+            const convertedItemTotal = Math.round((item.price * item.quantity) * exchangeRates[currentCurrency]);
             container.innerHTML += `
                 <div class="cart-item">
                     <div>
                         <h4>${item.name}</h4>
-                        <p style="color:var(--gold-primary)">₦${(item.price * item.quantity).toLocaleString()}</p>
+                        <p style="color:var(--gold-primary)">${currencySymbols[currentCurrency]}${convertedItemTotal.toLocaleString()}</p>
                     </div>
                     <div class="quantity-control">
                         <span class="quantity-btn" onclick="adjustItemQuantity('${item.name}', -1)">-</span>
@@ -150,27 +151,86 @@ function updateCartUI() {
         });
     }
     badge.innerText = totalItemCount;
-    totalDisplay.innerText = '₦' + grandTotalSum.toLocaleString();
+    const convertedGrandTotal = Math.round(grandTotalSum * exchangeRates[currentCurrency]);
+    totalDisplay.innerText = currencySymbols[currentCurrency] + convertedGrandTotal.toLocaleString();
 }
 
 function executeCartCheckout() {
     if (basketCart.length === 0) { return; }
-    const baseNumber = "2348073733419";
+    const baseNumber = "2348143644489";
     let orderSummary = "Hello Omoolopaase Empire, I want to purchase the following spiritual solutions:\n\n";
     let grandTotal = 0;
     basketCart.forEach((item, index) => {
         const itemTotal = item.price * item.quantity;
         grandTotal += itemTotal;
-        orderSummary += `${index + 1}. ${item.name} (x${item.quantity}) - ₦${itemTotal.toLocaleString()}\n`;
+        const convertedItemTotal = Math.round(itemTotal * exchangeRates[currentCurrency]);
+        orderSummary += `${index + 1}. ${item.name} (x${item.quantity}) - ${currencySymbols[currentCurrency]}${convertedItemTotal.toLocaleString()}\n`;
     });
-    orderSummary += `\n🎯 Grand Total: ₦${grandTotal.toLocaleString()}`;
+    const convertedGrandTotal = Math.round(grandTotal * exchangeRates[currentCurrency]);
+    orderSummary += `\n🎯 Grand Total: ${currencySymbols[currentCurrency]}${convertedGrandTotal.toLocaleString()}`;
     window.open(`https://wa.me/${baseNumber}?text=${encodeURIComponent(orderSummary)}`, '_blank');
 }
 
 function bookConsultation(tierType) {
-    const baseNumber = "2348073733419";
+    const baseNumber = "2348143644489";
     let msg = "Hello, I am ready for the Consultation. I want to select the normal one.";
     if (tierType === 'vip') { msg = "Hello, I am ready for the Consultation. I would love to sign up for the VIP one."; }
     else if (tierType === 'face-to-face') { msg = "Hello, I am ready for the Consultation. I want to book a physical face-to-face session."; }
     window.open(`https://wa.me/${baseNumber}?text=${encodeURIComponent(msg)}`, '_blank');
 }
+
+/* --- CURRENCY SWITCHER LOGIC --- */
+let currentCurrency = 'NGN';
+const exchangeRates = { NGN: 1, USD: 1/1500, GBP: 1/1900, EUR: 1/1600 };
+const currencySymbols = { NGN: '₦', USD: '$', GBP: '£', EUR: '€' };
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Store original NGN base prices on load
+    document.querySelectorAll('.new-price, .tier-price').forEach(el => {
+        let rawNum = el.innerText.replace(/[^0-9]/g, '');
+        el.setAttribute('data-base-price', rawNum);
+    });
+});
+
+function changeCurrency(currency) {
+    currentCurrency = currency;
+    const rate = exchangeRates[currency];
+    const symbol = currencySymbols[currency];
+    
+    document.querySelectorAll('.new-price, .tier-price').forEach(el => {
+        const basePrice = parseInt(el.getAttribute('data-base-price'));
+        if(!isNaN(basePrice)) {
+            const converted = Math.round(basePrice * rate);
+            el.innerText = symbol + converted.toLocaleString();
+        }
+    });
+    updateCartUI();
+}
+
+/* --- SALES TOAST NOTIFICATIONS --- */
+const salesLocations = ["Lagos, Nigeria", "London, UK", "Abuja, Nigeria", "Atlanta, USA", "Houston, USA", "Abeokuta, Ogun State", "Port Harcourt", "Ibadan, Nigeria", "Toronto, Canada", "Kano, Nigeria", "Dubai, UAE", "Lekki, Lagos"];
+const salesProducts = ["Cash Out Soap", "Stay With Me Mirror", "Breakthrough Soap", "VIP Consultation", "Atude Soap", "Eyonu Agba", "Fuck & Pay", "Glory Retrieval", "Open Door Kit"];
+
+function showSalesToast() {
+    const toast = document.getElementById('salesToast');
+    const msg = document.getElementById('toastMessage');
+    if(!toast || !msg) return;
+    
+    const randomLoc = salesLocations[Math.floor(Math.random() * salesLocations.length)];
+    const randomProd = salesProducts[Math.floor(Math.random() * salesProducts.length)];
+    
+    msg.innerHTML = `Someone from ${randomLoc} just bought/booked <strong>${randomProd}</strong>`;
+    
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 5000); // Hide after 5 seconds
+}
+
+// Start showing toasts after 8 seconds, then randomly every 15 to 30 seconds
+setTimeout(() => {
+    showSalesToast();
+    setInterval(showSalesToast, Math.floor(Math.random() * 15000) + 15000);
+}, 8000);
+

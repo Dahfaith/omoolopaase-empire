@@ -1,265 +1,1000 @@
-let basketCart = [];
-
-window.addEventListener('scroll', function() {
-    const nav = document.querySelector('nav');
-    if (window.scrollY > 30) { nav.classList.add('scrolled'); } 
-    else { nav.classList.remove('scrolled'); }
-});
-
-function toggleMobileMenu() {
-    const linksMenu = document.getElementById('navLinksMenu');
-    const icon = document.getElementById('menuToggleIcon');
-    linksMenu.classList.toggle('mobile-open');
-    if (linksMenu.classList.contains('mobile-open')) {
-        icon.classList.replace('fa-bars', 'fa-xmark');
-    } else {
-        icon.classList.replace('fa-xmark', 'fa-bars');
-    }
-}
-
-function closeMobileMenu() {
-    const linksMenu = document.getElementById('navLinksMenu');
-    if(linksMenu.classList.contains('mobile-open')) {
-        linksMenu.classList.remove('mobile-open');
-        document.getElementById('menuToggleIcon').classList.replace('fa-xmark', 'fa-bars');
-    }
-}
-
-function imageLoaded(img) {
-    img.classList.add('loaded');
-    const placeholder = img.parentElement.querySelector('.mystical-fallback');
-    if(placeholder) placeholder.style.opacity = '0';
-}
-
-function imageError(img) {
-    img.style.display = 'none';
-}
-
-function openLightboxModal(imageSrc) {
-    const lightbox = document.getElementById('imageLightbox');
-    const targetImg = document.getElementById('lightboxTargetImage');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Omoolopaase Empire | Premium Spiritual Solutions & Consultation</title>
     
-    const matchingImages = document.querySelectorAll(`img[src="${imageSrc}"]`);
-    let isLoaded = false;
-    if(matchingImages.length > 0) {
-        if(matchingImages[0].style.display !== 'none') {
-            isLoaded = true;
-        }
-    }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body>
 
-    if (isLoaded) {
-        targetImg.src = imageSrc;
-        lightbox.style.display = 'flex';
-    } else {
-        alert("This product image will be viewable in high resolution once you upload the picture to the 'images/' folder.");
-    }
-}
+    <nav id="navbar">
+        <a href="#" class="logo">OMOOLOPAASE <span>EMPIRE</span></a>
+        <ul class="nav-links" id="navLinksMenu">
+            <li><a href="#" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="#products" onclick="closeMobileMenu()">Spiritual Shop</a></li>
+            <li><a href="#consultation" onclick="closeMobileMenu()">Consultation</a></li>
+            <li><a href="#faq" onclick="closeMobileMenu()">FAQ</a></li>
+            <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+        </ul>
+        <div class="nav-actions-group">
+            <select id="currencySelector" onchange="changeCurrency(this.value)" style="background: transparent; color: var(--gold-primary); border: 1px solid rgba(255,255,255,0.1); padding: 6px 10px; border-radius: 4px; font-family: var(--font-body); font-size: 0.8rem; outline: none; cursor: pointer;">
+                <option value="NGN" style="color: #000">₦ NGN</option>
+                <option value="USD" style="color: #000">$ USD</option>
+                <option value="GBP" style="color: #000">£ GBP</option>
+                <option value="EUR" style="color: #000">€ EUR</option>
+            </select>
+            <div class="cart-icon-nav" onclick="toggleCartDrawer(true)">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <div class="cart-badge" id="cartBadgeCount">0</div>
+            </div>
+            <div class="menu-toggle" onclick="toggleMobileMenu()">
+                <i class="fa-solid fa-bars" id="menuToggleIcon"></i>
+            </div>
+        </div>
+    </nav>
 
-function closeLightboxModal() {
-    document.getElementById('imageLightbox').style.display = 'none';
-}
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCartDrawer(false)"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h4>Your Ritual Basket</h4>
+            <i class="fa-solid fa-xmark" style="color:var(--gold-primary); cursor:pointer; font-size:1.5rem;" onclick="toggleCartDrawer(false)"></i>
+        </div>
+        <div class="cart-items-container" id="cartItemsContainer">
+            <p class="empty-cart-msg">Your basket is currently empty.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total-row" style="display:flex; justify-content:space-between; margin-bottom:20px; font-size:1rem;">
+                <span style="color:var(--text-primary);">Total:</span>
+                <span id="cartTotalDisplay" style="color:var(--gold-primary); font-weight:bold; font-size: 1.2rem;">₦0</span>
+            </div>
+            <button class="checkout-btn" onclick="executeCartCheckout()">Secure WhatsApp Checkout</button>
+        </div>
+    </div>
 
-function toggleFaq(element) {
-    const item = element.parentElement;
-    const body = item.querySelector('.faq-body');
-    if (item.classList.contains('active')) {
-        body.style.maxHeight = null;
-        item.classList.remove('active');
-    } else {
-        document.querySelectorAll('.faq-item').forEach(el => {
-            el.classList.remove('active');
-            el.querySelector('.faq-body').style.maxHeight = null;
-        });
-        item.classList.add('active');
-        body.style.maxHeight = body.scrollHeight + "px";
-    }
-}
+    <div class="lightbox-modal" id="imageLightbox" onclick="closeLightboxModal()">
+        <i class="fa-solid fa-xmark close-lightbox"></i>
+        <img class="lightbox-content" id="lightboxTargetImage" src="" alt="Preview Enlarged">
+    </div>
 
-function filterProducts(category, event) {
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    if(event) event.target.classList.add('active');
-    
-    document.querySelectorAll('.product-card').forEach(card => {
-        if (category === 'all' || card.getAttribute('data-category') === category) {
-            card.style.display = 'flex';
-            card.style.animation = 'fadeUp 0.5s ease forwards';
-        } else {
-            card.style.display = 'none';
-        }
-    });
-}
+    <section class="hero">
+        <img src="images/hero-bg.jpg" class="hero-bg" alt="Spiritual Background" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?q=80&w=1925&auto=format&fit=crop';">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Awaken Your Inner Energy <span>Spiritual Healing & Natural Remedies</span></h1>
+            <p>Premium spiritual consultations and botanical alternatives tailored to align your path to abundance, favor, and protection.</p>
+            <div class="hero-btns">
+                <a href="#products" class="btn btn-primary">Shop Remedies</a>
+                <a href="#consultation" class="btn btn-secondary">Book Reading</a>
+            </div>
+        </div>
+    </section>
 
-function toggleCartDrawer(openStatus) {
-    const drawer = document.getElementById('cartDrawer');
-    const overlay = document.getElementById('cartOverlay');
-    if (openStatus) {
-        drawer.classList.add('open');
-        overlay.classList.add('open');
-    } else {
-        drawer.classList.remove('open');
-        overlay.classList.remove('open');
-    }
-}
+    <section class="products section-padding" id="products">
+        <div class="heading-container">
+            <h2>Our Full <span>Remedies Catalog</span></h2>
+        </div>
 
-function addItemToCart(name, price) {
-    const existingItem = basketCart.find(item => item.name === name);
-    if (existingItem) { existingItem.quantity += 1; } 
-    else { basketCart.push({ name: name, price: price, quantity: 1 }); }
-    updateCartUI();
-    toggleCartDrawer(true);
-}
+        <div class="product-tabs-wrapper">
+            <div class="product-tabs">
+                <button class="tab-btn active" onclick="filterProducts('all', event)">All Products</button>
+                <button class="tab-btn" onclick="filterProducts('cleansing', event)">Cleansing</button>
+                <button class="tab-btn" onclick="filterProducts('way-opener', event)">Way Openers</button>
+                <button class="tab-btn" onclick="filterProducts('money', event)">Wealth & Favor</button>
+                <button class="tab-btn" onclick="filterProducts('love', event)">Love Products</button>
+                <button class="tab-btn" onclick="filterProducts('protection', event)">Protection</button>
+                <button class="tab-btn" onclick="filterProducts('appeasement', event)">Appeasement</button>
+            </div>
+        </div>
 
-function adjustItemQuantity(name, shift) {
-    const item = basketCart.find(item => item.name === name);
-    if (item) {
-        item.quantity += shift;
-        if (item.quantity <= 0) { basketCart = basketCart.filter(i => i.name !== name); }
-    }
-    updateCartUI();
-}
-
-function updateCartUI() {
-    const container = document.getElementById('cartItemsContainer');
-    const badge = document.getElementById('cartBadgeCount');
-    const totalDisplay = document.getElementById('cartTotalDisplay');
-    let totalItemCount = 0; let grandTotalSum = 0;
-    container.innerHTML = '';
-    
-    if (basketCart.length === 0) {
-        container.innerHTML = '<p class="empty-cart-msg">Your basket is currently empty.</p>';
-    } else {
-        basketCart.forEach(item => {
-            totalItemCount += item.quantity;
-            grandTotalSum += (item.price * item.quantity);
-            const convertedItemTotal = Math.round((item.price * item.quantity) * exchangeRates[currentCurrency]);
-            container.innerHTML += `
-                <div class="cart-item">
-                    <div>
-                        <h4>${item.name}</h4>
-                        <p style="color:var(--gold-primary)">${currencySymbols[currentCurrency]}${convertedItemTotal.toLocaleString()}</p>
-                    </div>
-                    <div class="quantity-control">
-                        <span class="quantity-btn" onclick="adjustItemQuantity('${item.name}', -1)">-</span>
-                        <span>${item.quantity}</span>
-                        <span class="quantity-btn" onclick="adjustItemQuantity('${item.name}', 1)">+</span>
+        <div class="product-grid">
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery" onclick="openLightboxModal('images/curse-breaker.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-soap"></i><span>Curse Breaker</span></div>
+                        <img src="images/curse-breaker.jpg" alt="Curse Breaker Soap" onload="imageLoaded(this)" onerror="imageError(this)">
                     </div>
                 </div>
-            `;
-        });
-    }
-    badge.innerText = totalItemCount;
-    const convertedGrandTotal = Math.round(grandTotalSum * exchangeRates[currentCurrency]);
-    totalDisplay.innerText = currencySymbols[currentCurrency] + convertedGrandTotal.toLocaleString();
-}
+                <div class="product-content">
+                    <h3>Curse Breaker Soap</h3>
+                    <p>Clears deep foundational blockages, generational hexes, and stagnant obstacles.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Curse Breaker Soap', 20000)">Add To Basket</button>
+                </div>
+            </div>
 
-function executeCartCheckout() {
-    if (basketCart.length === 0) { return; }
-    const baseNumber = "2348073733419";
-    let orderSummary = "Hello Omoolopaase Empire, I want to purchase the following spiritual solutions:\n\n";
-    let grandTotal = 0;
-    basketCart.forEach((item, index) => {
-        const itemTotal = item.price * item.quantity;
-        grandTotal += itemTotal;
-        const convertedItemTotal = Math.round(itemTotal * exchangeRates[currentCurrency]);
-        orderSummary += `${index + 1}. ${item.name} (x${item.quantity}) - ${currencySymbols[currentCurrency]}${convertedItemTotal.toLocaleString()}\n`;
-    });
-    const convertedGrandTotal = Math.round(grandTotal * exchangeRates[currentCurrency]);
-    orderSummary += `\n🎯 Grand Total: ${currencySymbols[currentCurrency]}${convertedGrandTotal.toLocaleString()}`;
-    window.open(`https://wa.me/${baseNumber}?text=${encodeURIComponent(orderSummary)}`, '_blank');
-}
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery" onclick="openLightboxModal('images/ebe-agba.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-shield"></i><span>Ebe Agba</span></div>
+                        <img src="images/ebe-agba.jpg" alt="Ebe Agba" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Ebe Agba Soap</h3>
+                    <p>Defensive structural shielding solution configured to unlock ancient blockades.</p>
+                    <div class="price-container"><span class="new-price">₦25,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Ebe Agba Soap', 25000)">Add To Basket</button>
+                </div>
+            </div>
 
-function bookConsultation(tierType) {
-    const baseNumber = "2348073733419";
-    let msg = "Hello, I am ready for the Consultation. I want to select the normal one.";
-    if (tierType === 'vip') { msg = "Hello, I am ready for the Consultation. I would love to sign up for the VIP one."; }
-    else if (tierType === 'face-to-face') { msg = "Hello, I am ready for the Consultation. I want to book a physical face-to-face session."; }
-    window.open(`https://wa.me/${baseNumber}?text=${encodeURIComponent(msg)}`, '_blank');
-}
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery" onclick="openLightboxModal('images/eyonu-agba.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-sparkles"></i><span>Eyonu Agba</span></div>
+                        <img src="images/eyonu-agba.jpg" alt="Eyonu Agba" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Eyonu Agba Soap</h3>
+                    <p>Ancestral favor preparation crafted to clear away friction loops and unexplainable bottlenecks.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Eyonu Agba Soap', 20000)">Add To Basket</button>
+                </div>
+            </div>
 
-/* --- CURRENCY SWITCHER LOGIC --- */
-let currentCurrency = 'NGN';
-const exchangeRates = { NGN: 1, USD: 1/1500, GBP: 1/1900, EUR: 1/1600 };
-const currencySymbols = { NGN: '₦', USD: '$', GBP: '£', EUR: '€' };
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery" onclick="openLightboxModal('images/atude.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-key"></i><span>Atude</span></div>
+                        <img src="images/atude.jpg" alt="Atude Soap" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Atude Soap</h3>
+                    <p>Explicitly engineered to safely untie complex life restrictions and fast-track breakthroughs.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Atude Soap', 20000)">Add To Basket</button>
+                </div>
+            </div>
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.new-price, .tier-price').forEach(el => {
-        let rawNum = el.innerText.replace(/[^0-9]/g, '');
-        el.setAttribute('data-base-price', rawNum);
-    });
-});
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery" onclick="openLightboxModal('images/abortion-cleansing.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-water"></i><span>Abortion Clean</span></div>
+                        <img src="images/abortion-cleansing.jpg" alt="Abortion Cleansing" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Abortion Cleansing</h3>
+                    <p>Targeted aura cleansing to dissolve energetic trailing residues safely.</p>
+                    <div class="price-container"><span class="new-price">₦35,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Abortion Cleansing', 35000)">Add To Basket</button>
+                </div>
+            </div>
 
-function changeCurrency(currency) {
-    currentCurrency = currency;
-    const rate = exchangeRates[currency];
-    const symbol = currencySymbols[currency];
-    
-    document.querySelectorAll('.new-price, .tier-price').forEach(el => {
-        const basePrice = parseInt(el.getAttribute('data-base-price'));
-        if(!isNaN(basePrice)) {
-            const converted = Math.round(basePrice * rate);
-            el.innerText = symbol + converted.toLocaleString();
-        }
-    });
-    updateCartUI();
-}
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery" onclick="openLightboxModal('images/back-to-sender-soap.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-arrow-rotate-left"></i><span>Back To Sender</span></div>
+                        <img src="images/back-to-sender-soap.jpg" alt="Back To Sender Soap" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Back To Sender Soap</h3>
+                    <p>Reflects toxic targeted spiritual trajectories directly back to their source.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Back To Sender Soap', 20000)">Add To Basket</button>
+                </div>
+            </div>
 
-/* --- SALES TOAST NOTIFICATIONS --- */
-const salesLocations = ["Lagos, Nigeria", "London, UK", "Abuja, Nigeria", "Atlanta, USA", "Houston, USA", "Abeokuta, Ogun State", "Ogbomosho, Nigeria", "Port Harcourt", "Ibadan, Nigeria", "Toronto, Canada", "Kano, Nigeria", "Dubai, UAE", "Lekki, Lagos"];
-const salesProducts = ["Cash Out Soap", "Stay With Me Mirror", "Curse Breaker Soap", "Breakthrough Soap", "VIP Consultation", "Atude Soap", "Eyonu Agba", "Fuck & Pay", "Glory Retrieval", "Open Door Kit"];
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery" onclick="openLightboxModal('images/protection-soap.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-shield-halved"></i><span>Protection</span></div>
+                        <img src="images/protection-soap.jpg" alt="Protection Soap" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Protection Soap</h3>
+                    <p>Establishes a solid, safe boundary parameter around your home and actions.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Protection Soap', 20000)">Add To Basket</button>
+                </div>
+            </div>
 
-function showSalesToast() {
-    const toast = document.getElementById('salesToast');
-    const msg = document.getElementById('toastMessage');
-    if(!toast || !msg) return;
-    
-    const randomLoc = salesLocations[Math.floor(Math.random() * salesLocations.length)];
-    const randomProd = salesProducts[Math.floor(Math.random() * salesProducts.length)];
-    
-    msg.innerHTML = `Someone from ${randomLoc} just bought/booked <strong>${randomProd}</strong>`;
-    
-    toast.classList.add('show');
-    
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 5000); 
-}
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery" onclick="openLightboxModal('images/memory-soap.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-brain"></i><span>Memory Soap</span></div>
+                        <img src="images/memory-soap.jpg" alt="Memory Soap" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Memory Soap</h3>
+                    <p>Calibrates mental clarity, baseline tracking focus, and cognitive retentive capacity.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Memory Soap', 20000)">Add To Basket</button>
+                </div>
+            </div>
 
-setTimeout(() => {
-    showSalesToast();
-    setInterval(showSalesToast, Math.floor(Math.random() * 15000) + 15000);
-}, 8000);
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery" onclick="openLightboxModal('images/cleansing-soap.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-shower"></i><span>Cleanse Water</span></div>
+                        <img src="images/cleansing-soap.jpg" alt="Cleansing Soap & Water" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Cleansing Soap & Water</h3>
+                    <p>General utility flush to purge accumulated environmental dense micro-elements.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Cleansing Soap & Water', 20000)">Add To Basket</button>
+                </div>
+            </div>
 
-/* --- EMAILJS SECURE FORM PROCESSING --- */
-document.addEventListener('DOMContentLoaded', () => {
-    const contactForm = document.getElementById('empireContactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const submitBtn = this.querySelector('.luxury-submit-btn');
-            const originalText = submitBtn.innerText;
-            submitBtn.innerText = "Encrypting Transmission...";
-            submitBtn.disabled = true;
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery" onclick="openLightboxModal('images/sea-salt.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-cubes"></i><span>Sea Salt Base</span></div>
+                        <img src="images/sea-salt.jpg" alt="Sea Salt Base" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Sea Salt Base</h3>
+                    <p>Fortified crystalline base utilized to balance localized spatial field frameworks.</p>
+                    <div class="price-container"><span class="new-price">₦10,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Sea Salt Base', 10000)">Add To Basket</button>
+                </div>
+            </div>
 
-            const templateParams = {
-                from_name: document.getElementById('userName').value,
-                reply_to: document.getElementById('userEmail').value,
-                message: document.getElementById('userMessage').value
-            };
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery" onclick="openLightboxModal('images/connection-perfume-soap.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-link"></i><span>Connection Pair</span></div>
+                        <img src="images/connection-perfume-soap.jpg" alt="Connection Perfume/Soap" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Connection Perfume/Soap</h3>
+                    <p>Dual-action energetic bundle built to connect networks and favorable partnerships.</p>
+                    <div class="price-container"><span class="new-price">₦35,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Connection Perfume/Soap', 35000)">Add To Basket</button>
+                </div>
+            </div>
 
-            // Fully configured connection using your real service and template parameters
-            emailjs.send('service_x9pc811', 'template_pd71q72', templateParams)
-                .then(() => {
-                    alert('Your spiritual request has been logged and transmitted securely.');
-                    contactForm.reset();
-                    submitBtn.innerText = originalText;
-                    submitBtn.disabled = false;
-                }, (error) => {
-                    alert('Transmission channel blocked. Please try checking your network connection.');
-                    console.error('EmailJS Error Block:', error);
-                    submitBtn.innerText = originalText;
-                    submitBtn.disabled = false;
-                });
-        });
-    }
-});
+            <div class="product-card" data-category="cleansing">
+                <div class="product-gallery" onclick="openLightboxModal('images/commanding-soap.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-bullhorn"></i><span>Commanding Soap</span></div>
+                        <img src="images/commanding-soap.jpg" alt="Commanding Soap" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Commanding Soap</h3>
+                    <p>High-level authority catalyst designed to heavily sway negotiations and spaces in your favor.</p>
+                    <div class="price-container"><span class="new-price">₦50,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Commanding Soap', 50000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="way-opener">
+                <div class="product-gallery" onclick="openLightboxModal('images/glory-retrieval.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-crown"></i><span>Glory Retrieval</span></div>
+                        <img src="images/glory-retrieval.jpg" alt="Glory Retrieval" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Glory Retrieval (Gbogo Mi Funmi)</h3>
+                    <p>Reclaim missing personal spiritual configurations, stolen stars, and misplaced personal spiritual properties.</p>
+                    <div class="price-container"><span class="new-price">₦40,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Glory Retrieval', 40000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="way-opener">
+                <div class="product-gallery" onclick="openLightboxModal('images/open-door-kit.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-door-open"></i><span>Open Door Kit</span></div>
+                        <img src="images/open-door-kit.jpg" alt="Open Door Kit" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Open Door Kit</h3>
+                    <p>A multi-tiered framework designed to shatter highly restrictive business and career dead-ends.</p>
+                    <div class="price-container"><span class="new-price">₦50,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Open Door Kit', 50000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="way-opener">
+                <div class="product-gallery" onclick="openLightboxModal('images/attraction-perfume.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-bottle-droplet"></i><span>Attraction Perfume</span></div>
+                        <img src="images/attraction-perfume.jpg" alt="Attraction Perfume" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Attraction Perfume</h3>
+                    <p>Highly concentrated pheromonal aromatic base formulated to project an attractive field.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Attraction Perfume', 20000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="way-opener">
+                <div class="product-gallery" onclick="openLightboxModal('images/protection-attraction-beads.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-circle-nodes"></i><span>Attraction Beads</span></div>
+                        <img src="images/protection-attraction-beads.jpg" alt="Protection/Attraction Beads" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Protection/Attraction Beads</h3>
+                    <p>Fortified crystalline alignment beads built for body defense shielding matrices.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Protection/Attraction Beads', 20000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="money">
+                <div class="product-gallery" onclick="openLightboxModal('images/mercy-soap.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-handholding-heart"></i><span>Mercy Soap</span></div>
+                        <img src="images/mercy-soap.jpg" alt="Mercy Soap" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Mercy Soap</h3>
+                    <p>Washes away negative social biases, aura dampeners, and unexplainable job rejections.</p>
+                    <div class="price-container"><span class="new-price">₦25,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Mercy Soap', 25000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="money">
+                <div class="product-gallery" onclick="openLightboxModal('images/breakthrough-soap.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-coins"></i><span>Breakthrough Soap</span></div>
+                        <img src="images/breakthrough-soap.jpg" alt="Breakthrough Soap (Ashina)" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Breakthrough Soap (Ashina)</h3>
+                    <p>Designed to expand business visibility loops and accelerate ongoing client favor deals.</p>
+                    <div class="price-container"><span class="new-price">₦30,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Breakthrough Soap', 30000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="money">
+                <div class="product-gallery" onclick="openLightboxModal('images/aje-onigbin-soap.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-store"></i><span>Aje Soap</span></div>
+                        <img src="images/aje-onigbin-soap.jpg" alt="Aje Onigbin Soap" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Aje Onigbin Soap</h3>
+                    <p>Market favor alignment made specifically to boost foot-traffic and retail storefront transactions.</p>
+                    <div class="price-container"><span class="new-price">₦30,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Aje Onigbin Soap', 30000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="money">
+                <div class="product-gallery" onclick="openLightboxModal('images/cash-out-soap.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-vault"></i><span>Cash Out Soap</span></div>
+                        <img src="images/cash-out-soap.jpg" alt="Cash Out Soap" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Cash Out Soap</h3>
+                    <p>Our ultra-premium signature compound built for high-profile business windfalls and contracts.</p>
+                    <div class="price-container"><span class="new-price">₦250,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Cash Out Soap', 250000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="money">
+                <div class="product-gallery" onclick="openLightboxModal('images/favour-perfume.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-gift"></i><span>Favour Perfume</span></div>
+                        <img src="images/favour-perfume.jpg" alt="Favour Soap/Perfume" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Favour Soap & Perfume</h3>
+                    <p>Restores personal light frequencies to draw unexpected corporate support allocations.</p>
+                    <div class="price-container"><span class="new-price">₦25,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Favour Soap & Perfume', 25000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="money">
+                <div class="product-gallery" onclick="openLightboxModal('images/money-drawing.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-money-bill-trend-up"></i><span>Money Drawing</span></div>
+                        <img src="images/money-drawing.jpg" alt="Money Drawing" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Money Drawing Essence</h3>
+                    <p>Targeted attraction oil applied directly to wallet hubs to sustain cash flow variables.</p>
+                    <div class="price-container"><span class="new-price">₦15,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Money Drawing Essence', 15000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="money">
+                <div class="product-gallery" onclick="openLightboxModal('images/big-girl-soap.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-gem"></i><span>Big Girl Soap</span></div>
+                        <img src="images/big-girl-soap.jpg" alt="Big Girl Soap" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Big Girl Soap</h3>
+                    <p>Highly specialized premium empowerment compound built to pull luxury high-net-worth client profiles.</p>
+                    <div class="price-container"><span class="new-price">₦40,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Big Girl Soap', 40000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="money">
+                <div class="product-gallery" onclick="openLightboxModal('images/contract-soap.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-file-signature"></i><span>Contract Soap</span></div>
+                        <img src="images/contract-soap.jpg" alt="Contract Soap" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Contract Soap</h3>
+                    <p>A corporate-grade aura builder configured exclusively to anchor high-value legal and tender bid signatures.</p>
+                    <div class="price-container"><span class="new-price">₦50,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Contract Soap', 50000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/stay-with-me-mirror.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-heart"></i><span>Devotion Mirror</span></div>
+                        <img src="images/stay-with-me-mirror.jpg" alt="Stay With Me Mirror" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Stay With Me Mirror</h3>
+                    <p>Specialized relationship tool crafted for tracking fidelity parameters and partner focus.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Stay With Me Mirror', 20000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/fortified-sea-salt.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-sparkles"></i><span>Fortified Salt</span></div>
+                        <img src="images/fortified-sea-salt.jpg" alt="Fortified Sea Salt" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Fortified Sea Salt</h3>
+                    <p>Consecrated alignment salts configured specifically to draw favorable household affection vectors.</p>
+                    <div class="price-container"><span class="new-price">₦10,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Fortified Sea Salt', 10000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/mercy-by-force.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-hand-holding-heart"></i><span>Mercy Force</span></div>
+                        <img src="images/mercy-by-force.jpg" alt="Mercy By Force" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Mercy By Force</h3>
+                    <p>Heavy attraction compound formulated to break thick external emotional coldness loops instantly.</p>
+                    <div class="price-container"><span class="new-price">₦30,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Mercy By Force', 30000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/fuck-and-pay.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-wallet"></i><span>Intimate Draw</span></div>
+                        <img src="images/fuck-and-pay.jpg" alt="Fuck &amp; Pay" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Fuck & Pay</h3>
+                    <p>Traditional Kayamata formulation tailored to prompt voluntary partner financial allocations.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Fuck & Pay', 20000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/separation-candle.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-fire-burner"></i><span>Separation Candle</span></div>
+                        <img src="images/separation-candle.jpg" alt="Separation Candle" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Separation Candle</h3>
+                    <p>Targeted element burning channel designed to dissolve toxic external relationship side tracking.</p>
+                    <div class="price-container"><span class="new-price">₦35,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Separation Candle', 35000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/commanding-concoction.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-gavel"></i><span>Command Blend</span></div>
+                        <img src="images/commanding-concoction.jpg" alt="Commanding Concoction" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Commanding Concoction</h3>
+                    <p>High authority alignment blend designed to back verbal commands inside family spaces.</p>
+                    <div class="price-container"><span class="new-price">₦50,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Commanding Concoction', 50000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/protection-ring.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-ring"></i><span>Shield Ring</span></div>
+                        <img src="images/protection-ring.jpg" alt="Protection Ring" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Protection Ring</h3>
+                    <p>Fortified structural item crafted to shield romantic connections from interior bad-luck vectors.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Protection Ring', 20000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/love-attraction-soap.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-heart-circle-bolt"></i><span>Love Soap</span></div>
+                        <img src="images/love-attraction-soap.jpg" alt="Love Trap Soap" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Love Trap Soap</h3>
+                    <p>Calibrates a secure affectionate net field around a partner to enforce absolute focus parameters.</p>
+                    <div class="price-container"><span class="new-price">₦40,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Love Trap Soap', 40000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/brain-tonic.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-brain"></i><span>Brain Tonic</span></div>
+                        <img src="images/brain-tonic.jpg" alt="Brain Tonic" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Brain Tonic</h3>
+                    <p>Botanical essence designed to ground obsessive mental circles, restoring clear strategic tracking focus.</p>
+                    <div class="price-container"><span class="new-price">₦10,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Brain Tonic', 10000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/no-rival.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-crown"></i><span>No Rival</span></div>
+                        <img src="images/no-rival.jpg" alt="No Rival" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>No Rival</h3>
+                    <p>Potent aura barrier crafted to secure prime relational standing, displacing competitor footprints.</p>
+                    <div class="price-container"><span class="new-price">₦10,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('No Rival', 10000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/aporo-ofa.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-shield-halved"></i><span>Aporo Ofa</span></div>
+                        <img src="images/aporo-ofa.jpg" alt="Aporo Ofa" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Aporo Ofa</h3>
+                    <p>Specialized counter-acting clean liquid to clear tracking nodes planted inside your emotional stream.</p>
+                    <div class="price-container"><span class="new-price">₦10,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Aporo Ofa', 10000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/good-luck-honey.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-jar"></i><span>Luck Honey</span></div>
+                        <img src="images/good-luck-honey.jpg" alt="Good Luck Honey" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Good Luck Honey</h3>
+                    <p>Consecrated organic nectar used as a speech sweetener baseline catalyst before critical presentations.</p>
+                    <div class="price-container"><span class="new-price">₦10,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Good Luck Honey', 10000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/incense.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-fire"></i><span>Incense</span></div>
+                        <img src="images/incense.jpg" alt="Spiritual Incense" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Spiritual Incense</h3>
+                    <p>Premium slow-burning elements to purge home atmospheres and lift room vibration settings.</p>
+                    <div class="price-container"><span class="new-price">₦15,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Spiritual Incense', 15000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="love">
+                <div class="product-gallery" onclick="openLightboxModal('images/lip-gloss-attraction.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-wand-magic"></i><span>Lip Gloss</span></div>
+                        <img src="images/lip-gloss-attraction.jpg" alt="Attraction Lip Gloss" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Attraction Lip Gloss</h3>
+                    <p>Specialized magnetic cosmetic coating layer to boost spoken charm and favorable conversational bias.</p>
+                    <div class="price-container"><span class="new-price">₦10,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Attraction Lip Gloss', 10000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="protection">
+                <div class="product-gallery" onclick="openLightboxModal('images/destroyer.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-bolt"></i><span>Destroyer</span></div>
+                        <img src="images/destroyer.jpg" alt="Destroyer Soap" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Destroyer Soap</h3>
+                    <p>Emergency countermeasure configured to target and clear active malicious hex parameters.</p>
+                    <div class="price-container"><span class="new-price">₦20,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Destroyer Soap', 20000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="protection">
+                <div class="product-gallery" onclick="openLightboxModal('images/spirit-blocker.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-eye-slash"></i><span>Spirit Blocker</span></div>
+                        <img src="images/spirit-blocker.jpg" alt="Monitoring Spirit Blocker" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Monitoring Spirit Blocker</h3>
+                    <p>Blinds distant energetic spying nodes tasked to track your developmental movements.</p>
+                    <div class="price-container"><span class="new-price">₦25,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Monitoring Spirit Blocker', 25000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="protection">
+                <div class="product-gallery" onclick="openLightboxModal('images/adodun.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-fire-flame-curved"></i><span>Adodun</span></div>
+                        <img src="images/adodun.jpg" alt="Adodun" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Adodun Premium</h3>
+                    <p>Traditional structural spice remedy built to heighten attraction metrics and focus parameters.</p>
+                    <div class="price-container"><span class="new-price">₦10,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Adodun Premium', 10000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="appeasement">
+                <div class="product-gallery" onclick="openLightboxModal('images/egbe-appease.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-handshake"></i><span>Egbe Sacrifice</span></div>
+                        <img src="images/egbe-appease.jpg" alt="Egbe Appeasement" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Egbe Appeasement</h3>
+                    <p>Sacrificial botanical setup required to quiet internal turbulent spiritual fraternities.</p>
+                    <div class="price-container"><span class="new-price">₦60,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Egbe Appeasement', 60000)">Add To Basket</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="appeasement">
+                <div class="product-gallery" onclick="openLightboxModal('images/spiritual-spouse.jpg')">
+                    <div class="view-overlay-hint"><i class="fa-solid fa-maximize"></i></div>
+                    <div class="image-frame">
+                        <div class="mystical-fallback"><i class="fa-solid fa-heart-crack"></i><span>Spouse Release</span></div>
+                        <img src="images/spiritual-spouse.jpg" alt="Spiritual Spouse" onload="imageLoaded(this)" onerror="imageError(this)">
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3>Spiritual Spouse Separation</h3>
+                    <p>Heavy energetic separation cleaning to completely untie marital blocks from astral elements.</p>
+                    <div class="price-container"><span class="new-price">₦100,000</span></div>
+                    <button class="buy-btn" onclick="addItemToCart('Spiritual Spouse Separation', 100000)">Add To Basket</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="consultation section-padding" id="consultation">
+        <div class="heading-container">
+            <h2>Spiritual <span>Consultation Tiers</span></h2>
+        </div>
+        <div class="consultation-container">
+            <p class="consultation-p">Gain clear diagnostic analysis into your ancestral frameworks, marital friction points, career limitations, or personal protection vulnerabilities.</p>
+            <div class="tier-grid">
+                <div class="tier-card">
+                    <h4>Standard Consultation</h4>
+                    <span class="tier-time">3 - 5 Days Response</span>
+                    <div class="tier-price">₦7,000</div>
+                    <button class="tier-btn" onclick="bookConsultation('normal')">Book Normal</button>
+                </div>
+                <div class="tier-card featured">
+                    <div class="tier-badge">URGENT</div>
+                    <h4>VIP Consultation</h4>
+                    <span class="tier-time">Within 24 Hours</span>
+                    <div class="tier-price">₦12,000</div>
+                    <button class="tier-btn" onclick="bookConsultation('vip')">Book VIP</button>
+                </div>
+                <div class="tier-card">
+                    <h4>Face To Face Session</h4>
+                    <span class="tier-time">By Appointment</span>
+                    <div class="tier-price">₦15,000</div>
+                    <button class="tier-btn" onclick="bookConsultation('face-to-face')">Book Physical</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials section-padding" id="testimonials">
+        <div class="heading-container">
+            <h2>Empire <span>Testimonials</span></h2>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="review-text">"The Cash Out Soap completely changed my boutique's trajectory. I started seeing an influx of high-paying clients within a week. Truly magical work!"</p>
+                <div class="reviewer">
+                    <div class="reviewer-avatar"><i class="fa-solid fa-user"></i></div>
+                    <div class="reviewer-info">
+                        <h4>Amina B.</h4>
+                        <span>Lagos, Nigeria</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="review-text">"I booked the VIP Consultation and the clarity I received was unmatched. The Atude Soap they recommended untied years of unexplainable blockages."</p>
+                <div class="reviewer">
+                    <div class="reviewer-avatar"><i class="fa-solid fa-user"></i></div>
+                    <div class="reviewer-info">
+                        <h4>David O.</h4>
+                        <span>London, UK</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="review-text">"The Stay With Me Mirror worked exactly as described. The energy in my home has shifted to absolute peace and focus. Highly recommend the Empire."</p>
+                <div class="reviewer">
+                    <div class="reviewer-avatar"><i class="fa-solid fa-user"></i></div>
+                    <div class="reviewer-info">
+                        <h4>Sarah T.</h4>
+                        <span>Abuja, Nigeria</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq section-padding" id="faq">
+        <div class="heading-container">
+            <h2>Frequently Asked <span>Questions</span></h2>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <h4>How long does it take to see visible results?</h4>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-body">
+                    <p>Spiritual paths depend on configuration alignment, faith, and consistency. While many see shifts within 7 to 14 days, situations vary based on individual aura parameters and individual blockages.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <h4>Are these solutions safe and completely organic?</h4>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-body">
+                    <p>Yes. Everything listed across our registry is prepared strictly with 100% natural plant essences, organic botanicals, and safe ancestral spiritual laws—entirely free from negative energetic kickbacks or side-effects.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <h4>How does the multi-item WhatsApp checkout work?</h4>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-body">
+                    <p>When you click 'Add to Basket' on your desired remedies, they stack dynamically into your cart drawer. Clicking checkout bundles your complete order summary, quantities, and totals into an instant message sent directly to our team line.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <h4>What if my product image is missing?</h4>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-body">
+                    <p>We designed the site to gracefully fallback to a beautiful mystical icon until you upload your custom pictures into the 'images' folder. It will always look premium!</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                    <h4>Can I request international or out-of-state delivery?</h4>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-body">
+                    <p>Yes. We package and distribute our remedies safely with discreet logistics handling across local regions and international transit lines. Transit details can be finalized directly over your post-checkout consultation thread.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="forms-section section-padding" id="contact">
+        <div class="premium-form-box">
+            <h3>Join Our Inner Circle</h3>
+            <p>Subscribe to receive spiritual alerts, botanical maintenance tips, and exclusive prophetic guidance updates directly in your inbox.</p>
+            <form id="empireSubscribeForm">
+                <div class="luxury-input-group">
+                    <input type="email" id="subscriberEmail" class="luxury-field" placeholder="Enter your email address" required>
+                    <button type="submit" class="luxury-submit-btn" id="subscribeBtn">Subscribe Today</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="premium-form-box">
+            <h3>Connect With the Empire</h3>
+            <p>Describe your current situation carefully below. Submissions are processed securely via encrypted protocols.</p>
+            <form id="empireContactForm">
+                <div class="luxury-input-group">
+                    <input type="text" id="userName" class="luxury-field" placeholder="Your Legal Name" required>
+                    <input type="email" id="userEmail" class="luxury-field" placeholder="Your Email Address" required>
+                    <textarea id="userMessage" class="luxury-field" rows="4" placeholder="How can we assist your spiritual journey?" required></textarea>
+                    <button type="submit" class="luxury-submit-btn">Send Secure Message</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-main-grid">
+            <div class="footer-col footer-brand">
+                <h4>OMOOLOPAASE EMPIRE</h4>
+                <p>Delivering high-fidelity ancestral advice, aura alignments, botanical solutions, and holistic health parameters globally.</p>
+                
+                <div style="margin-top: 20px;">
+                    <p style="color: var(--text-primary); margin-bottom: 5px; font-weight: 400;"><i class="fa-solid fa-location-dot" style="color: var(--gold-primary); margin-right: 8px;"></i> Abeokuta, Ogun State</p>
+                    <p style="color: var(--text-primary); font-weight: 400;"><i class="fa-solid fa-envelope" style="color: var(--gold-primary); margin-right: 8px;"></i> <a href="mailto:omoolopaaseempire@gmail.com" style="color: var(--text-primary); text-decoration: none;">omoolopaaseempire@gmail.com</a></p>
+                </div>
+
+                <div class="social-icons" style="margin-top: 25px; display: flex; gap: 15px;">
+                    <a href="https://www.instagram.com/omoolopaase1" target="_blank" style="color: var(--gold-primary); font-size: 1.4rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'" title="Instagram - @Omooloopaase1"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://web.facebook.com/ajike.bamgboye" target="_blank" style="color: var(--gold-primary); font-size: 1.4rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'" title="Facebook - @Omooloopaase1"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.tiktok.com/@omoolopaase1" target="_blank" style="color: var(--gold-primary); font-size: 1.4rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'" title="TikTok - @Omooloopaase1"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h5>Navigation Links</h5>
+                <ul>
+                    <li><a href="#">Home Core</a></li>
+                    <li><a href="#products">Spiritual Shop</a></li>
+                    <li><a href="#consultation">Consultation Tiers</a></li>
+                    <li><a href="#faq">FAQ Board</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Company Protocols</h5>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Protocol</a></li>
+                    <li><a href="#">Shipping Parameters</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Omoolopaase Empire Limited. All Rights Reserved.</p>
+            <p>Designed with ❤️ by <a href="#" class="credit-link">VisioReach Concepts</a></p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/2348073733419?text=Hello%20Omoolopaase%20Empire,%20I%20am%20visiting%20your%20website%20and%20need%20some%20spiritual%20guidance." class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <div id="salesToast" class="sales-toast">
+        <i class="fa-solid fa-bell toast-icon"></i>
+        <div class="toast-content">
+            <p id="toastMessage">Someone from Lagos just bought <strong>Cash Out Soap</strong></p>
+            <span class="toast-time">Verified Purchase ✓ Just now</span>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.js"></script>
+    <script type="text/javascript">
+       (function(){
+           emailjs.init("Ez9VredESPBSD0kEp");
+       })();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -109,7 +109,6 @@ function addItemToCart(name, price) {
     toggleCartDrawer(true);
 }
 
-// Fixed standard 'Add To Cart' callback connection logic parameter tracking framework
 function adjustItemQuantity(name, shift) {
     const item = basketCart.find(item => item.name === name);
     if (item) {

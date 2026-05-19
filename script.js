@@ -32,7 +32,6 @@ function imageLoaded(img) {
 }
 
 function imageError(img) {
-    // Keep the fallback visible and hide the broken browser img icon frame.
     img.style.display = 'none';
 }
 
@@ -204,7 +203,7 @@ function changeCurrency(currency) {
     updateCartUI();
 }
 
-/* --- FIXED ARRAYS: ALL COMMAS ARE RESTORED CORECTLY --- */
+/* --- SALES TOAST NOTIFICATIONS --- */
 const salesLocations = ["Lagos, Nigeria", "London, UK", "Abuja, Nigeria", "Atlanta, USA", "Houston, USA", "Abeokuta, Ogun State", "Ogbomosho, Nigeria", "Port Harcourt", "Ibadan, Nigeria", "Toronto, Canada", "Kano, Nigeria", "Dubai, UAE", "Lekki, Lagos"];
 const salesProducts = ["Cash Out Soap", "Stay With Me Mirror", "Curse Breaker Soap", "Breakthrough Soap", "VIP Consultation", "Atude Soap", "Eyonu Agba", "Fuck & Pay", "Glory Retrieval", "Open Door Kit"];
 
@@ -229,3 +228,38 @@ setTimeout(() => {
     showSalesToast();
     setInterval(showSalesToast, Math.floor(Math.random() * 15000) + 15000);
 }, 8000);
+
+/* --- EMAILJS SECURE FORM PROCESSING --- */
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('empireContactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const submitBtn = this.querySelector('.luxury-submit-btn');
+            const originalText = submitBtn.innerText;
+            submitBtn.innerText = "Encrypting Transmission...";
+            submitBtn.disabled = true;
+
+            const templateParams = {
+                from_name: document.getElementById('userName').value,
+                reply_to: document.getElementById('userEmail').value,
+                message: document.getElementById('userMessage').value
+            };
+
+            // Fully configured connection using your real service and template parameters
+            emailjs.send('service_x9pc811', 'template_pd71q72', templateParams)
+                .then(() => {
+                    alert('Your spiritual request has been logged and transmitted securely.');
+                    contactForm.reset();
+                    submitBtn.innerText = originalText;
+                    submitBtn.disabled = false;
+                }, (error) => {
+                    alert('Transmission channel blocked. Please try checking your network connection.');
+                    console.error('EmailJS Error Block:', error);
+                    submitBtn.innerText = originalText;
+                    submitBtn.disabled = false;
+                });
+        });
+    }
+});

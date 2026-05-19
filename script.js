@@ -155,7 +155,7 @@ function updateCartUI() {
 
 function executeCartCheckout() {
     if (basketCart.length === 0) { return; }
-    const baseNumber = "2348143644489";
+    const baseNumber = "2348073733419";
     let orderSummary = "Hello Omoolopaase Empire, I want to purchase the following spiritual solutions:\n\n";
     let grandTotal = 0;
     basketCart.forEach((item, index) => {
@@ -168,7 +168,7 @@ function executeCartCheckout() {
 }
 
 function bookConsultation(tierType) {
-    const baseNumber = "2348143644489";
+    const baseNumber = "2348073733419";
     let msg = "Hello, I am ready for the Consultation. I want to select the normal one.";
     if (tierType === 'vip') { msg = "Hello, I am ready for the Consultation. I would love to sign up for the VIP one."; }
     else if (tierType === 'face-to-face') { msg = "Hello, I am ready for the Consultation. I want to book a physical face-to-face session."; }

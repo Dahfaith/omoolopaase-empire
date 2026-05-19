@@ -229,14 +229,14 @@ setTimeout(() => {
     setInterval(showSalesToast, Math.floor(Math.random() * 15000) + 15000);
 }, 8000);
 
-/* --- EMAILJS SECURE FORM PROCESSING & POSITION STACK RESET FIX --- */
+/* --- EMAILJS SECURE FORM PROCESSING & JUMP PREVENTIONS --- */
 document.addEventListener('DOMContentLoaded', () => {
     
     // 1. CONNECT WITH THE EMPIRE - INQUIRY PORTAL
     const contactForm = document.getElementById('empireContactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // HALTS THE ACTION '#' NATIVE PAGE RESET JUMP
+            event.preventDefault(); // Prevents page jumping behavior completely
             
             const submitBtn = this.querySelector('.luxury-submit-btn');
             const originalText = submitBtn.innerText;
@@ -264,11 +264,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. JOIN OUR INNER CIRCLE - SPIRITUAL ALERTS RETRIEVAL
+    // 2. JOIN OUR INNER CIRCLE - SPIRITUAL ALERTS FORM VIA EMAILJS
     const subscribeForm = document.getElementById('empireSubscribeForm');
     if (subscribeForm) {
         subscribeForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // HALTS THE ACTION '#' NATIVE PAGE RESET JUMP
+            event.preventDefault(); // Prevents page jumping behavior completely
             
             const subBtn = document.getElementById('subscribeBtn');
             const originalSubText = subBtn.innerText;

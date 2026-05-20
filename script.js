@@ -26,6 +26,10 @@ function closeMobileMenu() {
 }
 
 function imageLoaded(img) {
+    if(img.getAttribute('src') === "") {
+        img.style.display = 'none';
+        return;
+    }
     img.classList.add('loaded');
     const placeholder = img.parentElement.querySelector('.mystical-fallback');
     if(placeholder) placeholder.style.opacity = '0';
@@ -36,6 +40,10 @@ function imageError(img) {
 }
 
 function openLightboxModal(imageSrc) {
+    if(!imageSrc || imageSrc === "") {
+        alert("This specialized spiritual remedy is dynamically customized following a direct framework session.");
+        return;
+    }
     const lightbox = document.getElementById('imageLightbox');
     const targetImg = document.getElementById('lightboxTargetImage');
     
@@ -59,7 +67,6 @@ function closeLightboxModal() {
     document.getElementById('imageLightbox').style.display = 'none';
 }
 
-// FIXED FAQ SCROLL JUMP PARAMETER
 function toggleFaq(element) {
     const item = element.parentElement;
     const body = item.querySelector('.faq-body');
@@ -134,9 +141,8 @@ function updateCartUI() {
             grandTotalSum += (item.price * item.quantity);
             const convertedItemTotal = Math.round((item.price * item.quantity) * exchangeRates[currentCurrency]);
             
-            // Format price string gracefully if item requires calculation parameters
             let displayedPrice = `${currencySymbols[currentCurrency]}${convertedItemTotal.toLocaleString()}`;
-            if(item.price === 0) { displayedPrice = "Inquiry Setup"; }
+            if(item.price === 0) { displayedPrice = "Consultation Link"; }
 
             container.innerHTML += `
                 <div class="cart-item">
@@ -215,9 +221,7 @@ function changeCurrency(currency) {
     updateCartUI();
 }
 
-/* --- SALES TOAST SYSTEM REMOVED FROM BACKGROUND EXECUTION ENTIRELY --- */
-
-/* --- EMAILJS INTENT ROUTING --- */
+/* --- EMAILJS INTEGRATION --- */
 document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('empireContactForm');
     if (contactForm) {

@@ -59,6 +59,7 @@ function closeLightboxModal() {
     document.getElementById('imageLightbox').style.display = 'none';
 }
 
+// FIXED FAQ SCROLL JUMP PARAMETER
 function toggleFaq(element) {
     const item = element.parentElement;
     const body = item.querySelector('.faq-body');
@@ -132,11 +133,16 @@ function updateCartUI() {
             totalItemCount += item.quantity;
             grandTotalSum += (item.price * item.quantity);
             const convertedItemTotal = Math.round((item.price * item.quantity) * exchangeRates[currentCurrency]);
+            
+            // Format price string gracefully if item requires calculation parameters
+            let displayedPrice = `${currencySymbols[currentCurrency]}${convertedItemTotal.toLocaleString()}`;
+            if(item.price === 0) { displayedPrice = "Inquiry Setup"; }
+
             container.innerHTML += `
                 <div class="cart-item">
                     <div>
                         <h4>${item.name}</h4>
-                        <p style="color:var(--gold-primary)">${currencySymbols[currentCurrency]}${convertedItemTotal.toLocaleString()}</p>
+                        <p style="color:var(--gold-primary)">${displayedPrice}</p>
                     </div>
                     <div class="quantity-control">
                         <span class="quantity-btn" onclick="adjustItemQuantity('${item.name}', -1)">-</span>
@@ -161,7 +167,11 @@ function executeCartCheckout() {
         const itemTotal = item.price * item.quantity;
         grandTotal += itemTotal;
         const convertedItemTotal = Math.round(itemTotal * exchangeRates[currentCurrency]);
-        orderSummary += `${index + 1}. ${item.name} (x${item.quantity}) - ${currencySymbols[currentCurrency]}${convertedItemTotal.toLocaleString()}\n`;
+        
+        let priceString = `${currencySymbols[currentCurrency]}${convertedItemTotal.toLocaleString()}`;
+        if(item.price === 0) { priceString = "Price via Consultation"; }
+
+        orderSummary += `${index + 1}. ${item.name} (x${item.quantity}) - ${priceString}\n`;
     });
     const convertedGrandTotal = Math.round(grandTotal * exchangeRates[currentCurrency]);
     orderSummary += `\n🎯 Grand Total: ${currencySymbols[currentCurrency]}${convertedGrandTotal.toLocaleString()}`;
@@ -184,7 +194,9 @@ const currencySymbols = { NGN: '₦', USD: '$', GBP: '£', EUR: '€' };
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.new-price, .tier-price').forEach(el => {
         let rawNum = el.innerText.replace(/[^0-9]/g, '');
-        el.setAttribute('data-base-price', rawNum);
+        if(rawNum !== "") {
+            el.setAttribute('data-base-price', rawNum);
+        }
     });
 });
 
@@ -203,40 +215,14 @@ function changeCurrency(currency) {
     updateCartUI();
 }
 
-/* --- SALES TOAST NOTIFICATIONS --- */
-const salesLocations = ["Lagos, Nigeria", "London, UK", "Abuja, Nigeria", "Atlanta, USA", "Houston, USA", "Abeokuta, Ogun State", "Ogbomosho, Nigeria", "Port Harcourt", "Ibadan, Nigeria", "Toronto, Canada", "Kano, Nigeria", "Dubai, UAE", "Lekki, Lagos"];
-const salesProducts = ["Cash Out Soap", "Stay With Me Mirror", "Curse Breaker Soap", "Breakthrough Soap", "VIP Consultation", "Atude Soap", "Eyonu Agba", "Fuck & Pay", "Glory Retrieval", "Open Door Kit"];
+/* --- SALES TOAST SYSTEM REMOVED FROM BACKGROUND EXECUTION ENTIRELY --- */
 
-function showSalesToast() {
-    const toast = document.getElementById('salesToast');
-    const msg = document.getElementById('toastMessage');
-    if(!toast || !msg) return;
-    
-    const randomLoc = salesLocations[Math.floor(Math.random() * salesLocations.length)];
-    const randomProd = salesProducts[Math.floor(Math.random() * salesProducts.length)];
-    
-    msg.innerHTML = `Someone from ${randomLoc} just bought/booked <strong>${randomProd}</strong>`;
-    
-    toast.classList.add('show');
-    
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 5000); 
-}
-
-setTimeout(() => {
-    showSalesToast();
-    setInterval(showSalesToast, Math.floor(Math.random() * 15000) + 15000);
-}, 8000);
-
-/* --- EMAILJS SECURE FORM PROCESSING & JUMP PREVENTIONS --- */
+/* --- EMAILJS INTENT ROUTING --- */
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. CONNECT WITH THE EMPIRE - INQUIRY PORTAL
     const contactForm = document.getElementById('empireContactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevents page jumping behavior completely
+            event.preventDefault();
             
             const submitBtn = this.querySelector('.luxury-submit-btn');
             const originalText = submitBtn.innerText;
@@ -257,18 +243,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     submitBtn.disabled = false;
                 }, (error) => {
                     alert('Transmission channel blocked. Please try checking your network connection.');
-                    console.error('EmailJS Error Block:', error);
                     submitBtn.innerText = originalText;
                     submitBtn.disabled = false;
                 });
         });
     }
 
-    // 2. JOIN OUR INNER CIRCLE - SPIRITUAL ALERTS FORM VIA EMAILJS
     const subscribeForm = document.getElementById('empireSubscribeForm');
     if (subscribeForm) {
         subscribeForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevents page jumping behavior completely
+            event.preventDefault();
             
             const subBtn = document.getElementById('subscribeBtn');
             const originalSubText = subBtn.innerText;
@@ -280,18 +264,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const templateParams = {
                 from_name: "Inner Circle Subscriber",
                 reply_to: inputEmail,
-                message: `Shalom Empire Team,\n\nA new vessel has requested access to the Inner Circle. Please add their email address to receive spiritual alerts, prophetic updates, and maintenance parameters:\n\n📧 Subscriber Target Email: ${inputEmail}`
+                message: `Shalom Empire Team,\n\nA new vessel has requested access to the Inner Circle: ${inputEmail}`
             };
 
             emailjs.send('service_x9pc811', 'template_pd71q72', templateParams)
                 .then(() => {
-                    alert('Subscription confirmed. Your aura parameter has been synchronized with the Empire Inner Circle.');
+                    alert('Subscription confirmed.');
                     subscribeForm.reset();
                     subBtn.innerText = originalSubText;
                     subBtn.disabled = false;
                 }, (error) => {
-                    alert('Subscription alignment interrupted. Check your network.');
-                    console.error('EmailJS Subscription Error:', error);
+                    alert('Subscription alignment interrupted.');
                     subBtn.innerText = originalSubText;
                     subBtn.disabled = false;
                 });

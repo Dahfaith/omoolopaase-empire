@@ -26,7 +26,7 @@ function closeMobileMenu() {
 }
 
 function imageLoaded(img) {
-    if(img.getAttribute('src') === "") {
+    if(!img.getAttribute('src') || img.getAttribute('src') === "") {
         img.style.display = 'none';
         return;
     }
@@ -47,20 +47,9 @@ function openLightboxModal(imageSrc) {
     const lightbox = document.getElementById('imageLightbox');
     const targetImg = document.getElementById('lightboxTargetImage');
     
-    const matchingImages = document.querySelectorAll(`img[src="${imageSrc}"]`);
-    let isLoaded = false;
-    if(matchingImages.length > 0) {
-        if(matchingImages[0].style.display !== 'none') {
-            isLoaded = true;
-        }
-    }
-
-    if (isLoaded) {
-        targetImg.src = imageSrc;
-        lightbox.style.display = 'flex';
-    } else {
-        alert("This product image will be viewable in high resolution once you upload the picture to the 'images/' folder.");
-    }
+    // FIX: Trust source parameters explicitly to run seamlessly across virtual setups
+    targetImg.src = imageSrc;
+    lightbox.style.display = 'flex';
 }
 
 function closeLightboxModal() {
@@ -169,6 +158,7 @@ function executeCartCheckout() {
     const baseNumber = "2348073733419";
     let orderSummary = "Hello Omoolopaase Empire, I want to purchase the following spiritual solutions:\n\n";
     let grandTotal = 0;
+    
     basketCart.forEach((item, index) => {
         const itemTotal = item.price * item.quantity;
         grandTotal += itemTotal;
@@ -179,9 +169,12 @@ function executeCartCheckout() {
 
         orderSummary += `${index + 1}. ${item.name} (x${item.quantity}) - ${priceString}\n`;
     });
+    
     const convertedGrandTotal = Math.round(grandTotal * exchangeRates[currentCurrency]);
     orderSummary += `\n🎯 Grand Total: ${currencySymbols[currentCurrency]}${convertedGrandTotal.toLocaleString()}`;
-    window.open(`https://wa.me/${baseNumber}?text=${encodeURIComponent(orderSummary)}`, '_blank');
+    
+    // FIX: Redirect using the direct api.whatsapp.com layout to completely satisfy TikTok browser layers
+    window.location.href = `https://api.whatsapp.com/send?phone=${baseNumber}&text=${encodeURIComponent(orderSummary)}`;
 }
 
 function bookConsultation(tierType) {
@@ -189,7 +182,9 @@ function bookConsultation(tierType) {
     let msg = "Hello, I am ready for the Consultation. I want to select the normal one.";
     if (tierType === 'vip') { msg = "Hello, I am ready for the Consultation. I would love to sign up for the VIP one."; }
     else if (tierType === 'face-to-face') { msg = "Hello, I am ready for the Consultation. I want to book a physical face-to-face session."; }
-    window.open(`https://wa.me/${baseNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+    
+    // FIX: Use native redirection mechanics inside the same frame context
+    window.location.href = `https://api.whatsapp.com/send?phone=${baseNumber}&text=${encodeURIComponent(msg)}`;
 }
 
 /* --- CURRENCY SWITCHER LOGIC --- */
@@ -199,9 +194,11 @@ const currencySymbols = { NGN: '₦', USD: '$', GBP: '£', EUR: '€' };
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.new-price, .tier-price').forEach(el => {
-        let rawNum = el.innerText.replace(/[^0-9]/g, '');
-        if(rawNum !== "") {
-            el.setAttribute('data-base-price', rawNum);
+        if(!el.hasAttribute('data-base-price')) {
+            let rawNum = el.innerText.replace(/[^0-9]/g, '');
+            if(rawNum !== "") {
+                el.setAttribute('data-base-price', rawNum);
+            }
         }
     });
 });
